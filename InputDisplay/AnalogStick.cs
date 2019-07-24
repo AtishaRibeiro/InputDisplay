@@ -33,7 +33,7 @@ namespace InputDisplay
 
         public void Draw(ref Graphics g)
         {
-            Pen pen = new Pen(Config.ButtonColour, 3);
+            Pen pen = new Pen(Config.ButtonColour, Config.LineWidth);
             g.DrawPolygon(pen, this.OctagonPoints);
             //SolidBrush blackBrush = new SolidBrush(Color.Gray);
             //g.FillPolygon(blackBrush, this.OctagonPoints);

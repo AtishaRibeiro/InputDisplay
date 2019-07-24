@@ -24,7 +24,7 @@ namespace InputDisplay
 
         public void Draw(ref Graphics g)
         {
-            Pen pen = new Pen(Config.ButtonColour, 3);
+            Pen pen = new Pen(Config.ButtonColour, Config.LineWidth);
             SolidBrush brush = new SolidBrush(Config.ButtonColour);
 
             if (this.Type == "Circle")

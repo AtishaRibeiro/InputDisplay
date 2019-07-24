@@ -46,16 +46,19 @@ namespace InputDisplay
             if (roundedFrame >= this.GhostReader.Face_inputs[this.FaceIndex].endFrame)
             {
                 this.FaceIndex += 1;
+                Console.WriteLine(this.FaceIndex);
             }
 
             if (roundedFrame >= this.GhostReader.Analog_inputs[this.AnalogIndex].endFrame)
             {
                 this.AnalogIndex += 1;
+                Console.WriteLine(this.AnalogIndex);
             }
 
             if (roundedFrame >= this.GhostReader.Trick_inputs[this.TrickIndex].endFrame)
             {
                 this.TrickIndex += 1;
+                Console.WriteLine(this.TrickIndex);
             }
 
             (bool accelerator, bool drift, bool item) actions = this.GhostReader.Face_inputs[this.FaceIndex].values;
@@ -69,7 +72,8 @@ namespace InputDisplay
             int trick = this.GhostReader.Trick_inputs[this.TrickIndex].values;
             this.Dpad.Update(trick);
 
-            this.CurrentFrame += 60.0 / this.Fps;
+            this.CurrentFrame += this.PlayBackrate / this.Fps;
+            
         }
 
         public void Draw(ref Graphics g)
@@ -103,7 +107,12 @@ namespace InputDisplay
             this.Dpad.Draw(ref g);
         }
 
-        GhostReader GhostReader = new GhostReader();
+        public (string, string) GetGhostInfo()
+        {
+            return (this.GhostReader.CompletionTime, this.GhostReader.MiiName);
+        } 
+
+        private GhostReader GhostReader = new GhostReader();
 
         private int FaceIndex = 0;
         private int AnalogIndex = 0;
@@ -115,6 +124,7 @@ namespace InputDisplay
         private FaceButton Item;
         private DPad Dpad;
 
+        private double PlayBackrate = 60;
         private int Fps;
         private double CurrentFrame = 0;
     }

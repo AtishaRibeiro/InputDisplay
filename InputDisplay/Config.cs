@@ -12,6 +12,6 @@ namespace InputDisplay
         static public Color BackgroundColour { get; set; } = Color.Green;
         static public Color ButtonColour { get; set; } = Color.White;
         static public bool DisplayTimer { get; set; } = true;
-
+        static public int LineWidth { get; set; } = 3;
     }
 }

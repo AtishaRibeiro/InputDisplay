@@ -28,7 +28,7 @@ namespace InputDisplay
                 g.FillPointDirection(brush, new Point(Coords.x + this.Size / 2, Coords.y + this.Size / 2), 20, this.Size, 1, this.CurrentDirection);
             }
 
-            Pen pen = new Pen(Config.ButtonColour, 3);
+            Pen pen = new Pen(Config.ButtonColour, Config.LineWidth);
             g.DrawPlus(pen, new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), 20, 1);
         }
 
