@@ -120,6 +120,20 @@ namespace InputDisplay
                 Properties.Settings.Default.Save();
             }
         }
+
+        static public double AcceleratorScale
+        {
+            get
+            {
+                return Properties.Settings.Default.AcceleratorScale;
+            }
+            set
+            {
+                Properties.Settings.Default.AcceleratorScale = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
         static public int PlaybackSpeed { get; set; } = 60;
     }
 }

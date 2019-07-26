@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Globalization;
+using InputDisplay.Buttons;
 
 namespace InputDisplay
 {
@@ -14,9 +15,9 @@ namespace InputDisplay
         public Animator(int fps) {
             this.Fps = fps;
             this.AnalogStick = new AnalogStick(150, 100, 40);
-            this.Accelerator = new FaceButton(230, 100, "Circle");
-            this.Drift = new FaceButton(170, 20, "Bar");
-            this.Item = new FaceButton(20, 20, "Bar");
+            this.Accelerator = new Circle(230, 100);
+            this.Drift = new Bar(170, 20);
+            this.Item = new Bar(20, 20);
             this.Dpad = new DPad(20, 65, 70);
         }
 
@@ -173,5 +174,10 @@ namespace InputDisplay
         private bool MoveItem = false;
         private bool MoveAnalog = false;
         private bool MoveDPad = false;
+
+        public void ScaleAccelerator(double scale)
+        {
+            this.Accelerator.Scale(scale);
+        }
     }
 }

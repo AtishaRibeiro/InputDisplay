@@ -142,5 +142,17 @@ namespace InputDisplay.Properties {
                 this["DPadColour"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double AcceleratorScale {
+            get {
+                return ((double)(this["AcceleratorScale"]));
+            }
+            set {
+                this["AcceleratorScale"] = value;
+            }
+        }
     }
 }

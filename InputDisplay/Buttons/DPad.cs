@@ -13,6 +13,7 @@ namespace InputDisplay
         {
             this.Coords = (x, y);
             this.Size = size;
+            this.ThicknessFraction = 2.0 / 7.0;
         }
 
         public void Update(int direction)
@@ -22,18 +23,20 @@ namespace InputDisplay
 
         public void Draw(ref Graphics g, Color colour)
         {
+            int thickness = (int)(this.ThicknessFraction * this.Size);
             if (this.CurrentDirection != 0)
             {
                 SolidBrush brush = new SolidBrush(colour);
-                g.FillPointDirection(brush, new Point(Coords.x + this.Size / 2, Coords.y + this.Size / 2), 20, this.Size, 1, this.CurrentDirection);
+                g.FillPointDirection(brush, new Point(Coords.x + this.Size / 2, Coords.y + this.Size / 2), thickness, this.Size, 1, this.CurrentDirection);
             }
 
             Pen pen = new Pen(colour, Config.LineWidth);
-            g.DrawPlus(pen, new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), 20, 1);
+            g.DrawPlus(pen, new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), thickness, 1);
         }
         public bool CheckMouse(Point cursor)
         {
-            return CustomShapes.Plus(new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), 20, 1).IsVisible(cursor);
+            int thickness = (int)(this.ThicknessFraction * this.Size);
+            return CustomShapes.Plus(new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), thickness, 1).IsVisible(cursor);
         }
 
         public void Translate((int x, int y) coords)
@@ -44,5 +47,6 @@ namespace InputDisplay
         private (int x, int y) Coords;
         private int Size;
         private int CurrentDirection = 0;
+        private double ThicknessFraction;
     }
 }
