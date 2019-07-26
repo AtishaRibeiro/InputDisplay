@@ -81,8 +81,8 @@ namespace InputDisplay
 
                 current_byte += 2;
             }
-            Console.WriteLine(endFrame);
-            Console.WriteLine(current_byte);
+
+            this.TotalFrames = endFrame;
 
             endFrame = 0;
             for (int i = 0; i < directional_inputs; ++i)
@@ -97,7 +97,6 @@ namespace InputDisplay
 
                 current_byte += 2;
             }
-            Console.WriteLine(endFrame);
 
             endFrame = 0;
             for (int i = 0; i < trick_inputs; ++i)
@@ -120,13 +119,12 @@ namespace InputDisplay
                 current_byte += 2;
             }
 
-            Console.WriteLine(endFrame);
-
         }
 
         public string CompletionTime { get; set; }
         public int Controller_type { get; set; }
         public String MiiName { get; set; }
+        public int TotalFrames { get; set; }
         public List<(int endFrame, (bool, bool, bool) values)> Face_inputs { get; }
         public List<(int endFrame, (double, double) values)> Analog_inputs { get; }
         public List<(int endFrame, int values)> Trick_inputs { get; }

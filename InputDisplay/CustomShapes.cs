@@ -208,5 +208,32 @@ namespace InputDisplay
                 graphics.FillPath(brush, path);
             }
         }
+
+        static public GraphicsPath CreateOctagon(Point center, int radius)
+        {
+            float c = (float)Math.Sqrt(2) / 2;
+            List<(float x, float y)> coords = new List<(float x, float y)> { (1, 0), (c, c), (0, 1), (-c, c), (-1, 0), (-c, -c), (0, -1), (c, -c) };
+            List<PointF> octagonPointsList = new List<PointF>();
+            for (int i = 0; i < coords.Count; ++i)
+            {
+                octagonPointsList.Add(new PointF(radius * coords[i].x + center.X, radius * coords[i].y + center.Y));
+            }
+            byte[] types = new byte[8] { 1, 1, 1, 1, 1, 1, 1, 1 };
+            return new GraphicsPath(octagonPointsList.ToArray(), types);
+        }
+
+        static public void DrawOctagon(this Graphics graphics, Pen pen, Point center, int radius)
+        {
+            float c = (float)Math.Sqrt(2) / 2;
+            List<(float x, float y)> coords = new List<(float x, float y)> { (1, 0), (c, c), (0, 1), (-c, c), (-1, 0), (-c, -c), (0, -1), (c, -c) };
+            List<PointF> octagonPointsList = new List<PointF>();
+            for (int i = 0; i < coords.Count; ++i)
+            {
+                octagonPointsList.Add(new PointF(radius * coords[i].x + center.X, radius * coords[i].y + center.Y));
+            }
+            byte[] types = new byte[8] { 1, 1, 1, 1, 1, 1, 1, 1 };
+            graphics.DrawPolygon(pen, octagonPointsList.ToArray());
+        }
+
     }
 }

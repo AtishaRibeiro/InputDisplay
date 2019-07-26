@@ -18,24 +18,29 @@ namespace InputDisplay
         private bool GhostLoaded = false;
         private bool Animate = false;
 
-        Stopwatch stopWatch = new Stopwatch();
-        AccurateTimer timer;
+        private Stopwatch stopWatch = new Stopwatch();
+        private AccurateTimer timer;
+
+        private AdvancedWindow AdvancedWindow;
+
+        private bool DisplayExternal = false;
 
         public Form1()
         {
             InitializeComponent();
             this.Animator = new Animator(50);
+            this.AdvancedWindow = new AdvancedWindow(this);
         }
 
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Options = new System.Windows.Forms.GroupBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.button6 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,13 +52,14 @@ namespace InputDisplay
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.Options.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -62,21 +68,24 @@ namespace InputDisplay
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Green;
+            this.pictureBox1.BackColor = global::InputDisplay.Properties.Settings.Default.BackgroundColour;
             this.pictureBox1.Location = new System.Drawing.Point(6, 13);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(448, 295);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox1_Paint);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseClick);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
             // 
             // Options
             // 
+            this.Options.Controls.Add(this.numericUpDown2);
             this.Options.Controls.Add(this.button6);
             this.Options.Controls.Add(this.label4);
             this.Options.Controls.Add(this.numericUpDown1);
             this.Options.Controls.Add(this.checkBox1);
-            this.Options.Controls.Add(this.textBox1);
             this.Options.Controls.Add(this.label3);
             this.Options.Controls.Add(this.button2);
             this.Options.Controls.Add(this.label2);
@@ -90,6 +99,29 @@ namespace InputDisplay
             this.Options.Text = "General Options";
             this.Options.Enter += new System.EventHandler(this.GroupBox1_Enter);
             // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(189, 91);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(44, 20);
+            this.numericUpDown2.TabIndex = 11;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.NumericUpDown2_ValueChanged);
+            // 
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(6, 223);
@@ -98,11 +130,12 @@ namespace InputDisplay
             this.button6.TabIndex = 10;
             this.button6.Text = "Advanced";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 119);
+            this.label4.Location = new System.Drawing.Point(6, 124);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 9;
@@ -110,7 +143,7 @@ namespace InputDisplay
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(198, 117);
+            this.numericUpDown1.Location = new System.Drawing.Point(189, 117);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             99,
             0,
@@ -122,7 +155,7 @@ namespace InputDisplay
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(35, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(44, 20);
             this.numericUpDown1.TabIndex = 8;
             this.numericUpDown1.Value = new decimal(new int[] {
             3,
@@ -134,9 +167,9 @@ namespace InputDisplay
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(6, 182);
+            this.checkBox1.Checked = global::InputDisplay.Properties.Settings.Default.DisplayTimer;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.checkBox1.Location = new System.Drawing.Point(6, 163);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(89, 17);
             this.checkBox1.TabIndex = 7;
@@ -144,20 +177,10 @@ namespace InputDisplay
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(176, 81);
-            this.textBox1.MaxLength = 2;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(57, 20);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 84);
+            this.label3.Location = new System.Drawing.Point(6, 98);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 4;
@@ -165,7 +188,7 @@ namespace InputDisplay
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.BackColor = global::InputDisplay.Properties.Settings.Default.ButtonColour;
             this.button2.Location = new System.Drawing.Point(176, 55);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(57, 20);
@@ -184,7 +207,7 @@ namespace InputDisplay
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Green;
+            this.button1.BackColor = global::InputDisplay.Properties.Settings.Default.BackgroundColour;
             this.button1.Location = new System.Drawing.Point(176, 29);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(57, 20);
@@ -260,18 +283,6 @@ namespace InputDisplay
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Location = new System.Drawing.Point(257, 322);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(460, 47);
-            this.panel1.TabIndex = 7;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -304,12 +315,25 @@ namespace InputDisplay
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 8);
+            this.label5.Location = new System.Drawing.Point(7, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "File";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label5.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Location = new System.Drawing.Point(257, 322);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(460, 47);
+            this.panel1.TabIndex = 7;
             // 
             // Form1
             // 
@@ -321,13 +345,16 @@ namespace InputDisplay
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.Options);
+            this.MinimumSize = new System.Drawing.Size(745, 420);
             this.Name = "Form1";
             this.Text = "Input Display";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.Options.ResumeLayout(false);
             this.Options.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -340,11 +367,41 @@ namespace InputDisplay
         private void Form1_Load(object sender, EventArgs e)
         {
             this.timer = new AccurateTimer(this, new Action(TimerCallback), 20);
+            if (this.checkBox1.Checked)
+            {
+                this.checkBox1.CheckState = CheckState.Checked;
+            }
+            else
+            {
+                this.checkBox1.CheckState = CheckState.Unchecked;
+            }
+            if (Config.CustomColours)
+            {
+                this.button2.Enabled = false;
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.timer.Stop();
+        }
+
+        public void Redraw()
+        {
+            this.pictureBox1.Invalidate();
+        }
+
+        public void SwitchButtonColourButton()
+        {
+            this.button2.Enabled = !this.button2.Enabled;
+        }
+
+        public void SwitchEnableControls()
+        {
+            this.groupBox1.Enabled = !this.groupBox1.Enabled;
+            this.Options.Enabled = !this.Options.Enabled;
+            this.button3.Enabled = !this.button3.Enabled;
+            this.button4.Enabled = !this.button4.Enabled;
         }
 
         private void TimerCallback()
@@ -356,8 +413,15 @@ namespace InputDisplay
             //this.stopWatch.Restart();
             if (this.Animate)
             {
-                this.Animator.Update();
-                this.pictureBox1.Invalidate();
+                if (this.Animator.Update())
+                {
+                    this.pictureBox1.Invalidate();
+                } else
+                {
+                    this.Animator.Clear();
+                    this.Button3_Click(null, null);
+                }
+                
             }
             //this.stopWatch.Stop();
             //Console.WriteLine(stopWatch.Elapsed);
@@ -393,8 +457,8 @@ namespace InputDisplay
 
                 (string time, string name) info = this.Animator.GetGhostInfo();
                 this.label5.Text = Path.GetFileName(ofd.FileName);
-                this.label7.Text = info.name;
-                this.label8.Text = info.time;
+                this.label7.Text = "Mii: " + info.name;
+                this.label8.Text = "Time: " + info.time;
                 this.label5.Visible = true;
                 this.label7.Visible = true;
                 this.label8.Visible = true;
@@ -474,12 +538,70 @@ namespace InputDisplay
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             Config.DisplayTimer = this.checkBox1.Checked;
+            this.pictureBox1.Invalidate();
         }
 
         private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             Config.LineWidth = (int) this.numericUpDown1.Value;
             this.pictureBox1.Invalidate();
+        }
+
+        private void NumericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            Config.PlaybackSpeed = (int) this.numericUpDown2.Value;
+        }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            this.AdvancedWindow.Show();
+        }
+
+        
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            Control control = (Control)sender;
+
+            int widthChange = control.Size.Width - 745;
+            this.groupBox2.Width = 460 + widthChange;
+            this.pictureBox1.Width = 448 + widthChange;
+            this.panel1.Width = 460 + widthChange;
+
+            int heightChange = control.Size.Height - 420;
+            this.groupBox2.Height = 314 + heightChange;
+            this.pictureBox1.Height = 295 + heightChange;
+            this.button3.Location = new Point(81, 321 + heightChange);
+            this.button4.Location = new Point(12, 321 + heightChange);
+            this.panel1.Location = new Point(257, 322 + heightChange);
+        }
+
+        //
+        // Drag drop system for picturebox
+        //
+
+        private bool Dragging = false;
+
+        private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point pos = this.pictureBox1.PointToClient(Cursor.Position);
+            Cursor.Current = Cursors.Hand;
+            this.Dragging = this.Animator.EvaluateCursor(pos);
+        }
+
+        private void PictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Dragging = false;
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.Dragging)
+            {
+                this.Animator.MoveShapes(this.pictureBox1.PointToClient(Cursor.Position));
+                this.pictureBox1.Invalidate();
+            }
         }
     }
 }

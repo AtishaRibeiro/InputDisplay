@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace InputDisplay
 {
@@ -15,15 +16,6 @@ namespace InputDisplay
             this.StickCoords = (x, y);
             this.Radius = radius;
             this.StickRadius = (int) (radius * 0.6);
-
-            float c = (float) Math.Sqrt(2) / 2;
-            List<(float x, float y)> coords = new List<(float x, float y)> { (1, 0), (c, c), (0, 1), (-c, c), (-1, 0), (-c, -c), (0, -1), (c, -c) };
-            List<PointF> octagonPointsList = new List<PointF>();
-            for (int i = 0; i < coords.Count; ++i)
-            {
-                octagonPointsList.Add(new PointF(radius * coords[i].x + x, radius * coords[i].y + y));
-            }
-            this.OctagonPoints = octagonPointsList.ToArray();
         }
 
         public void Update(double horizontal, double vertical)
@@ -31,10 +23,11 @@ namespace InputDisplay
             this.StickCoords = ((int) (this.Coords.x + (horizontal - 0.5) * this.StickRadius * 1.6), (int) (this.Coords.y - ((float)vertical - 0.5) * this.StickRadius * 1.6));
         }
 
-        public void Draw(ref Graphics g)
+        public void Draw(ref Graphics g, Color colour)
         {
-            Pen pen = new Pen(Config.ButtonColour, Config.LineWidth);
-            g.DrawPolygon(pen, this.OctagonPoints);
+            Pen pen = new Pen(colour, Config.LineWidth);
+            //g.DrawPolygon(pen, this.OctagonPoints);
+            g.DrawOctagon(pen, new Point(this.Coords.x, this.Coords.y), this.Radius);
             //SolidBrush blackBrush = new SolidBrush(Color.Gray);
             //g.FillPolygon(blackBrush, this.OctagonPoints);
             SolidBrush brush = new SolidBrush(Config.BackgroundColour);
@@ -42,10 +35,20 @@ namespace InputDisplay
             g.DrawEllipse(pen, this.StickCoords.x - this.StickRadius, this.StickCoords.y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
         }
 
+        public bool CheckMouse(Point cursor)
+        {
+            return CustomShapes.CreateOctagon(new Point(this.Coords.x, this.Coords.y), this.Radius).IsVisible(cursor);
+        }
+
+        public void Translate((int x, int y) coords)
+        {
+            this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
+            this.StickCoords = (this.StickCoords.x + coords.x, this.StickCoords.y + coords.y);
+        }
+
         private (int x, int y) Coords;
         private (int x, int y) StickCoords;
         private int Radius;
         private int StickRadius;
-        private PointF[] OctagonPoints;
     }
 }

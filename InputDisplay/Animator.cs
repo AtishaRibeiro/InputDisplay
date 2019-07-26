@@ -14,7 +14,7 @@ namespace InputDisplay
         public Animator(int fps) {
             this.Fps = fps;
             this.AnalogStick = new AnalogStick(150, 100, 40);
-            this.Accelerator = new FaceButton(250, 120, "Circle");
+            this.Accelerator = new FaceButton(230, 100, "Circle");
             this.Drift = new FaceButton(170, 20, "Bar");
             this.Item = new FaceButton(20, 20, "Bar");
             this.Dpad = new DPad(20, 65, 70);
@@ -39,26 +39,29 @@ namespace InputDisplay
             this.Dpad.Update(0);
         }
 
-        public void Update()
+        public bool Update()
         {
             int roundedFrame = (int) Math.Floor(this.CurrentFrame);
+
+            //end of inputs reached
+            if (roundedFrame >= this.GhostReader.TotalFrames)
+            {
+                return false;
+            }
 
             if (roundedFrame >= this.GhostReader.Face_inputs[this.FaceIndex].endFrame)
             {
                 this.FaceIndex += 1;
-                Console.WriteLine(this.FaceIndex);
             }
 
             if (roundedFrame >= this.GhostReader.Analog_inputs[this.AnalogIndex].endFrame)
             {
                 this.AnalogIndex += 1;
-                Console.WriteLine(this.AnalogIndex);
             }
 
             if (roundedFrame >= this.GhostReader.Trick_inputs[this.TrickIndex].endFrame)
             {
                 this.TrickIndex += 1;
-                Console.WriteLine(this.TrickIndex);
             }
 
             (bool accelerator, bool drift, bool item) actions = this.GhostReader.Face_inputs[this.FaceIndex].values;
@@ -72,8 +75,8 @@ namespace InputDisplay
             int trick = this.GhostReader.Trick_inputs[this.TrickIndex].values;
             this.Dpad.Update(trick);
 
-            this.CurrentFrame += this.PlayBackrate / this.Fps;
-            
+            this.CurrentFrame += (double) Config.PlaybackSpeed / this.Fps;
+            return true;
         }
 
         public void Draw(ref Graphics g)
@@ -83,7 +86,7 @@ namespace InputDisplay
             if (Config.DisplayTimer)
             {
                 SolidBrush blackBrush = new SolidBrush(Color.Black);
-                g.FillRectangle(blackBrush, new Rectangle(new Point(100, 195), new Size(70, 30)));
+                g.FillRectangle(blackBrush, new Rectangle(new Point(100, 195), new Size(100, 30)));
 
                 int actualFrame = 0;
                 if (this.CurrentFrame < 240)
@@ -98,19 +101,56 @@ namespace InputDisplay
                 SolidBrush whiteBrush = new SolidBrush(Color.White);
                 g.DrawString(seconds.ToString("0.000", CultureInfo.CreateSpecificCulture("en-CA")), drawFont, whiteBrush, 100, 200, new StringFormat());
             }
-            
 
-            this.Accelerator.Draw(ref g);
-            this.AnalogStick.Draw(ref g);
-            this.Drift.Draw(ref g);
-            this.Item.Draw(ref g);
-            this.Dpad.Draw(ref g);
+            if (Config.CustomColours)
+            {
+                this.Accelerator.Draw(ref g, Config.AcceleratorColour);
+                this.AnalogStick.Draw(ref g, Config.DirectionalColour);
+                this.Drift.Draw(ref g, Config.DriftColour);
+                this.Item.Draw(ref g, Config.ItemColour);
+                this.Dpad.Draw(ref g, Config.DPadColour);
+            }
+            else
+            {
+                Color colour = Config.ButtonColour;
+                this.Accelerator.Draw(ref g, colour);
+                this.AnalogStick.Draw(ref g, colour);
+                this.Drift.Draw(ref g, colour);
+                this.Item.Draw(ref g, colour);
+                this.Dpad.Draw(ref g, colour);
+            }
         }
 
         public (string, string) GetGhostInfo()
         {
             return (this.GhostReader.CompletionTime, this.GhostReader.MiiName);
-        } 
+        }
+
+        public bool EvaluateCursor(Point cursor)
+        {
+            this.MousePos = cursor;
+
+            this.MoveAcc = this.Accelerator.CheckMouse(cursor);
+            this.MoveDrift = this.Drift.CheckMouse(cursor);
+            this.MoveItem = this.Item.CheckMouse(cursor);
+            this.MoveAnalog = this.AnalogStick.CheckMouse(cursor);
+            this.MoveDPad = this.Dpad.CheckMouse(cursor);
+            return (this.MoveAcc || this.MoveDrift || this.MoveItem || this.MoveAnalog || this.MoveDPad);
+        }
+
+        public void MoveShapes(Point cursor)
+        {
+            int xChange = cursor.X - this.MousePos.X;
+            int yChange = cursor.Y - this.MousePos.Y;
+
+            if (this.MoveAcc) { this.Accelerator.Translate((xChange, yChange)); }
+            if (this.MoveDrift) { this.Drift.Translate((xChange, yChange)); }
+            if (this.MoveItem) { this.Item.Translate((xChange, yChange)); }
+            if (this.MoveAnalog) { this.AnalogStick.Translate((xChange, yChange)); }
+            if (this.MoveDPad) { this.Dpad.Translate((xChange, yChange)); }
+
+            this.MousePos = cursor;
+        }
 
         private GhostReader GhostReader = new GhostReader();
 
@@ -124,8 +164,14 @@ namespace InputDisplay
         private FaceButton Item;
         private DPad Dpad;
 
-        private double PlayBackrate = 60;
         private int Fps;
         private double CurrentFrame = 0;
+
+        private Point MousePos;
+        private bool MoveAcc = false;
+        private bool MoveDrift = false;
+        private bool MoveItem = false;
+        private bool MoveAnalog = false;
+        private bool MoveDPad = false;
     }
 }
