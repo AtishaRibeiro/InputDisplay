@@ -72,15 +72,15 @@
         private System.Windows.Forms.TextBox DPadScale;
         private System.Windows.Forms.TextBox DirScale;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.TrackBar trackBar5;
+        private System.Windows.Forms.TrackBar DPadSlide;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TrackBar trackBar4;
+        private System.Windows.Forms.TrackBar DirSlide;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.TrackBar ItemSlide;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.TrackBar DriftSlide;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar AccSlide;
     }
 }
 

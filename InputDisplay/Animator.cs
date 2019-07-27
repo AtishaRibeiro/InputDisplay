@@ -14,11 +14,11 @@ namespace InputDisplay
 
         public Animator(int fps) {
             this.Fps = fps;
-            this.AnalogStick = new AnalogStick(150, 100, 40);
+            this.AnalogStick = new AnalogStick(150, 100);
             this.Accelerator = new Circle(230, 100);
             this.Drift = new Bar(170, 20);
             this.Item = new Bar(20, 20);
-            this.Dpad = new DPad(20, 65, 70);
+            this.Dpad = new DPad(20, 65);
         }
 
         public void ReadFile(String FileName)
@@ -178,6 +178,26 @@ namespace InputDisplay
         public void ScaleAccelerator(double scale)
         {
             this.Accelerator.Scale(scale);
+        }
+
+        public void ScaleDrift(double scale)
+        {
+            this.Drift.Scale(scale);
+        }
+
+        public void ScaleItem(double scale)
+        {
+            this.Item.Scale(scale);
+        }
+
+        public void ScaleDir(double scale)
+        {
+            this.AnalogStick.Scale(scale);
+        }
+
+        public void ScaleDPad(double scale)
+        {
+            this.Dpad.Scale(scale);
         }
     }
 }

@@ -41,6 +41,7 @@ namespace InputDisplay
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -48,24 +49,8 @@ namespace InputDisplay
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ControlTab = new System.Windows.Forms.TabPage();
-            this.ColourTab = new System.Windows.Forms.TabPage();
-            this.TransformTab = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.ItemScale = new System.Windows.Forms.TextBox();
-            this.DriftScale = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.AccScale = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.StyleTab = new System.Windows.Forms.TabPage();
-            this.SchemeTab = new System.Windows.Forms.TabPage();
-            this.DirScale = new System.Windows.Forms.TextBox();
-            this.DPadScale = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.ColourTab = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.DirColButton = new System.Windows.Forms.Button();
             this.DPadColButton = new System.Windows.Forms.Button();
@@ -80,40 +65,55 @@ namespace InputDisplay
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.trackBar4 = new System.Windows.Forms.TrackBar();
+            this.TransformTab = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.trackBar5 = new System.Windows.Forms.TrackBar();
+            this.DPadSlide = new System.Windows.Forms.TrackBar();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.DirSlide = new System.Windows.Forms.TrackBar();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.ItemSlide = new System.Windows.Forms.TrackBar();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.DriftSlide = new System.Windows.Forms.TrackBar();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.AccSlide = new System.Windows.Forms.TrackBar();
+            this.DPadScale = new System.Windows.Forms.TextBox();
+            this.DirScale = new System.Windows.Forms.TextBox();
+            this.ItemScale = new System.Windows.Forms.TextBox();
+            this.DriftScale = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.AccScale = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.StyleTab = new System.Windows.Forms.TabPage();
+            this.SchemeTab = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.ControlTab.SuspendLayout();
             this.ColourTab.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.TransformTab.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DPadSlide)).BeginInit();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DirSlide)).BeginInit();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemSlide)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DriftSlide)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AccSlide)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // numericUpDown2
@@ -165,7 +165,7 @@ namespace InputDisplay
             this.numericUpDown1.Size = new System.Drawing.Size(44, 20);
             this.numericUpDown1.TabIndex = 8;
             this.numericUpDown1.Value = new decimal(new int[] {
-            Properties.Settings.Default.LineWidth,
+            3,
             0,
             0,
             0});
@@ -257,6 +257,19 @@ namespace InputDisplay
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = global::InputDisplay.Properties.Settings.Default.BackgroundColour;
+            this.pictureBox1.Location = new System.Drawing.Point(7, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(442, 295);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox1_Paint);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseClick);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -337,6 +350,19 @@ namespace InputDisplay
             this.ControlTab.Text = "General";
             this.ControlTab.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = global::InputDisplay.Properties.Settings.Default.DisplayTimer;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(6, 86);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(89, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Display Timer";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            // 
             // ColourTab
             // 
             this.ColourTab.Controls.Add(this.groupBox3);
@@ -352,6 +378,152 @@ namespace InputDisplay
             this.ColourTab.TabIndex = 1;
             this.ColourTab.Text = "Colour";
             this.ColourTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.DirColButton);
+            this.groupBox3.Controls.Add(this.DPadColButton);
+            this.groupBox3.Controls.Add(this.ItemColButton);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.DriftColButton);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.AccColButton);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Enabled = global::InputDisplay.Properties.Settings.Default.CustomColours;
+            this.groupBox3.Location = new System.Drawing.Point(6, 80);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(228, 155);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            // 
+            // DirColButton
+            // 
+            this.DirColButton.BackColor = global::InputDisplay.Properties.Settings.Default.DirectionalColour;
+            this.DirColButton.Location = new System.Drawing.Point(166, 88);
+            this.DirColButton.Name = "DirColButton";
+            this.DirColButton.Size = new System.Drawing.Size(57, 20);
+            this.DirColButton.TabIndex = 2;
+            this.DirColButton.UseVisualStyleBackColor = false;
+            this.DirColButton.Click += new System.EventHandler(this.DirColButton_Click);
+            // 
+            // DPadColButton
+            // 
+            this.DPadColButton.BackColor = global::InputDisplay.Properties.Settings.Default.DPadColour;
+            this.DPadColButton.Location = new System.Drawing.Point(166, 114);
+            this.DPadColButton.Name = "DPadColButton";
+            this.DPadColButton.Size = new System.Drawing.Size(57, 20);
+            this.DPadColButton.TabIndex = 2;
+            this.DPadColButton.UseVisualStyleBackColor = false;
+            this.DPadColButton.Click += new System.EventHandler(this.DPadColButton_Click);
+            // 
+            // ItemColButton
+            // 
+            this.ItemColButton.BackColor = global::InputDisplay.Properties.Settings.Default.ItemColour;
+            this.ItemColButton.Location = new System.Drawing.Point(166, 62);
+            this.ItemColButton.Name = "ItemColButton";
+            this.ItemColButton.Size = new System.Drawing.Size(57, 20);
+            this.ItemColButton.TabIndex = 2;
+            this.ItemColButton.UseVisualStyleBackColor = false;
+            this.ItemColButton.Click += new System.EventHandler(this.ItemColButton_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 114);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "D-Pad";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 62);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(27, 13);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Item";
+            // 
+            // DriftColButton
+            // 
+            this.DriftColButton.BackColor = global::InputDisplay.Properties.Settings.Default.DriftColour;
+            this.DriftColButton.Location = new System.Drawing.Point(166, 38);
+            this.DriftColButton.Name = "DriftColButton";
+            this.DriftColButton.Size = new System.Drawing.Size(57, 20);
+            this.DriftColButton.TabIndex = 2;
+            this.DriftColButton.UseVisualStyleBackColor = false;
+            this.DriftColButton.Click += new System.EventHandler(this.DriftColButton_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 38);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Drift";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 88);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(57, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Directional";
+            // 
+            // AccColButton
+            // 
+            this.AccColButton.BackColor = global::InputDisplay.Properties.Settings.Default.AcceleratorColour;
+            this.AccColButton.Location = new System.Drawing.Point(166, 12);
+            this.AccColButton.Name = "AccColButton";
+            this.AccColButton.Size = new System.Drawing.Size(57, 20);
+            this.AccColButton.TabIndex = 2;
+            this.AccColButton.UseVisualStyleBackColor = false;
+            this.AccColButton.Click += new System.EventHandler(this.AccColButton_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 12);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Accelerator";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = global::InputDisplay.Properties.Settings.Default.CustomColours;
+            this.checkBox2.Location = new System.Drawing.Point(5, 66);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(99, 17);
+            this.checkBox2.TabIndex = 5;
+            this.checkBox2.Text = "Custom Colours";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = global::InputDisplay.Properties.Settings.Default.BackgroundColour;
+            this.button1.Location = new System.Drawing.Point(172, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(57, 20);
+            this.button1.TabIndex = 1;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = global::InputDisplay.Properties.Settings.Default.ButtonColour;
+            this.button2.Location = new System.Drawing.Point(172, 35);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(57, 20);
+            this.button2.TabIndex = 3;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // TransformTab
             // 
@@ -388,8 +560,131 @@ namespace InputDisplay
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Scale";
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.DPadSlide);
+            this.panel6.Location = new System.Drawing.Point(111, 123);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(117, 23);
+            this.panel6.TabIndex = 15;
+            // 
+            // DPadSlide
+            // 
+            this.DPadSlide.Location = new System.Drawing.Point(11, -9);
+            this.DPadSlide.Maximum = 20;
+            this.DPadSlide.Minimum = 1;
+            this.DPadSlide.Name = "DPadSlide";
+            this.DPadSlide.Size = new System.Drawing.Size(104, 45);
+            this.DPadSlide.TabIndex = 0;
+            this.DPadSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.DPadSlide.Value = 10;
+            this.DPadSlide.ValueChanged += new System.EventHandler(this.DPadSlide_ValueChanged);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.DirSlide);
+            this.panel5.Location = new System.Drawing.Point(111, 97);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(117, 23);
+            this.panel5.TabIndex = 15;
+            // 
+            // DirSlide
+            // 
+            this.DirSlide.Location = new System.Drawing.Point(11, -9);
+            this.DirSlide.Maximum = 20;
+            this.DirSlide.Minimum = 1;
+            this.DirSlide.Name = "DirSlide";
+            this.DirSlide.Size = new System.Drawing.Size(104, 45);
+            this.DirSlide.TabIndex = 0;
+            this.DirSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.DirSlide.Value = 10;
+            this.DirSlide.ValueChanged += new System.EventHandler(this.DirSlide_ValueChanged);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.ItemSlide);
+            this.panel4.Location = new System.Drawing.Point(111, 71);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(117, 23);
+            this.panel4.TabIndex = 15;
+            // 
+            // ItemSlide
+            // 
+            this.ItemSlide.Location = new System.Drawing.Point(11, -9);
+            this.ItemSlide.Maximum = 20;
+            this.ItemSlide.Minimum = 1;
+            this.ItemSlide.Name = "ItemSlide";
+            this.ItemSlide.Size = new System.Drawing.Size(104, 45);
+            this.ItemSlide.TabIndex = 0;
+            this.ItemSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.ItemSlide.Value = 10;
+            this.ItemSlide.ValueChanged += new System.EventHandler(this.ItemSlide_ValueChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.DriftSlide);
+            this.panel3.Location = new System.Drawing.Point(111, 45);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(117, 23);
+            this.panel3.TabIndex = 15;
+            // 
+            // DriftSlide
+            // 
+            this.DriftSlide.Location = new System.Drawing.Point(11, -9);
+            this.DriftSlide.Maximum = 20;
+            this.DriftSlide.Minimum = 1;
+            this.DriftSlide.Name = "DriftSlide";
+            this.DriftSlide.Size = new System.Drawing.Size(104, 45);
+            this.DriftSlide.TabIndex = 0;
+            this.DriftSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.DriftSlide.Value = 10;
+            this.DriftSlide.ValueChanged += new System.EventHandler(this.DriftSlide_ValueChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.AccSlide);
+            this.panel2.Location = new System.Drawing.Point(111, 19);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(117, 23);
+            this.panel2.TabIndex = 14;
+            // 
+            // AccSlide
+            // 
+            this.AccSlide.Location = new System.Drawing.Point(11, -9);
+            this.AccSlide.Maximum = 20;
+            this.AccSlide.Minimum = 1;
+            this.AccSlide.Name = "AccSlide";
+            this.AccSlide.Size = new System.Drawing.Size(104, 45);
+            this.AccSlide.TabIndex = 0;
+            this.AccSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.AccSlide.Value = 10;
+            this.AccSlide.ValueChanged += new System.EventHandler(this.AccSlide_ValueChanged);
+            // 
+            // DPadScale
+            // 
+            this.DPadScale.Enabled = false;
+            this.DPadScale.Location = new System.Drawing.Point(74, 126);
+            this.DPadScale.MaxLength = 4;
+            this.DPadScale.Name = "DPadScale";
+            this.DPadScale.Size = new System.Drawing.Size(29, 20);
+            this.DPadScale.TabIndex = 13;
+            this.DPadScale.Text = "1";
+            this.DPadScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // DirScale
+            // 
+            this.DirScale.Enabled = false;
+            this.DirScale.Location = new System.Drawing.Point(74, 100);
+            this.DirScale.MaxLength = 4;
+            this.DirScale.Name = "DirScale";
+            this.DirScale.Size = new System.Drawing.Size(29, 20);
+            this.DirScale.TabIndex = 12;
+            this.DirScale.Text = "1";
+            this.DirScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // ItemScale
             // 
+            this.ItemScale.Enabled = false;
             this.ItemScale.Location = new System.Drawing.Point(74, 74);
             this.ItemScale.MaxLength = 4;
             this.ItemScale.Name = "ItemScale";
@@ -400,6 +695,7 @@ namespace InputDisplay
             // 
             // DriftScale
             // 
+            this.DriftScale.Enabled = false;
             this.DriftScale.Location = new System.Drawing.Point(74, 48);
             this.DriftScale.MaxLength = 4;
             this.DriftScale.Name = "DriftScale";
@@ -446,6 +742,7 @@ namespace InputDisplay
             // 
             // AccScale
             // 
+            this.AccScale.Enabled = false;
             this.AccScale.Location = new System.Drawing.Point(74, 22);
             this.AccScale.MaxLength = 4;
             this.AccScale.Name = "AccScale";
@@ -453,8 +750,6 @@ namespace InputDisplay
             this.AccScale.TabIndex = 5;
             this.AccScale.Text = "1";
             this.AccScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.AccScale.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AccScale_KeyUp);
-            this.AccScale.Leave += new System.EventHandler(this.AccScale_Leave);
             // 
             // label15
             // 
@@ -502,277 +797,6 @@ namespace InputDisplay
             this.SchemeTab.Text = "Scheme";
             this.SchemeTab.UseVisualStyleBackColor = true;
             // 
-            // DirScale
-            // 
-            this.DirScale.Location = new System.Drawing.Point(74, 100);
-            this.DirScale.MaxLength = 4;
-            this.DirScale.Name = "DirScale";
-            this.DirScale.Size = new System.Drawing.Size(29, 20);
-            this.DirScale.TabIndex = 12;
-            this.DirScale.Text = "1";
-            this.DirScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // DPadScale
-            // 
-            this.DPadScale.Location = new System.Drawing.Point(74, 126);
-            this.DPadScale.MaxLength = 4;
-            this.DPadScale.Name = "DPadScale";
-            this.DPadScale.Size = new System.Drawing.Size(29, 20);
-            this.DPadScale.TabIndex = 13;
-            this.DPadScale.Text = "1";
-            this.DPadScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = Properties.Settings.Default.DisplayTimer;
-            this.checkBox1.Location = new System.Drawing.Point(6, 86);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Display Timer";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.DirColButton);
-            this.groupBox3.Controls.Add(this.DPadColButton);
-            this.groupBox3.Controls.Add(this.ItemColButton);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.DriftColButton);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.AccColButton);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Enabled = Properties.Settings.Default.CustomColours;
-            this.groupBox3.Location = new System.Drawing.Point(6, 80);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(228, 155);
-            this.groupBox3.TabIndex = 6;
-            this.groupBox3.TabStop = false;
-            // 
-            // DirColButton
-            // 
-            this.DirColButton.BackColor = Properties.Settings.Default.DirectionalColour;
-            this.DirColButton.Location = new System.Drawing.Point(166, 88);
-            this.DirColButton.Name = "DirColButton";
-            this.DirColButton.Size = new System.Drawing.Size(57, 20);
-            this.DirColButton.TabIndex = 2;
-            this.DirColButton.UseVisualStyleBackColor = false;
-            this.DirColButton.Click += new System.EventHandler(this.DirColButton_Click);
-            // 
-            // DPadColButton
-            // 
-            this.DPadColButton.BackColor = Properties.Settings.Default.DPadColour;
-            this.DPadColButton.Location = new System.Drawing.Point(166, 114);
-            this.DPadColButton.Name = "DPadColButton";
-            this.DPadColButton.Size = new System.Drawing.Size(57, 20);
-            this.DPadColButton.TabIndex = 2;
-            this.DPadColButton.UseVisualStyleBackColor = false;
-            this.DPadColButton.Click += new System.EventHandler(this.DPadColButton_Click);
-            // 
-            // ItemColButton
-            // 
-            this.ItemColButton.BackColor = Properties.Settings.Default.ItemColour;
-            this.ItemColButton.Location = new System.Drawing.Point(166, 62);
-            this.ItemColButton.Name = "ItemColButton";
-            this.ItemColButton.Size = new System.Drawing.Size(57, 20);
-            this.ItemColButton.TabIndex = 2;
-            this.ItemColButton.UseVisualStyleBackColor = false;
-            this.ItemColButton.Click += new System.EventHandler(this.ItemColButton_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 114);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 13);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "D-Pad";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 62);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(27, 13);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "Item";
-            // 
-            // DriftColButton
-            // 
-            this.DriftColButton.BackColor = Properties.Settings.Default.DriftColour;
-            this.DriftColButton.Location = new System.Drawing.Point(166, 38);
-            this.DriftColButton.Name = "DriftColButton";
-            this.DriftColButton.Size = new System.Drawing.Size(57, 20);
-            this.DriftColButton.TabIndex = 2;
-            this.DriftColButton.UseVisualStyleBackColor = false;
-            this.DriftColButton.Click += new System.EventHandler(this.DriftColButton_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 38);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(26, 13);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Drift";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 88);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(57, 13);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Directional";
-            // 
-            // AccColButton
-            // 
-            this.AccColButton.BackColor = Properties.Settings.Default.AcceleratorColour;
-            this.AccColButton.Location = new System.Drawing.Point(166, 12);
-            this.AccColButton.Name = "AccColButton";
-            this.AccColButton.Size = new System.Drawing.Size(57, 20);
-            this.AccColButton.TabIndex = 2;
-            this.AccColButton.UseVisualStyleBackColor = false;
-            this.AccColButton.Click += new System.EventHandler(this.AccColButton_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 12);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(61, 13);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Accelerator";
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(5, 66);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(99, 17);
-            this.checkBox2.TabIndex = 5;
-            this.checkBox2.Text = "Custom Colours";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.Checked = Properties.Settings.Default.CustomColours;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = Properties.Settings.Default.BackgroundColour;
-            this.button1.Location = new System.Drawing.Point(172, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(57, 20);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = Properties.Settings.Default.ButtonColour;
-            this.button2.Location = new System.Drawing.Point(172, 35);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(57, 20);
-            this.button2.TabIndex = 3;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = Properties.Settings.Default.BackgroundColour;
-            this.pictureBox1.Location = new System.Drawing.Point(7, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(442, 295);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox1_Paint);
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseClick);
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.trackBar1);
-            this.panel2.Location = new System.Drawing.Point(111, 19);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(117, 23);
-            this.panel2.TabIndex = 14;
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(11, -9);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
-            this.trackBar1.TabIndex = 0;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.trackBar2);
-            this.panel3.Location = new System.Drawing.Point(111, 45);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(117, 23);
-            this.panel3.TabIndex = 15;
-            // 
-            // trackBar2
-            // 
-            this.trackBar2.Location = new System.Drawing.Point(11, -9);
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(104, 45);
-            this.trackBar2.TabIndex = 0;
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.Both;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.trackBar3);
-            this.panel4.Location = new System.Drawing.Point(111, 71);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(117, 23);
-            this.panel4.TabIndex = 15;
-            // 
-            // trackBar3
-            // 
-            this.trackBar3.Location = new System.Drawing.Point(11, -9);
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(104, 45);
-            this.trackBar3.TabIndex = 0;
-            this.trackBar3.TickStyle = System.Windows.Forms.TickStyle.Both;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.trackBar4);
-            this.panel5.Location = new System.Drawing.Point(111, 97);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(117, 23);
-            this.panel5.TabIndex = 15;
-            // 
-            // trackBar4
-            // 
-            this.trackBar4.Location = new System.Drawing.Point(11, -9);
-            this.trackBar4.Name = "trackBar4";
-            this.trackBar4.Size = new System.Drawing.Size(104, 45);
-            this.trackBar4.TabIndex = 0;
-            this.trackBar4.TickStyle = System.Windows.Forms.TickStyle.Both;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.trackBar5);
-            this.panel6.Location = new System.Drawing.Point(111, 123);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(117, 23);
-            this.panel6.TabIndex = 15;
-            // 
-            // trackBar5
-            // 
-            this.trackBar5.Location = new System.Drawing.Point(11, -9);
-            this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Size = new System.Drawing.Size(104, 45);
-            this.trackBar5.TabIndex = 0;
-            this.trackBar5.TickStyle = System.Windows.Forms.TickStyle.Both;
-            // 
             // Form1
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -793,6 +817,7 @@ namespace InputDisplay
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -800,29 +825,28 @@ namespace InputDisplay
             this.ControlTab.PerformLayout();
             this.ColourTab.ResumeLayout(false);
             this.ColourTab.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.TransformTab.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DPadSlide)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DirSlide)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemSlide)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DriftSlide)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AccSlide)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1001,5 +1025,6 @@ namespace InputDisplay
             this.button4.Location = new Point(12, 321 + heightChange);
             this.panel1.Location = new Point(257, 322 + heightChange);
         }
+
     }
 }

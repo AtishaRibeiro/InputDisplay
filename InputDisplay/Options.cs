@@ -112,9 +112,12 @@ namespace InputDisplay
 
         private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            Point pos = this.pictureBox1.PointToClient(Cursor.Position);
-            Cursor.Current = Cursors.Hand;
-            this.Dragging = this.Animator.EvaluateCursor(pos);
+            if (this.tabControl1.SelectedTab == this.TransformTab)
+            {
+                Point pos = this.pictureBox1.PointToClient(Cursor.Position);
+                Cursor.Current = Cursors.Hand;
+                this.Dragging = this.Animator.EvaluateCursor(pos);
+            }
         }
 
         private void PictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -142,29 +145,44 @@ namespace InputDisplay
             }
         }
 
-        private void AccScale_KeyUp(object sender, KeyEventArgs e)
+        private void AccSlide_ValueChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                double scale;
-                if (double.TryParse(this.AccScale.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out scale))
-                {
-                    this.Animator.ScaleAccelerator(scale);
-                    Config.AcceleratorScale = scale;
-                    this.pictureBox1.Invalidate();
-                } else
-                {
-                    this.AccScale.Text = Convert.ToString(Config.AcceleratorScale);
-                }
-                
-            }
-        }
-
-        private void AccScale_Leave(object sender, EventArgs e)
-        {
-            double scale = Convert.ToDouble(this.AccScale.Text, CultureInfo.InvariantCulture);
+            double scale = this.AccSlide.Value * 0.1;
             this.Animator.ScaleAccelerator(scale);
             this.pictureBox1.Invalidate();
+            this.AccScale.Text = Convert.ToString(scale);
+        }
+
+        private void DriftSlide_ValueChanged(object sender, EventArgs e)
+        {
+            double scale = this.DriftSlide.Value * 0.1;
+            this.Animator.ScaleDrift(scale);
+            this.pictureBox1.Invalidate();
+            this.DriftScale.Text = Convert.ToString(scale);
+        }
+
+        private void ItemSlide_ValueChanged(object sender, EventArgs e)
+        {
+            double scale = this.ItemSlide.Value * 0.1;
+            this.Animator.ScaleItem(scale);
+            this.pictureBox1.Invalidate();
+            this.ItemScale.Text = Convert.ToString(scale);
+        }
+
+        private void DirSlide_ValueChanged(object sender, EventArgs e)
+        {
+            double scale = this.DirSlide.Value * 0.1;
+            this.Animator.ScaleDir(scale);
+            this.pictureBox1.Invalidate();
+            this.DirScale.Text = Convert.ToString(scale);
+        }
+
+        private void DPadSlide_ValueChanged(object sender, EventArgs e)
+        {
+            double scale = this.DPadSlide.Value * 0.1;
+            this.Animator.ScaleDPad(scale);
+            this.pictureBox1.Invalidate();
+            this.DPadScale.Text = Convert.ToString(scale);
         }
     }
 }

@@ -9,10 +9,10 @@ namespace InputDisplay
 {
     class DPad
     {
-        public DPad(int x, int y, int size)
+        public DPad(int x, int y)
         {
             this.Coords = (x, y);
-            this.Size = size;
+            this.Size = 70;
             this.ThicknessFraction = 2.0 / 7.0;
         }
 
@@ -42,6 +42,11 @@ namespace InputDisplay
         public void Translate((int x, int y) coords)
         {
             this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
+        }
+
+        public void Scale(double scale)
+        {
+            this.Size = (int)(70 * scale);
         }
 
         private (int x, int y) Coords;

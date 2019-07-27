@@ -10,12 +10,12 @@ namespace InputDisplay
 {
     class AnalogStick
     {
-        public AnalogStick(int x, int y, int radius)
+        public AnalogStick(int x, int y)
         {
             this.Coords = (x, y);
             this.StickCoords = (x, y);
-            this.Radius = radius;
-            this.StickRadius = (int) (radius * 0.6);
+            this.Radius = 40;
+            this.StickRadius = (int) (40 * 0.6);
         }
 
         public void Update(double horizontal, double vertical)
@@ -44,6 +44,12 @@ namespace InputDisplay
         {
             this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
             this.StickCoords = (this.StickCoords.x + coords.x, this.StickCoords.y + coords.y);
+        }
+
+        public void Scale(double scale)
+        {
+            this.Radius = (int)(40 * scale);
+            this.StickRadius = (int)(40 * 0.6 * scale);
         }
 
         private (int x, int y) Coords;
