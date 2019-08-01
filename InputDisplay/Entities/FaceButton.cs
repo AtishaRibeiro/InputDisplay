@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace InputDisplay.Buttons
+namespace InputDisplay.Entities
 {
-    abstract class FaceButton
+    abstract class FaceButton: BaseEntity
     {
 
         public FaceButton(int x, int y)
@@ -16,23 +16,16 @@ namespace InputDisplay.Buttons
             this.Coords = (x, y);
         }
 
-        public void Update(bool pressed)
+        public virtual void Update(bool pressed)
         {
             this.Pressed = pressed;
         }
 
-        public abstract void Draw(ref Graphics g, Color colour);
-
-        public abstract bool CheckMouse(Point cursor);
-
-        public void Translate((int x, int y) coords)
+        public override void Translate((int x, int y) coords)
         {
             this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
         }
 
-        public abstract void Scale(double scale);
-
-        protected (int x, int y) Coords;
         protected bool Pressed = false;
     }
 }

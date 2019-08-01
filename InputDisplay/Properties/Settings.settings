@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="BackgroundColour" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">0, 192, 0</Value>
+      <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="ButtonColour" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
@@ -14,26 +14,47 @@
     <Setting Name="DisplayTimer" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="CustomColours" Type="System.Boolean" Scope="User">
+    <Setting Name="C_CustomColours" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="AcceleratorColour" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="C_AcceleratorColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Teal</Value>
+    </Setting>
+    <Setting Name="C_DriftColour" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="DriftColour" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="C_ItemColour" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="ItemColour" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="C_DirectionalColour" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="DirectionalColour" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="C_DPadColour" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="DPadColour" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">White</Value>
-    </Setting>
-    <Setting Name="AcceleratorScale" Type="System.Double" Scope="User">
+    <Setting Name="C_AcceleratorScale" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="C_DriftScale" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="C_ItemScale" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="C_DirectionalScale" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="C_DPadScale" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="OutlineColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Cyan</Value>
+    </Setting>
+    <Setting Name="UseOutline" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Outline" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

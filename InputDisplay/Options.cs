@@ -12,6 +12,28 @@ namespace InputDisplay
     public partial class Form1: Form
     {
         //
+        // Variable Setup
+        //
+
+        private void VariableSetup()
+        {
+            this.pictureBox1.BackColor = Config.BackgroundColour;
+            this.numericUpDown1.Value = new decimal(new int[] {Config.LineWidth, 0, 0, 0});
+            this.numericUpDown4.Value = new decimal(new int[] {Config.Outline, 0, 0, 0 });
+            this.checkBox1.Checked = Config.DisplayTimer;
+            this.button6.BackColor = Config.OutlineColour;
+            this.button1.BackColor = Config.BackgroundColour;
+            this.button2.BackColor = Config.ButtonColour;
+
+            //events
+            this.button1.Click += new EventHandler(Button1_Click);
+            this.button2.Click += new EventHandler(Button2_Click);
+            this.button6.Click += new EventHandler(Button6_Click);
+            this.ButtonColour.Click += new EventHandler(ButtonColour_Click);
+            this.ButtonSlide.ValueChanged += new EventHandler(ButtonSlide_ValueChanged);
+        }
+
+        //
         // General Tab
         //
 
@@ -32,79 +54,49 @@ namespace InputDisplay
             Config.PlaybackSpeed = (int)this.numericUpDown2.Value;
         }
 
-        //
-        // Colour Tab
-        //
-
-        private void CheckBox2_CheckedChanged(object sender, EventArgs e)
+        private void NumericUpDown4_ValueChanged(object sender, EventArgs e)
         {
-            if (this.checkBox2.Checked)
-            {
-                this.groupBox3.Enabled = true;
-                Config.CustomColours = true;
-                this.button2.Enabled = false;
-            }
-            else
-            {
-                this.groupBox3.Enabled = false;
-                Config.CustomColours = false;
-                this.button2.Enabled = true;
-            }
-            this.pictureBox1.Invalidate();
-        }
-
-        private void AccColButton_Click(object sender, EventArgs e)
-        {
-            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.AccColButton.BackColor = this.colorDialog1.Color;
-                Config.AcceleratorColour = this.colorDialog1.Color;
-            }
-            this.pictureBox1.Invalidate();
-        }
-
-        private void DriftColButton_Click(object sender, EventArgs e)
-        {
-            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.DriftColButton.BackColor = this.colorDialog1.Color;
-                Config.DriftColour = this.colorDialog1.Color;
-            }
-            this.pictureBox1.Invalidate();
-        }
-
-        private void ItemColButton_Click(object sender, EventArgs e)
-        {
-            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.ItemColButton.BackColor = this.colorDialog1.Color;
-                Config.ItemColour = this.colorDialog1.Color;
-            }
-            this.pictureBox1.Invalidate();
-        }
-
-        private void DirColButton_Click(object sender, EventArgs e)
-        {
-            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.DirColButton.BackColor = this.colorDialog1.Color;
-                Config.DirectionalColour = this.colorDialog1.Color;
-            }
-            this.pictureBox1.Invalidate();
-        }
-
-        private void DPadColButton_Click(object sender, EventArgs e)
-        {
-            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.DPadColButton.BackColor = this.colorDialog1.Color;
-                Config.DPadColour = this.colorDialog1.Color;
-            }
+            Config.Outline = (int)this.numericUpDown4.Value;
+            Config.UseOutline = Config.Outline != 0;
             this.pictureBox1.Invalidate();
         }
 
         //
-        // Transform Tab
+        // Colours
+        //
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                this.button1.BackColor = this.colorDialog1.Color;
+                this.pictureBox1.BackColor = this.button1.BackColor;
+                Config.BackgroundColour = this.button1.BackColor;
+            }
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                this.button2.BackColor = this.colorDialog1.Color;
+                Config.ButtonColour = this.button2.BackColor;
+                this.pictureBox1.Invalidate();
+            }
+        }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                this.button6.BackColor = this.colorDialog1.Color;
+                Config.OutlineColour = this.button6.BackColor;
+                this.pictureBox1.Invalidate();
+            }
+        }
+
+        //
+        // Customise Tab
         //
 
         private bool Dragging = false;
@@ -112,11 +104,11 @@ namespace InputDisplay
 
         private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.tabControl1.SelectedTab == this.TransformTab)
+            if (this.tabControl1.SelectedTab == this.CustomiseTab)
             {
                 Point pos = this.pictureBox1.PointToClient(Cursor.Position);
                 Cursor.Current = Cursors.Hand;
-                this.Dragging = this.Animator.EvaluateCursor(pos);
+                this.Dragging = this.Animator.EvaluateCursor(pos).Item1 != null;
             }
         }
 
@@ -124,6 +116,25 @@ namespace InputDisplay
         {
             this.Dragging = false;
             Cursor.Current = Cursors.Default;
+
+            Point pos = this.pictureBox1.PointToClient(Cursor.Position);
+            (string name, Color colour, double scale) = this.Animator.EvaluateCursor(pos);
+            this.CurrentButton.Text = name;
+            this.ButtonColour.BackColor = colour;
+            if (scale == 0)
+            {
+                this.ButtonSlide.Value = 10;
+                this.ButtonScale.Text = null;
+            } else
+            {
+                this.ButtonSlide.Value = (int)(10 * scale);
+                this.ButtonScale.Text = Convert.ToString(scale);
+            }
+            this.groupBox3.Enabled = name != null;
+
+            this.Animator.Highlight();
+            this.pictureBox1.Invalidate();
+            //this.Animator.EvaluateCursor(this.pictureBox1.PointToClient(Cursor.Position));
         }
 
         private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -145,44 +156,22 @@ namespace InputDisplay
             }
         }
 
-        private void AccSlide_ValueChanged(object sender, EventArgs e)
+        private void ButtonColour_Click(object sender, EventArgs e)
         {
-            double scale = this.AccSlide.Value * 0.1;
-            this.Animator.ScaleAccelerator(scale);
-            this.pictureBox1.Invalidate();
-            this.AccScale.Text = Convert.ToString(scale);
+            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                this.ButtonColour.BackColor = this.colorDialog1.Color;
+                this.Animator.ChangeColour(this.colorDialog1.Color);
+                this.pictureBox1.Invalidate();
+            }
         }
 
-        private void DriftSlide_ValueChanged(object sender, EventArgs e)
+        private void ButtonSlide_ValueChanged(object sender, EventArgs e)
         {
-            double scale = this.DriftSlide.Value * 0.1;
-            this.Animator.ScaleDrift(scale);
+            double scale = this.ButtonSlide.Value * 0.1;
+            this.Animator.Scale(scale);
             this.pictureBox1.Invalidate();
-            this.DriftScale.Text = Convert.ToString(scale);
-        }
-
-        private void ItemSlide_ValueChanged(object sender, EventArgs e)
-        {
-            double scale = this.ItemSlide.Value * 0.1;
-            this.Animator.ScaleItem(scale);
-            this.pictureBox1.Invalidate();
-            this.ItemScale.Text = Convert.ToString(scale);
-        }
-
-        private void DirSlide_ValueChanged(object sender, EventArgs e)
-        {
-            double scale = this.DirSlide.Value * 0.1;
-            this.Animator.ScaleDir(scale);
-            this.pictureBox1.Invalidate();
-            this.DirScale.Text = Convert.ToString(scale);
-        }
-
-        private void DPadSlide_ValueChanged(object sender, EventArgs e)
-        {
-            double scale = this.DPadSlide.Value * 0.1;
-            this.Animator.ScaleDPad(scale);
-            this.pictureBox1.Invalidate();
-            this.DPadScale.Text = Convert.ToString(scale);
+            this.ButtonScale.Text = Convert.ToString(scale);
         }
     }
 }

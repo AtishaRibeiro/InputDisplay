@@ -25,7 +25,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 192, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
         public global::System.Drawing.Color BackgroundColour {
             get {
                 return ((global::System.Drawing.Color)(this["BackgroundColour"]));
@@ -74,84 +74,168 @@ namespace InputDisplay.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CustomColours {
+        public bool C_CustomColours {
             get {
-                return ((bool)(this["CustomColours"]));
+                return ((bool)(this["C_CustomColours"]));
             }
             set {
-                this["CustomColours"] = value;
+                this["C_CustomColours"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Teal")]
+        public global::System.Drawing.Color C_AcceleratorColour {
+            get {
+                return ((global::System.Drawing.Color)(this["C_AcceleratorColour"]));
+            }
+            set {
+                this["C_AcceleratorColour"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("White")]
-        public global::System.Drawing.Color AcceleratorColour {
+        public global::System.Drawing.Color C_DriftColour {
             get {
-                return ((global::System.Drawing.Color)(this["AcceleratorColour"]));
+                return ((global::System.Drawing.Color)(this["C_DriftColour"]));
             }
             set {
-                this["AcceleratorColour"] = value;
+                this["C_DriftColour"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("White")]
-        public global::System.Drawing.Color DriftColour {
+        public global::System.Drawing.Color C_ItemColour {
             get {
-                return ((global::System.Drawing.Color)(this["DriftColour"]));
+                return ((global::System.Drawing.Color)(this["C_ItemColour"]));
             }
             set {
-                this["DriftColour"] = value;
+                this["C_ItemColour"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("White")]
-        public global::System.Drawing.Color ItemColour {
+        public global::System.Drawing.Color C_DirectionalColour {
             get {
-                return ((global::System.Drawing.Color)(this["ItemColour"]));
+                return ((global::System.Drawing.Color)(this["C_DirectionalColour"]));
             }
             set {
-                this["ItemColour"] = value;
+                this["C_DirectionalColour"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("White")]
-        public global::System.Drawing.Color DirectionalColour {
+        public global::System.Drawing.Color C_DPadColour {
             get {
-                return ((global::System.Drawing.Color)(this["DirectionalColour"]));
+                return ((global::System.Drawing.Color)(this["C_DPadColour"]));
             }
             set {
-                this["DirectionalColour"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("White")]
-        public global::System.Drawing.Color DPadColour {
-            get {
-                return ((global::System.Drawing.Color)(this["DPadColour"]));
-            }
-            set {
-                this["DPadColour"] = value;
+                this["C_DPadColour"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double AcceleratorScale {
+        public double C_AcceleratorScale {
             get {
-                return ((double)(this["AcceleratorScale"]));
+                return ((double)(this["C_AcceleratorScale"]));
             }
             set {
-                this["AcceleratorScale"] = value;
+                this["C_AcceleratorScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double C_DriftScale {
+            get {
+                return ((double)(this["C_DriftScale"]));
+            }
+            set {
+                this["C_DriftScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double C_ItemScale {
+            get {
+                return ((double)(this["C_ItemScale"]));
+            }
+            set {
+                this["C_ItemScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double C_DirectionalScale {
+            get {
+                return ((double)(this["C_DirectionalScale"]));
+            }
+            set {
+                this["C_DirectionalScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double C_DPadScale {
+            get {
+                return ((double)(this["C_DPadScale"]));
+            }
+            set {
+                this["C_DPadScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Cyan")]
+        public global::System.Drawing.Color OutlineColour {
+            get {
+                return ((global::System.Drawing.Color)(this["OutlineColour"]));
+            }
+            set {
+                this["OutlineColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseOutline {
+            get {
+                return ((bool)(this["UseOutline"]));
+            }
+            set {
+                this["UseOutline"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Outline {
+            get {
+                return ((int)(this["Outline"]));
+            }
+            set {
+                this["Outline"] = value;
             }
         }
     }

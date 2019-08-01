@@ -32,69 +32,81 @@ namespace InputDisplay
                 Properties.Settings.Default.Save();
             }
         }
-        static public bool CustomColours {
+        static public Color OutlineColour
+        {
             get
             {
-                return Properties.Settings.Default.CustomColours;
+                return Properties.Settings.Default.OutlineColour;
             }
             set
             {
-                Properties.Settings.Default.CustomColours = value;
+                Properties.Settings.Default.OutlineColour = value;
                 Properties.Settings.Default.Save();
             }
         }
-        static public Color AcceleratorColour {
+        static public bool C_CustomColours {
             get
             {
-                return Properties.Settings.Default.AcceleratorColour;
+                return Properties.Settings.Default.C_CustomColours;
             }
             set
             {
-                Properties.Settings.Default.AcceleratorColour = value;
+                Properties.Settings.Default.C_CustomColours = value;
                 Properties.Settings.Default.Save();
             }
         }
-        static public Color DriftColour {
+        static public Color C_AcceleratorColour {
             get
             {
-                return Properties.Settings.Default.DriftColour;
+                return Properties.Settings.Default.C_AcceleratorColour;
             }
             set
             {
-                Properties.Settings.Default.DriftColour = value;
+                Properties.Settings.Default.C_AcceleratorColour = value;
                 Properties.Settings.Default.Save();
             }
         }
-        static public Color ItemColour {
+        static public Color C_DriftColour {
             get
             {
-                return Properties.Settings.Default.ItemColour;
+                return Properties.Settings.Default.C_DriftColour;
             }
             set
             {
-                Properties.Settings.Default.ItemColour = value;
+                Properties.Settings.Default.C_DriftColour = value;
                 Properties.Settings.Default.Save();
             }
         }
-        static public Color DirectionalColour {
+        static public Color C_ItemColour {
             get
             {
-                return Properties.Settings.Default.DirectionalColour;
+                return Properties.Settings.Default.C_ItemColour;
             }
             set
             {
-                Properties.Settings.Default.DirectionalColour = value;
+                Properties.Settings.Default.C_ItemColour = value;
                 Properties.Settings.Default.Save();
             }
         }
-        static public Color DPadColour {
+        static public Color C_DirectionalColour {
             get
             {
-                return Properties.Settings.Default.DPadColour;
+                return Properties.Settings.Default.C_DirectionalColour;
             }
             set
             {
-                Properties.Settings.Default.DPadColour = value;
+                Properties.Settings.Default.C_DirectionalColour = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+        static public Color C_DPadColour {
+            get
+            {
+                return Properties.Settings.Default.C_DPadColour;
+            }
+            set
+            {
+                Properties.Settings.Default.C_DPadColour = value;
                 Properties.Settings.Default.Save();
             }
         }
@@ -120,16 +132,93 @@ namespace InputDisplay
                 Properties.Settings.Default.Save();
             }
         }
-
-        static public double AcceleratorScale
+        static public double C_AcceleratorScale
         {
             get
             {
-                return Properties.Settings.Default.AcceleratorScale;
+                return Properties.Settings.Default.C_AcceleratorScale;
             }
             set
             {
-                Properties.Settings.Default.AcceleratorScale = value;
+                Properties.Settings.Default.C_AcceleratorScale = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public double C_DriftScale
+        {
+            get
+            {
+                return Properties.Settings.Default.C_DriftScale;
+            }
+            set
+            {
+                Properties.Settings.Default.C_DriftScale = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public double C_ItemScale
+        {
+            get
+            {
+                return Properties.Settings.Default.C_ItemScale;
+            }
+            set
+            {
+                Properties.Settings.Default.C_ItemScale = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public double C_DirectionalScale
+        {
+            get
+            {
+                return Properties.Settings.Default.C_DirectionalScale;
+            }
+            set
+            {
+                Properties.Settings.Default.C_DirectionalScale = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public double C_DPadScale
+        {
+            get
+            {
+                return Properties.Settings.Default.C_DPadScale;
+            }
+            set
+            {
+                Properties.Settings.Default.C_DPadScale = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public bool UseOutline
+        {
+            get
+            {
+                return Properties.Settings.Default.UseOutline;
+            }
+            set
+            {
+                Properties.Settings.Default.UseOutline = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        static public int Outline
+        {
+            get
+            {
+                return Properties.Settings.Default.Outline;
+            }
+            set
+            {
+                Properties.Settings.Default.Outline = value;
                 Properties.Settings.Default.Save();
             }
         }

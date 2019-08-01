@@ -24,17 +24,12 @@ namespace InputDisplay
         public Form1()
         {
             InitializeComponent();
-            this.Animator = new Animator(50);
+            VariableSetup();
+            this.Animator = new Animator(62.5);
         }
 
         private void InitializeComponent()
         {
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -47,156 +42,51 @@ namespace InputDisplay
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.ControlTab = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.ColourTab = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.DirColButton = new System.Windows.Forms.Button();
-            this.DPadColButton = new System.Windows.Forms.Button();
-            this.ItemColButton = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.DriftColButton = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.AccColButton = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.TransformTab = new System.Windows.Forms.TabPage();
+            this.SchemeTab = new System.Windows.Forms.TabPage();
+            this.CustomiseTab = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.DPadSlide = new System.Windows.Forms.TrackBar();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.DirSlide = new System.Windows.Forms.TrackBar();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.ItemSlide = new System.Windows.Forms.TrackBar();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.DriftSlide = new System.Windows.Forms.TrackBar();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.AccSlide = new System.Windows.Forms.TrackBar();
-            this.DPadScale = new System.Windows.Forms.TextBox();
-            this.DirScale = new System.Windows.Forms.TextBox();
-            this.ItemScale = new System.Windows.Forms.TextBox();
-            this.DriftScale = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.AccScale = new System.Windows.Forms.TextBox();
+            this.ButtonSlide = new System.Windows.Forms.TrackBar();
+            this.ButtonScale = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.ButtonColour = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.CurrentButton = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.StyleTab = new System.Windows.Forms.TabPage();
-            this.SchemeTab = new System.Windows.Forms.TabPage();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.GeneralTab = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label22 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.ControlTab.SuspendLayout();
-            this.ColourTab.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.TransformTab.SuspendLayout();
+            this.CustomiseTab.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DPadSlide)).BeginInit();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DirSlide)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemSlide)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DriftSlide)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AccSlide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ButtonSlide)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.GeneralTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(185, 10);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(44, 20);
-            this.numericUpDown2.TabIndex = 11;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.NumericUpDown2_ValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Line Width";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(185, 34);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(44, 20);
-            this.numericUpDown1.TabIndex = 8;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.NumericUpDown1_ValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Playback Speed";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 35);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Button Colour";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Background Colour";
             // 
             // colorDialog1
             // 
@@ -259,7 +149,7 @@ namespace InputDisplay
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = global::InputDisplay.Properties.Settings.Default.BackgroundColour;
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Location = new System.Drawing.Point(7, 13);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(442, 295);
@@ -322,450 +212,132 @@ namespace InputDisplay
             this.panel1.Size = new System.Drawing.Size(455, 47);
             this.panel1.TabIndex = 7;
             // 
-            // tabControl1
+            // SchemeTab
             // 
-            this.tabControl1.Controls.Add(this.ControlTab);
-            this.tabControl1.Controls.Add(this.ColourTab);
-            this.tabControl1.Controls.Add(this.TransformTab);
-            this.tabControl1.Controls.Add(this.StyleTab);
-            this.tabControl1.Controls.Add(this.SchemeTab);
-            this.tabControl1.Location = new System.Drawing.Point(12, 55);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(248, 260);
-            this.tabControl1.TabIndex = 8;
+            this.SchemeTab.Location = new System.Drawing.Point(4, 22);
+            this.SchemeTab.Name = "SchemeTab";
+            this.SchemeTab.Size = new System.Drawing.Size(240, 234);
+            this.SchemeTab.TabIndex = 3;
+            this.SchemeTab.Text = "Scheme";
+            this.SchemeTab.UseVisualStyleBackColor = true;
             // 
-            // ControlTab
+            // CustomiseTab
             // 
-            this.ControlTab.Controls.Add(this.numericUpDown2);
-            this.ControlTab.Controls.Add(this.checkBox1);
-            this.ControlTab.Controls.Add(this.numericUpDown1);
-            this.ControlTab.Controls.Add(this.label4);
-            this.ControlTab.Controls.Add(this.label3);
-            this.ControlTab.Location = new System.Drawing.Point(4, 22);
-            this.ControlTab.Name = "ControlTab";
-            this.ControlTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ControlTab.Size = new System.Drawing.Size(240, 234);
-            this.ControlTab.TabIndex = 0;
-            this.ControlTab.Text = "General";
-            this.ControlTab.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = global::InputDisplay.Properties.Settings.Default.DisplayTimer;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(6, 86);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Display Timer";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
-            // 
-            // ColourTab
-            // 
-            this.ColourTab.Controls.Add(this.groupBox3);
-            this.ColourTab.Controls.Add(this.checkBox2);
-            this.ColourTab.Controls.Add(this.label1);
-            this.ColourTab.Controls.Add(this.label2);
-            this.ColourTab.Controls.Add(this.button1);
-            this.ColourTab.Controls.Add(this.button2);
-            this.ColourTab.Location = new System.Drawing.Point(4, 22);
-            this.ColourTab.Name = "ColourTab";
-            this.ColourTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ColourTab.Size = new System.Drawing.Size(240, 234);
-            this.ColourTab.TabIndex = 1;
-            this.ColourTab.Text = "Colour";
-            this.ColourTab.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.DirColButton);
-            this.groupBox3.Controls.Add(this.DPadColButton);
-            this.groupBox3.Controls.Add(this.ItemColButton);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.DriftColButton);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.AccColButton);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Enabled = global::InputDisplay.Properties.Settings.Default.CustomColours;
-            this.groupBox3.Location = new System.Drawing.Point(6, 80);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(228, 155);
-            this.groupBox3.TabIndex = 6;
-            this.groupBox3.TabStop = false;
-            // 
-            // DirColButton
-            // 
-            this.DirColButton.BackColor = global::InputDisplay.Properties.Settings.Default.DirectionalColour;
-            this.DirColButton.Location = new System.Drawing.Point(166, 88);
-            this.DirColButton.Name = "DirColButton";
-            this.DirColButton.Size = new System.Drawing.Size(57, 20);
-            this.DirColButton.TabIndex = 2;
-            this.DirColButton.UseVisualStyleBackColor = false;
-            this.DirColButton.Click += new System.EventHandler(this.DirColButton_Click);
-            // 
-            // DPadColButton
-            // 
-            this.DPadColButton.BackColor = global::InputDisplay.Properties.Settings.Default.DPadColour;
-            this.DPadColButton.Location = new System.Drawing.Point(166, 114);
-            this.DPadColButton.Name = "DPadColButton";
-            this.DPadColButton.Size = new System.Drawing.Size(57, 20);
-            this.DPadColButton.TabIndex = 2;
-            this.DPadColButton.UseVisualStyleBackColor = false;
-            this.DPadColButton.Click += new System.EventHandler(this.DPadColButton_Click);
-            // 
-            // ItemColButton
-            // 
-            this.ItemColButton.BackColor = global::InputDisplay.Properties.Settings.Default.ItemColour;
-            this.ItemColButton.Location = new System.Drawing.Point(166, 62);
-            this.ItemColButton.Name = "ItemColButton";
-            this.ItemColButton.Size = new System.Drawing.Size(57, 20);
-            this.ItemColButton.TabIndex = 2;
-            this.ItemColButton.UseVisualStyleBackColor = false;
-            this.ItemColButton.Click += new System.EventHandler(this.ItemColButton_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 114);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 13);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "D-Pad";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 62);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(27, 13);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "Item";
-            // 
-            // DriftColButton
-            // 
-            this.DriftColButton.BackColor = global::InputDisplay.Properties.Settings.Default.DriftColour;
-            this.DriftColButton.Location = new System.Drawing.Point(166, 38);
-            this.DriftColButton.Name = "DriftColButton";
-            this.DriftColButton.Size = new System.Drawing.Size(57, 20);
-            this.DriftColButton.TabIndex = 2;
-            this.DriftColButton.UseVisualStyleBackColor = false;
-            this.DriftColButton.Click += new System.EventHandler(this.DriftColButton_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 38);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(26, 13);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Drift";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 88);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(57, 13);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Directional";
-            // 
-            // AccColButton
-            // 
-            this.AccColButton.BackColor = global::InputDisplay.Properties.Settings.Default.AcceleratorColour;
-            this.AccColButton.Location = new System.Drawing.Point(166, 12);
-            this.AccColButton.Name = "AccColButton";
-            this.AccColButton.Size = new System.Drawing.Size(57, 20);
-            this.AccColButton.TabIndex = 2;
-            this.AccColButton.UseVisualStyleBackColor = false;
-            this.AccColButton.Click += new System.EventHandler(this.AccColButton_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 12);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(61, 13);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Accelerator";
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = global::InputDisplay.Properties.Settings.Default.CustomColours;
-            this.checkBox2.Location = new System.Drawing.Point(5, 66);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(99, 17);
-            this.checkBox2.TabIndex = 5;
-            this.checkBox2.Text = "Custom Colours";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = global::InputDisplay.Properties.Settings.Default.BackgroundColour;
-            this.button1.Location = new System.Drawing.Point(172, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(57, 20);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = global::InputDisplay.Properties.Settings.Default.ButtonColour;
-            this.button2.Location = new System.Drawing.Point(172, 35);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(57, 20);
-            this.button2.TabIndex = 3;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // TransformTab
-            // 
-            this.TransformTab.Controls.Add(this.groupBox5);
-            this.TransformTab.Controls.Add(this.groupBox4);
-            this.TransformTab.Location = new System.Drawing.Point(4, 22);
-            this.TransformTab.Name = "TransformTab";
-            this.TransformTab.Size = new System.Drawing.Size(240, 234);
-            this.TransformTab.TabIndex = 2;
-            this.TransformTab.Text = "Transform";
-            this.TransformTab.UseVisualStyleBackColor = true;
+            this.CustomiseTab.Controls.Add(this.groupBox5);
+            this.CustomiseTab.Controls.Add(this.groupBox4);
+            this.CustomiseTab.Location = new System.Drawing.Point(4, 22);
+            this.CustomiseTab.Name = "CustomiseTab";
+            this.CustomiseTab.Size = new System.Drawing.Size(240, 234);
+            this.CustomiseTab.TabIndex = 2;
+            this.CustomiseTab.Text = "Customise";
+            this.CustomiseTab.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.panel6);
-            this.groupBox5.Controls.Add(this.panel5);
-            this.groupBox5.Controls.Add(this.panel4);
-            this.groupBox5.Controls.Add(this.panel3);
-            this.groupBox5.Controls.Add(this.panel2);
-            this.groupBox5.Controls.Add(this.DPadScale);
-            this.groupBox5.Controls.Add(this.DirScale);
-            this.groupBox5.Controls.Add(this.ItemScale);
-            this.groupBox5.Controls.Add(this.DriftScale);
-            this.groupBox5.Controls.Add(this.label16);
-            this.groupBox5.Controls.Add(this.label17);
-            this.groupBox5.Controls.Add(this.label18);
-            this.groupBox5.Controls.Add(this.label19);
-            this.groupBox5.Controls.Add(this.AccScale);
-            this.groupBox5.Controls.Add(this.label15);
-            this.groupBox5.Location = new System.Drawing.Point(3, 66);
+            this.groupBox5.Controls.Add(this.groupBox3);
+            this.groupBox5.Controls.Add(this.CurrentButton);
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Location = new System.Drawing.Point(0, 66);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(234, 165);
+            this.groupBox5.Size = new System.Drawing.Size(237, 165);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Scale";
             // 
-            // panel6
+            // groupBox3
             // 
-            this.panel6.Controls.Add(this.DPadSlide);
-            this.panel6.Location = new System.Drawing.Point(111, 123);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(117, 23);
-            this.panel6.TabIndex = 15;
-            // 
-            // DPadSlide
-            // 
-            this.DPadSlide.Location = new System.Drawing.Point(11, -9);
-            this.DPadSlide.Maximum = 20;
-            this.DPadSlide.Minimum = 1;
-            this.DPadSlide.Name = "DPadSlide";
-            this.DPadSlide.Size = new System.Drawing.Size(104, 45);
-            this.DPadSlide.TabIndex = 0;
-            this.DPadSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.DPadSlide.Value = 10;
-            this.DPadSlide.ValueChanged += new System.EventHandler(this.DPadSlide_ValueChanged);
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.DirSlide);
-            this.panel5.Location = new System.Drawing.Point(111, 97);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(117, 23);
-            this.panel5.TabIndex = 15;
-            // 
-            // DirSlide
-            // 
-            this.DirSlide.Location = new System.Drawing.Point(11, -9);
-            this.DirSlide.Maximum = 20;
-            this.DirSlide.Minimum = 1;
-            this.DirSlide.Name = "DirSlide";
-            this.DirSlide.Size = new System.Drawing.Size(104, 45);
-            this.DirSlide.TabIndex = 0;
-            this.DirSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.DirSlide.Value = 10;
-            this.DirSlide.ValueChanged += new System.EventHandler(this.DirSlide_ValueChanged);
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.ItemSlide);
-            this.panel4.Location = new System.Drawing.Point(111, 71);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(117, 23);
-            this.panel4.TabIndex = 15;
-            // 
-            // ItemSlide
-            // 
-            this.ItemSlide.Location = new System.Drawing.Point(11, -9);
-            this.ItemSlide.Maximum = 20;
-            this.ItemSlide.Minimum = 1;
-            this.ItemSlide.Name = "ItemSlide";
-            this.ItemSlide.Size = new System.Drawing.Size(104, 45);
-            this.ItemSlide.TabIndex = 0;
-            this.ItemSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.ItemSlide.Value = 10;
-            this.ItemSlide.ValueChanged += new System.EventHandler(this.ItemSlide_ValueChanged);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.DriftSlide);
-            this.panel3.Location = new System.Drawing.Point(111, 45);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(117, 23);
-            this.panel3.TabIndex = 15;
-            // 
-            // DriftSlide
-            // 
-            this.DriftSlide.Location = new System.Drawing.Point(11, -9);
-            this.DriftSlide.Maximum = 20;
-            this.DriftSlide.Minimum = 1;
-            this.DriftSlide.Name = "DriftSlide";
-            this.DriftSlide.Size = new System.Drawing.Size(104, 45);
-            this.DriftSlide.TabIndex = 0;
-            this.DriftSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.DriftSlide.Value = 10;
-            this.DriftSlide.ValueChanged += new System.EventHandler(this.DriftSlide_ValueChanged);
+            this.groupBox3.Controls.Add(this.panel2);
+            this.groupBox3.Controls.Add(this.ButtonScale);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.ButtonColour);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Location = new System.Drawing.Point(5, 75);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(226, 84);
+            this.groupBox3.TabIndex = 27;
+            this.groupBox3.TabStop = false;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.AccSlide);
-            this.panel2.Location = new System.Drawing.Point(111, 19);
+            this.panel2.Controls.Add(this.ButtonSlide);
+            this.panel2.Location = new System.Drawing.Point(109, 52);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(117, 23);
             this.panel2.TabIndex = 14;
             // 
-            // AccSlide
+            // ButtonSlide
             // 
-            this.AccSlide.Location = new System.Drawing.Point(11, -9);
-            this.AccSlide.Maximum = 20;
-            this.AccSlide.Minimum = 1;
-            this.AccSlide.Name = "AccSlide";
-            this.AccSlide.Size = new System.Drawing.Size(104, 45);
-            this.AccSlide.TabIndex = 0;
-            this.AccSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.AccSlide.Value = 10;
-            this.AccSlide.ValueChanged += new System.EventHandler(this.AccSlide_ValueChanged);
+            this.ButtonSlide.Location = new System.Drawing.Point(11, -9);
+            this.ButtonSlide.Maximum = 20;
+            this.ButtonSlide.Minimum = 1;
+            this.ButtonSlide.Name = "ButtonSlide";
+            this.ButtonSlide.Size = new System.Drawing.Size(104, 45);
+            this.ButtonSlide.TabIndex = 0;
+            this.ButtonSlide.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.ButtonSlide.Value = 10;
             // 
-            // DPadScale
+            // ButtonScale
             // 
-            this.DPadScale.Enabled = false;
-            this.DPadScale.Location = new System.Drawing.Point(74, 126);
-            this.DPadScale.MaxLength = 4;
-            this.DPadScale.Name = "DPadScale";
-            this.DPadScale.Size = new System.Drawing.Size(29, 20);
-            this.DPadScale.TabIndex = 13;
-            this.DPadScale.Text = "1";
-            this.DPadScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // DirScale
-            // 
-            this.DirScale.Enabled = false;
-            this.DirScale.Location = new System.Drawing.Point(74, 100);
-            this.DirScale.MaxLength = 4;
-            this.DirScale.Name = "DirScale";
-            this.DirScale.Size = new System.Drawing.Size(29, 20);
-            this.DirScale.TabIndex = 12;
-            this.DirScale.Text = "1";
-            this.DirScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ItemScale
-            // 
-            this.ItemScale.Enabled = false;
-            this.ItemScale.Location = new System.Drawing.Point(74, 74);
-            this.ItemScale.MaxLength = 4;
-            this.ItemScale.Name = "ItemScale";
-            this.ItemScale.Size = new System.Drawing.Size(29, 20);
-            this.ItemScale.TabIndex = 11;
-            this.ItemScale.Text = "1";
-            this.ItemScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // DriftScale
-            // 
-            this.DriftScale.Enabled = false;
-            this.DriftScale.Location = new System.Drawing.Point(74, 48);
-            this.DriftScale.MaxLength = 4;
-            this.DriftScale.Name = "DriftScale";
-            this.DriftScale.Size = new System.Drawing.Size(29, 20);
-            this.DriftScale.TabIndex = 10;
-            this.DriftScale.Text = "1";
-            this.DriftScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 130);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(37, 13);
-            this.label16.TabIndex = 6;
-            this.label16.Text = "D-Pad";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(7, 77);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(27, 13);
-            this.label17.TabIndex = 7;
-            this.label17.Text = "Item";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 51);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(26, 13);
-            this.label18.TabIndex = 8;
-            this.label18.Text = "Drift";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 104);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(57, 13);
-            this.label19.TabIndex = 9;
-            this.label19.Text = "Directional";
-            // 
-            // AccScale
-            // 
-            this.AccScale.Enabled = false;
-            this.AccScale.Location = new System.Drawing.Point(74, 22);
-            this.AccScale.MaxLength = 4;
-            this.AccScale.Name = "AccScale";
-            this.AccScale.Size = new System.Drawing.Size(29, 20);
-            this.AccScale.TabIndex = 5;
-            this.AccScale.Text = "1";
-            this.AccScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ButtonScale.Enabled = false;
+            this.ButtonScale.Location = new System.Drawing.Point(67, 55);
+            this.ButtonScale.MaxLength = 4;
+            this.ButtonScale.Name = "ButtonScale";
+            this.ButtonScale.Size = new System.Drawing.Size(29, 20);
+            this.ButtonScale.TabIndex = 5;
+            this.ButtonScale.Text = "1";
+            this.ButtonScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 25);
+            this.label15.Location = new System.Drawing.Point(6, 58);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(61, 13);
+            this.label15.Size = new System.Drawing.Size(34, 13);
             this.label15.TabIndex = 4;
-            this.label15.Text = "Accelerator";
+            this.label15.Text = "Scale";
+            // 
+            // ButtonColour
+            // 
+            this.ButtonColour.BackColor = System.Drawing.Color.White;
+            this.ButtonColour.Location = new System.Drawing.Point(165, 20);
+            this.ButtonColour.Name = "ButtonColour";
+            this.ButtonColour.Size = new System.Drawing.Size(57, 20);
+            this.ButtonColour.TabIndex = 24;
+            this.ButtonColour.UseVisualStyleBackColor = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 13);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "Colour";
+            // 
+            // CurrentButton
+            // 
+            this.CurrentButton.Enabled = false;
+            this.CurrentButton.Location = new System.Drawing.Point(70, 49);
+            this.CurrentButton.Name = "CurrentButton";
+            this.CurrentButton.ReadOnly = true;
+            this.CurrentButton.Size = new System.Drawing.Size(100, 20);
+            this.CurrentButton.TabIndex = 26;
+            this.CurrentButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 21);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(232, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Click on a button to change its colour and scale";
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Location = new System.Drawing.Point(0, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(234, 57);
+            this.groupBox4.Size = new System.Drawing.Size(237, 57);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Position";
@@ -779,23 +351,193 @@ namespace InputDisplay
             this.label14.TabIndex = 0;
             this.label14.Text = "Drag and drop buttons to move them\nHold shift for more precise movement";
             // 
-            // StyleTab
+            // GeneralTab
             // 
-            this.StyleTab.Location = new System.Drawing.Point(4, 22);
-            this.StyleTab.Name = "StyleTab";
-            this.StyleTab.Size = new System.Drawing.Size(240, 234);
-            this.StyleTab.TabIndex = 4;
-            this.StyleTab.Text = "Style";
-            this.StyleTab.UseVisualStyleBackColor = true;
+            this.GeneralTab.Controls.Add(this.button6);
+            this.GeneralTab.Controls.Add(this.label21);
+            this.GeneralTab.Controls.Add(this.label1);
+            this.GeneralTab.Controls.Add(this.label2);
+            this.GeneralTab.Controls.Add(this.button1);
+            this.GeneralTab.Controls.Add(this.button2);
+            this.GeneralTab.Controls.Add(this.numericUpDown4);
+            this.GeneralTab.Controls.Add(this.label22);
+            this.GeneralTab.Controls.Add(this.numericUpDown2);
+            this.GeneralTab.Controls.Add(this.checkBox1);
+            this.GeneralTab.Controls.Add(this.numericUpDown1);
+            this.GeneralTab.Controls.Add(this.label4);
+            this.GeneralTab.Controls.Add(this.label3);
+            this.GeneralTab.Location = new System.Drawing.Point(4, 22);
+            this.GeneralTab.Name = "GeneralTab";
+            this.GeneralTab.Padding = new System.Windows.Forms.Padding(3);
+            this.GeneralTab.Size = new System.Drawing.Size(240, 234);
+            this.GeneralTab.TabIndex = 0;
+            this.GeneralTab.Text = "General";
+            this.GeneralTab.UseVisualStyleBackColor = true;
             // 
-            // SchemeTab
+            // button6
             // 
-            this.SchemeTab.Location = new System.Drawing.Point(4, 22);
-            this.SchemeTab.Name = "SchemeTab";
-            this.SchemeTab.Size = new System.Drawing.Size(240, 234);
-            this.SchemeTab.TabIndex = 3;
-            this.SchemeTab.Text = "Scheme";
-            this.SchemeTab.UseVisualStyleBackColor = true;
+            this.button6.BackColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(177, 131);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(57, 20);
+            this.button6.TabIndex = 22;
+            this.button6.UseVisualStyleBackColor = false;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 131);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(73, 13);
+            this.label21.TabIndex = 21;
+            this.label21.Text = "Outline Colour";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Background Colour";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 107);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Button Colour";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(177, 84);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(57, 20);
+            this.button1.TabIndex = 18;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(177, 107);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(57, 20);
+            this.button2.TabIndex = 20;
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.numericUpDown4.Location = new System.Drawing.Point(185, 58);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(44, 20);
+            this.numericUpDown4.TabIndex = 15;
+            this.numericUpDown4.ValueChanged += new System.EventHandler(this.NumericUpDown4_ValueChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 60);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(71, 13);
+            this.label22.TabIndex = 14;
+            this.label22.Text = "Outline Width";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(185, 10);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(44, 20);
+            this.numericUpDown2.TabIndex = 11;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.NumericUpDown2_ValueChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(6, 169);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(89, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Display Timer";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(185, 34);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(44, 20);
+            this.numericUpDown1.TabIndex = 8;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.NumericUpDown1_ValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Line Width";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Playback Speed";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.GeneralTab);
+            this.tabControl1.Controls.Add(this.CustomiseTab);
+            this.tabControl1.Controls.Add(this.SchemeTab);
+            this.tabControl1.Location = new System.Drawing.Point(12, 55);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(248, 260);
+            this.tabControl1.TabIndex = 8;
             // 
             // Form1
             // 
@@ -813,47 +555,34 @@ namespace InputDisplay
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.ControlTab.ResumeLayout(false);
-            this.ControlTab.PerformLayout();
-            this.ColourTab.ResumeLayout(false);
-            this.ColourTab.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.TransformTab.ResumeLayout(false);
+            this.CustomiseTab.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DPadSlide)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DirSlide)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemSlide)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DriftSlide)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AccSlide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ButtonSlide)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.GeneralTab.ResumeLayout(false);
+            this.GeneralTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.timer = new AccurateTimer(this, new Action(TimerCallback), 20);
+            this.timer = new AccurateTimer(this, new Action(TimerCallback), 16);
             if (this.checkBox1.Checked)
             {
                 this.checkBox1.CheckState = CheckState.Checked;
@@ -862,7 +591,7 @@ namespace InputDisplay
             {
                 this.checkBox1.CheckState = CheckState.Unchecked;
             }
-            if (Config.CustomColours)
+            if (Config.C_CustomColours)
             {
                 this.button2.Enabled = false;
             }
@@ -871,6 +600,16 @@ namespace InputDisplay
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.timer.Stop();
+        }
+
+        public void Redraw()
+        {
+            this.pictureBox1.Invalidate();
+        }
+
+        public void AnimatorScale(string button, double scale)
+        {
+            //this.Animator.Scale(button, scale);
         }
 
         public void SwitchButtonColourButton()
@@ -904,11 +643,6 @@ namespace InputDisplay
             this.stopWatch.Restart();
 
             return;
-        }
-
-        private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void Button5_Click(object sender, EventArgs e)
@@ -945,36 +679,6 @@ namespace InputDisplay
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             this.Animator.Draw(ref g);
-        }
-
-        private void GroupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.button1.BackColor = this.colorDialog1.Color;
-                this.pictureBox1.BackColor = this.button1.BackColor;
-                Config.BackgroundColour = this.button1.BackColor;
-            }
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.button2.BackColor = this.colorDialog1.Color;
-                Config.ButtonColour = this.button2.BackColor;
-                this.pictureBox1.Invalidate();
-            }
-        }
-
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -1025,6 +729,5 @@ namespace InputDisplay
             this.button4.Location = new Point(12, 321 + heightChange);
             this.panel1.Location = new Point(257, 322 + heightChange);
         }
-
     }
 }
