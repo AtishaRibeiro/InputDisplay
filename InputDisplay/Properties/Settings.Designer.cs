@@ -74,12 +74,12 @@ namespace InputDisplay.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool C_CustomColours {
+        public bool CustomColours {
             get {
-                return ((bool)(this["C_CustomColours"]));
+                return ((bool)(this["CustomColours"]));
             }
             set {
-                this["C_CustomColours"] = value;
+                this["CustomColours"] = value;
             }
         }
         
@@ -236,6 +236,157 @@ namespace InputDisplay.Properties {
             }
             set {
                 this["Outline"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point C_AcceleratorPos {
+            get {
+                return ((global::System.Drawing.Point)(this["C_AcceleratorPos"]));
+            }
+            set {
+                this["C_AcceleratorPos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point C_DriftPos {
+            get {
+                return ((global::System.Drawing.Point)(this["C_DriftPos"]));
+            }
+            set {
+                this["C_DriftPos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point C_ItemPos {
+            get {
+                return ((global::System.Drawing.Point)(this["C_ItemPos"]));
+            }
+            set {
+                this["C_ItemPos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point C_DPadPos {
+            get {
+                return ((global::System.Drawing.Point)(this["C_DPadPos"]));
+            }
+            set {
+                this["C_DPadPos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point C_DirectionalPos {
+            get {
+                return ((global::System.Drawing.Point)(this["C_DirectionalPos"]));
+            }
+            set {
+                this["C_DirectionalPos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color N_AcceleratorColour {
+            get {
+                return ((global::System.Drawing.Color)(this["N_AcceleratorColour"]));
+            }
+            set {
+                this["N_AcceleratorColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color N_DriftColour {
+            get {
+                return ((global::System.Drawing.Color)(this["N_DriftColour"]));
+            }
+            set {
+                this["N_DriftColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color N_ItemColour {
+            get {
+                return ((global::System.Drawing.Color)(this["N_ItemColour"]));
+            }
+            set {
+                this["N_ItemColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color N_DirectionalColour {
+            get {
+                return ((global::System.Drawing.Color)(this["N_DirectionalColour"]));
+            }
+            set {
+                this["N_DirectionalColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color N_TrickColour {
+            get {
+                return ((global::System.Drawing.Color)(this["N_TrickColour"]));
+            }
+            set {
+                this["N_TrickColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double N_WiiMoteScale {
+            get {
+                return ((double)(this["N_WiiMoteScale"]));
+            }
+            set {
+                this["N_WiiMoteScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double N_DirectionalScale {
+            get {
+                return ((double)(this["N_DirectionalScale"]));
+            }
+            set {
+                this["N_DirectionalScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double N_ItemScale {
+            get {
+                return ((double)(this["N_ItemScale"]));
+            }
+            set {
+                this["N_ItemScale"] = value;
             }
         }
     }

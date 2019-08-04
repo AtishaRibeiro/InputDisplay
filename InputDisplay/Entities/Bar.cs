@@ -13,7 +13,7 @@ namespace InputDisplay.Entities
     {
         public Bar(int x, int y): base(x, y)
         {
-            this.Size = new Size(80, 20);
+            this.Size = new Size(90, 23);
             this.CornerRadius = (int)(0.5 * Math.Min(this.Size.Width, this.Size.Height));
         }
 
@@ -48,8 +48,8 @@ namespace InputDisplay.Entities
 
         public override void Scale(double scale)
         {
-            this.Size.Width = (int) (scale * 80);
-            this.Size.Height = (int) (scale * 20);
+            this.Size.Width = (int) (scale * 90);
+            this.Size.Height = (int) (scale * 23);
             this.CornerRadius = (int)(0.5 * Math.Min(this.Size.Width, this.Size.Height));
         }
 

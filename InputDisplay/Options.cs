@@ -31,6 +31,7 @@ namespace InputDisplay
             this.button6.Click += new EventHandler(Button6_Click);
             this.ButtonColour.Click += new EventHandler(ButtonColour_Click);
             this.ButtonSlide.ValueChanged += new EventHandler(ButtonSlide_ValueChanged);
+            this.LayoutBox.SelectedValueChanged += new EventHandler(LayoutBox_SelectedValueChanged);
         }
 
         //
@@ -58,6 +59,12 @@ namespace InputDisplay
         {
             Config.Outline = (int)this.numericUpDown4.Value;
             Config.UseOutline = Config.Outline != 0;
+            this.pictureBox1.Invalidate();
+        }
+
+        private void LayoutBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            this.Animator.SwitchController(this.LayoutBox.Text);
             this.pictureBox1.Invalidate();
         }
 
@@ -130,7 +137,7 @@ namespace InputDisplay
                 this.ButtonSlide.Value = (int)(10 * scale);
                 this.ButtonScale.Text = Convert.ToString(scale);
             }
-            this.groupBox3.Enabled = name != null;
+            this.groupBox3.Enabled = name != null && name != "Timer";
 
             this.Animator.Highlight();
             this.pictureBox1.Invalidate();

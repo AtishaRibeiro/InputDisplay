@@ -60,6 +60,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox CurrentButton;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox LayoutBox;
     }
 }
 

@@ -12,7 +12,7 @@ namespace InputDisplay.Entities
         public DPad(int x, int y)
         {
             this.Coords = (x, y);
-            this.Size = 70;
+            this.Size = 80;
             this.ThicknessFraction = 2.0 / 7.0;
             this.CornerRadius = (int)(0.1 * this.ThicknessFraction * (double)this.Size);
         }
@@ -62,7 +62,7 @@ namespace InputDisplay.Entities
 
         public override void Scale(double scale)
         {
-            this.Size = (int)(70 * scale);
+            this.Size = (int)(80 * scale);
             this.CornerRadius = (int)(0.1 * this.ThicknessFraction * this.Size);
             this.CornerRadius = this.CornerRadius == 0 ? 1 : this.CornerRadius;
         }

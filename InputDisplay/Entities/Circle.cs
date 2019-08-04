@@ -12,7 +12,7 @@ namespace InputDisplay.Entities
     {
         public Circle(int x, int y): base(x, y)
         {
-            this.Radius = 20;
+            this.Radius = 23;
         }
 
         public override void Draw(ref Graphics g, Color colour)
@@ -46,7 +46,7 @@ namespace InputDisplay.Entities
 
         public override void Scale(double scale)
         {
-            this.Radius = (int)(scale * 20.0);
+            this.Radius = (int)(scale * 23.0);
         }
 
         private int Radius;

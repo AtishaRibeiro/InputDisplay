@@ -33,6 +33,22 @@ namespace InputDisplay
             this.Controller.Clear();
         }
 
+        public void SwitchController(string controller)
+        {
+            switch (controller)
+            {
+                case "Classic/GCN":
+                    this.Controller = new Classic();
+                    break;
+                case "Nunchuck":
+                    this.Controller = new Nunchuck();
+                    break;
+                /*case "Wheel":
+                    this.Controller = new Wheel();
+                    break;*/
+            }
+        }
+
         public bool Update()
         {
             int roundedFrame = (int) Math.Floor(this.CurrentFrame);
@@ -83,7 +99,9 @@ namespace InputDisplay
         public (string, Color, double) EvaluateCursor(Point cursor)
         {
             this.MousePos = cursor;
-            return this.Controller.EvaluateCursor(cursor);
+            this.TimerMove = this.Timer.CheckMouse(cursor);
+            if (this.TimerMove) { return ("Timer", Color.Transparent, 0); }
+            else { return this.Controller.EvaluateCursor(cursor);  }
         }
 
         public void Highlight()
@@ -95,7 +113,8 @@ namespace InputDisplay
         {
             int xChange = cursor.X - this.MousePos.X;
             int yChange = cursor.Y - this.MousePos.Y;
-            this.Controller.MoveShapes(xChange, yChange);
+            if (this.TimerMove) { this.Timer.Translate((xChange, yChange)); }
+            else { this.Controller.MoveShapes(xChange, yChange); }
             this.MousePos = cursor;
         }
 
@@ -120,5 +139,6 @@ namespace InputDisplay
         private double CurrentFrame = 0;
 
         private Point MousePos;
+        private bool TimerMove = false;
     }
 }

@@ -14,8 +14,8 @@ namespace InputDisplay.Entities
         {
             this.Coords = (x, y);
             this.StickCoords = (x, y);
-            this.Radius = 40;
-            this.StickRadius = (int) (40 * 0.6);
+            this.Radius = 43;
+            this.StickRadius = (int) (43 * 0.65);
         }
 
         public void Update(double horizontal, double vertical)
@@ -65,8 +65,8 @@ namespace InputDisplay.Entities
 
         public override void Scale(double scale)
         {
-            this.Radius = (int)(40 * scale);
-            this.StickRadius = (int)(40 * 0.6 * scale);
+            this.Radius = (int)(43 * scale);
+            this.StickRadius = (int)(43 * 0.65 * scale);
         }
 
         private (int x, int y) StickCoords;

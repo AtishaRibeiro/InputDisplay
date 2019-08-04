@@ -12,11 +12,11 @@ namespace InputDisplay.Controllers
     {
         public Classic()
         {
-            this.AnalogStick = new AnalogStick(150, 100);
-            this.Accelerator = new Circle(230, 100);
-            this.Drift = new Bar(170, 20);
-            this.Item = new Bar(20, 20);
-            this.DPad = new DPad(20, 65);
+            this.AnalogStick = new AnalogStick(221, 150);
+            this.Accelerator = new Circle(310, 150);
+            this.Drift = new Bar(250, 60);
+            this.Item = new Bar(80, 60);
+            this.DPad = new DPad(76, 110);
         }
 
         public override void Clear()
@@ -39,7 +39,7 @@ namespace InputDisplay.Controllers
 
         public override void Draw(ref Graphics g)
         {
-            if (Config.C_CustomColours)
+            if (Config.CustomColours)
             {
                 this.AnalogStick.Draw(ref g, Config.C_DirectionalColour);
                 this.DPad.Draw(ref g, Config.C_DPadColour);
@@ -60,30 +60,30 @@ namespace InputDisplay.Controllers
 
         public override (string, Color, double) EvaluateCursor(Point cursor)
         {
-            this.MoveAcc = false;
-            this.MoveDrift = false;
-            this.MoveItem = false;
-            this.MoveDPad = false;
-            this.MoveAnalog = false;
+            this.SelectAcc = false;
+            this.SelectDrift = false;
+            this.SelectItem = false;
+            this.SelectDPad = false;
+            this.SelectAnalog = false;
             if (this.Accelerator.CheckMouse(cursor))
             {
-                this.MoveAcc = true;
+                this.SelectAcc = true;
                 return ("Accelerate", Config.C_AcceleratorColour, Config.C_AcceleratorScale);
             } else if (this.Drift.CheckMouse(cursor))
             {
-                this.MoveDrift = true;
+                this.SelectDrift = true;
                 return ("Drift", Config.C_DriftColour, Config.C_DriftScale);
             } else if (this.Item.CheckMouse(cursor))
             {
-                this.MoveItem = true;
+                this.SelectItem = true;
                 return ("Item", Config.C_ItemColour, Config.C_ItemScale);
             } else if (this.DPad.CheckMouse(cursor))
             {
-                this.MoveDPad = true;
+                this.SelectDPad = true;
                 return ("D-Pad", Config.C_DPadColour, Config.C_DPadScale);
             } else if (this.AnalogStick.CheckMouse(cursor))
             {
-                this.MoveAnalog = true;
+                this.SelectAnalog = true;
                 return ("Analog Stick", Config.C_DirectionalColour, Config.C_DirectionalScale);
             }
             return (null, Color.Transparent, 0);
@@ -91,41 +91,41 @@ namespace InputDisplay.Controllers
 
         public override void Highlight()
         {
-            this.Accelerator.Highlighted = this.MoveAcc;
-            this.Drift.Highlighted = this.MoveDrift;
-            this.Item.Highlighted = this.MoveItem;
-            this.DPad.Highlighted = this.MoveDPad;
-            this.AnalogStick.Highlighted = this.MoveAnalog;
+            this.Accelerator.Highlighted = this.SelectAcc;
+            this.Drift.Highlighted = this.SelectDrift;
+            this.Item.Highlighted = this.SelectItem;
+            this.DPad.Highlighted = this.SelectDPad;
+            this.AnalogStick.Highlighted = this.SelectAnalog;
         }
 
         public override void MoveShapes(int xChange, int yChange)
         {
-            if (this.MoveAcc) { this.Accelerator.Translate((xChange, yChange)); }
-            if (this.MoveDrift) { this.Drift.Translate((xChange, yChange)); }
-            if (this.MoveItem) { this.Item.Translate((xChange, yChange)); }
-            if (this.MoveAnalog) { this.AnalogStick.Translate((xChange, yChange)); }
-            if (this.MoveDPad) { this.DPad.Translate((xChange, yChange)); }
+            if (this.SelectAcc) { this.Accelerator.Translate((xChange, yChange)); }
+            if (this.SelectDrift) { this.Drift.Translate((xChange, yChange)); }
+            if (this.SelectItem) { this.Item.Translate((xChange, yChange)); }
+            if (this.SelectAnalog) { this.AnalogStick.Translate((xChange, yChange)); }
+            if (this.SelectDPad) { this.DPad.Translate((xChange, yChange)); }
         }
 
         public override void Scale(double scale)
         {
-            if (this.MoveAcc) {
+            if (this.SelectAcc) {
                 Config.C_AcceleratorScale = scale;
                 this.Accelerator.Scale(scale);
             }
-            if (this.MoveDrift) {
+            if (this.SelectDrift) {
                 Config.C_DriftScale = scale;
                 this.Drift.Scale(scale);
             }
-            if (this.MoveItem) {
+            if (this.SelectItem) {
                 Config.C_ItemScale = scale;
                 this.Item.Scale(scale);
             }
-            if (this.MoveAnalog) {
+            if (this.SelectAnalog) {
                 Config.C_DirectionalScale = scale;
                 this.AnalogStick.Scale(scale);
             }
-            if (this.MoveDPad) {
+            if (this.SelectDPad) {
                 Config.C_DPadScale = scale;
                 this.DPad.Scale(scale);
             }
@@ -133,11 +133,11 @@ namespace InputDisplay.Controllers
 
         public override void ChangeColour(Color colour)
         {
-            if (this.MoveAcc) { Config.C_AcceleratorColour = colour; }
-            if (this.MoveDrift) { Config.C_DriftColour = colour; }
-            if (this.MoveItem) { Config.C_ItemColour = colour; }
-            if (this.MoveAnalog) { Config.C_DirectionalColour = colour; }
-            if (this.MoveDPad) { Config.C_DPadColour = colour; }
+            if (this.SelectAcc) { Config.C_AcceleratorColour = colour; }
+            if (this.SelectDrift) { Config.C_DriftColour = colour; }
+            if (this.SelectItem) { Config.C_ItemColour = colour; }
+            if (this.SelectAnalog) { Config.C_DirectionalColour = colour; }
+            if (this.SelectDPad) { Config.C_DPadColour = colour; }
         }
 
         private AnalogStick AnalogStick;
@@ -146,10 +146,10 @@ namespace InputDisplay.Controllers
         private Bar Item;
         private DPad DPad;
 
-        private bool MoveAcc = false;
-        private bool MoveDrift = false;
-        private bool MoveItem = false;
-        private bool MoveAnalog = false;
-        private bool MoveDPad = false;
+        private bool SelectAcc = false;
+        private bool SelectDrift = false;
+        private bool SelectItem = false;
+        private bool SelectAnalog = false;
+        private bool SelectDPad = false;
     }
 }

@@ -57,6 +57,8 @@ namespace InputDisplay
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
             this.GeneralTab = new System.Windows.Forms.TabPage();
+            this.LayoutBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -250,6 +252,7 @@ namespace InputDisplay
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.ButtonColour);
             this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Enabled = false;
             this.groupBox3.Location = new System.Drawing.Point(5, 75);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(226, 84);
@@ -283,7 +286,6 @@ namespace InputDisplay
             this.ButtonScale.Name = "ButtonScale";
             this.ButtonScale.Size = new System.Drawing.Size(29, 20);
             this.ButtonScale.TabIndex = 5;
-            this.ButtonScale.Text = "1";
             this.ButtonScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label15
@@ -297,7 +299,7 @@ namespace InputDisplay
             // 
             // ButtonColour
             // 
-            this.ButtonColour.BackColor = System.Drawing.Color.White;
+            this.ButtonColour.BackColor = System.Drawing.Color.Transparent;
             this.ButtonColour.Location = new System.Drawing.Point(165, 20);
             this.ButtonColour.Name = "ButtonColour";
             this.ButtonColour.Size = new System.Drawing.Size(57, 20);
@@ -353,6 +355,8 @@ namespace InputDisplay
             // 
             // GeneralTab
             // 
+            this.GeneralTab.Controls.Add(this.LayoutBox);
+            this.GeneralTab.Controls.Add(this.label11);
             this.GeneralTab.Controls.Add(this.button6);
             this.GeneralTab.Controls.Add(this.label21);
             this.GeneralTab.Controls.Add(this.label1);
@@ -373,6 +377,28 @@ namespace InputDisplay
             this.GeneralTab.TabIndex = 0;
             this.GeneralTab.Text = "General";
             this.GeneralTab.UseVisualStyleBackColor = true;
+            // 
+            // LayoutBox
+            // 
+            this.LayoutBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.LayoutBox.FormattingEnabled = true;
+            this.LayoutBox.Items.AddRange(new object[] {
+            "Classic/GCN",
+            "Nunchuck",
+            "Wii Wheel"});
+            this.LayoutBox.Location = new System.Drawing.Point(143, 157);
+            this.LayoutBox.Name = "LayoutBox";
+            this.LayoutBox.Size = new System.Drawing.Size(91, 21);
+            this.LayoutBox.TabIndex = 25;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 157);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(39, 13);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "Layout";
             // 
             // button6
             // 
@@ -479,7 +505,7 @@ namespace InputDisplay
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(6, 169);
+            this.checkBox1.Location = new System.Drawing.Point(6, 211);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(89, 17);
             this.checkBox1.TabIndex = 7;
@@ -591,7 +617,7 @@ namespace InputDisplay
             {
                 this.checkBox1.CheckState = CheckState.Unchecked;
             }
-            if (Config.C_CustomColours)
+            if (Config.CustomColours)
             {
                 this.button2.Enabled = false;
             }
@@ -729,5 +755,6 @@ namespace InputDisplay
             this.button4.Location = new Point(12, 321 + heightChange);
             this.panel1.Location = new Point(257, 322 + heightChange);
         }
+
     }
 }
