@@ -53,7 +53,8 @@
     <Compile Include="Controllers\Nunchuck.cs" />
     <Compile Include="Entities\AnalogStick.cs" />
     <Compile Include="Animator.cs" />
-    <Compile Include="Entities\Bar.cs" />
+    <Compile Include="Entities\MotionTrick.cs" />
+    <Compile Include="Entities\RectangularButton.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Circle.cs" />
     <Compile Include="Entities\CustomShapes.cs" />

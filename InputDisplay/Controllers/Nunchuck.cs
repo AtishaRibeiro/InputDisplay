@@ -14,7 +14,7 @@ namespace InputDisplay.Controllers
         public Nunchuck()
         {
             this.AnalogStick = new AnalogStick(145, 160);
-            this.Item = new Bar(100, 70);
+            this.Item = new RectangularButton(100, 70, new Size(90, 23), 0.5);
             this.Mote = new WiiMote(250, 50);
         }
 
@@ -36,9 +36,9 @@ namespace InputDisplay.Controllers
         {
             if (Config.CustomColours)
             {
-                this.AnalogStick.Draw(ref g, Config.C_DirectionalColour);
-                this.Item.Draw(ref g, Config.C_ItemColour);
-                this.Mote.Draw(ref g, Config.C_DriftColour, Config.C_DriftColour, Config.C_DriftColour, Config.C_DriftColour);
+                this.AnalogStick.Draw(ref g, Config.N_DirectionalColour);
+                this.Item.Draw(ref g, Config.N_ItemColour);
+                this.Mote.Draw(ref g, Config.N_WiiMoteColour, Config.N_AcceleratorColour, Config.N_DriftColour, Config.N_TrickColour);
             }
             else
             {
@@ -53,6 +53,7 @@ namespace InputDisplay.Controllers
         {
             this.SelectItem = false;
             this.SelectAnalog = false;
+            this.SelectMote = false;
             if (this.Item.CheckMouse(cursor))
             {
                 this.SelectItem = true;
@@ -97,7 +98,7 @@ namespace InputDisplay.Controllers
             }
             if (this.SelectMote)
             {
-                Config.N_DirectionalScale = scale;
+                Config.N_WiiMoteScale = scale;
                 this.Mote.Scale(scale);
             }
         }
@@ -108,8 +109,14 @@ namespace InputDisplay.Controllers
             if (this.SelectAnalog) { Config.C_DirectionalColour = colour; }
         }
 
+        public override void SetEditMode(bool edit)
+        {
+            // True if the customise tab is selected, used to show the trick inputs on the wiimote so they can be selected
+            this.Mote.DisplayAllTricks(edit);
+        }
+
         private AnalogStick AnalogStick;
-        private Bar Item;
+        private RectangularButton Item;
         private WiiMote Mote;
 
         private bool SelectItem = false;

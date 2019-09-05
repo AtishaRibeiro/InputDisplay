@@ -20,7 +20,7 @@ namespace InputDisplay.Entities
 
         public void Update(double horizontal, double vertical)
         {
-            this.StickCoords = ((int) (this.Coords.x + (horizontal - 0.5) * this.StickRadius * 1.6), (int) (this.Coords.y - ((float)vertical - 0.5) * this.StickRadius * 1.6));
+            this.StickCoords = ((int) (this.Coords.x + (horizontal - 0.5) * this.StickRadius * 1.8), (int) (this.Coords.y - ((float)vertical - 0.5) * this.StickRadius * 1.8));
         }
 
         public override void Draw(ref Graphics g, Color colour)

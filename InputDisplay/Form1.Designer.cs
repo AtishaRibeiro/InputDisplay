@@ -50,7 +50,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -62,6 +61,7 @@
         private System.Windows.Forms.TextBox CurrentButton;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox LayoutBox;
+        private System.Windows.Forms.Label ControllerType;
     }
 }
 

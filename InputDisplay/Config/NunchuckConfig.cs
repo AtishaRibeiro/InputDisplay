@@ -9,6 +9,18 @@ namespace InputDisplay
 {
     static partial class Config
     {
+        static public Color N_WiiMoteColour
+        {
+            get
+            {
+                return Properties.Settings.Default.N_WiiMoteColour;
+            }
+            set
+            {
+                Properties.Settings.Default.N_WiiMoteColour = value;
+                Properties.Settings.Default.Save();
+            }
+        }
         static public Color N_AcceleratorColour
         {
             get

@@ -14,26 +14,21 @@ namespace InputDisplay.Entities
         {
             this.Coords = (x, y);
             this.Size = new Size(70, 170);
-            /*this.AccCoords = new Point(x + this.Size.Width / 2, this.Coords.y + 40);
-            this.AccRadius = 20;
-            this.DriftSize = new Size(40, 60);
-            this.DriftCoords = new Point((x + this.Size.Width / 2) - (this.DriftSize.Width / 2), y + 90);
-            this.CornerRadius = (int) ((1.0 / 10.0) * (double) this.Size.Width);
-            this.DriftCornerRadius = (int)((1.0 / 10.0) * 30.0);
+            this.CornerRadius = (int)(0.1 * (double)this.Size.Width);
 
-            this.TrickSpacing = 10;
-            this.TrickUp = new Rectangle(new Point(x - 10, y - 25), new Size(this.Size.Width + 20, 15));
-            this.TrickRight = new Rectangle(new Point(x + this.Size.Width + 10, y - 10), new Size(15, this.Size.Height + 25));
-            this.TrickDown = new Rectangle(new Point(x - 10, y + this.Size.Height + 10), new Size(this.Size.Width + 20, 15));
-            this.TrickLeft = new Rectangle(new Point(x - 25, y - 10), new Size(15, this.Size.Height + 25));*/
-            this.Scale(1);
+            this.Accelerator = new Circle(x + this.Size.Width / 2, y + this.Size.Height / 4, 20);
+            this.Drift = new RectangularButton((x + (int)(0.22 * (double)this.Size.Width)), y + (int)(0.50 * (double)this.Size.Height), new Size(40, 60), 0.1);
+            this.Trick = new MotionTrick(x, y);
+
+            // 0 when nothing is selected, 1: accelerator, 2: drift, 3: trick, 4: wiimote
+            this.Selected = 0;
         }
 
         public void Update(bool acc, bool drift, int trick)
         {
-            this.AccPressed = acc;
-            this.DriftPressed = drift;
-            this.CurrentDirection = trick;
+            this.Accelerator.Update(acc);
+            this.Drift.Update(drift);
+            this.Trick.Update(trick);
         }
 
         // not used
@@ -41,57 +36,49 @@ namespace InputDisplay.Entities
 
         public void Draw(ref Graphics g, Color border, Color acc, Color drift, Color trick)
         {
+            if (Config.UseOutline)
+            {
+                Pen outlinePen = new Pen(Config.OutlineColour, Config.LineWidth + 2 * Config.Outline);
+                g.DrawRoundedRectangle(outlinePen, new Rectangle(new Point(this.Coords.x, this.Coords.y), this.Size), this.CornerRadius);
+            }
+
             Pen motePen = new Pen(border, Config.LineWidth);
             g.DrawRoundedRectangle(motePen, new Rectangle(new Point(this.Coords.x, this.Coords.y), this.Size), this.CornerRadius);
 
-            Pen accPen = new Pen(acc, Config.LineWidth);
-            g.DrawEllipse(accPen, this.AccCoords.X - this.AccRadius, this.AccCoords.Y - this.AccRadius, this.AccRadius * 2, this.AccRadius * 2);
-
-            Pen driftPen = new Pen(drift, Config.LineWidth);
-            g.DrawRoundedRectangle(driftPen, this.Drift, this.DriftCornerRadius);
-
-
-            SolidBrush trickBrush = new SolidBrush(Color.FromArgb(255, trick.R, trick.G, trick.B));
-
-            switch (this.CurrentDirection)
-            {
-                case 1:
-                    g.FillRoundedRectangle(trickBrush, this.TrickUp, 7);
-                    break;
-                case 2:
-                    g.FillRoundedRectangle(trickBrush, this.TrickDown, 7);
-                    break;
-                case 3:
-                    g.FillRoundedRectangle(trickBrush, this.TrickLeft, 7);
-                    break;
-                case 4:
-                    g.FillRoundedRectangle(trickBrush, this.TrickRight, 7);
-                    break;
-                default:
-                    break;
-            }
+            this.Accelerator.Draw(ref g, Config.N_AcceleratorColour);
+            this.Drift.Draw(ref g, drift);
+            this.Trick.Draw(ref g, trick);
         }
 
         public override bool CheckMouse(Point cursor)
         {
-            return CustomShapes.RoundedRect(new Rectangle(new Point(this.Coords.x, this.Coords.y), this.Size), this.CornerRadius).IsVisible(cursor);
+            this.Selected = 0;
+
+            if (CustomShapes.RoundedRect(new Rectangle(new Point(this.Coords.x, this.Coords.y), this.Size), this.CornerRadius).IsVisible(cursor))
+            {
+                this.Selected = 4;
+            }
+            if (this.Accelerator.CheckMouse(cursor))
+            {
+                this.Selected = 1;
+            }
+            if (this.Drift.CheckMouse(cursor))
+            {
+                this.Selected = 2;
+            }
+            if (this.Trick.CheckMouse(cursor))
+            {
+                this.Selected = 3;
+            }
+            return this.Selected != 0;
         }
 
         public override void Translate((int x, int y) coords)
         {
             this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
-            this.AccCoords.X += coords.x;
-            this.AccCoords.Y += coords.y;
-            this.Drift.X += coords.x;
-            this.Drift.Y += coords.y;
-            this.TrickUp.X += coords.x;
-            this.TrickUp.Y += coords.y;
-            this.TrickDown.X += coords.x;
-            this.TrickDown.Y += coords.y;
-            this.TrickLeft.X += coords.x;
-            this.TrickLeft.Y += coords.y;
-            this.TrickRight.X += coords.x;
-            this.TrickRight.Y += coords.y;
+            this.Accelerator.Translate(coords);
+            this.Drift.Translate(coords);
+            this.Trick.Translate(coords);
         }
 
         public override void Scale(double scale)
@@ -104,38 +91,29 @@ namespace InputDisplay.Entities
             int x = this.Coords.x;
             int y = this.Coords.y;
             //accelerator
-            this.AccRadius = (int)(20.0 * scale);
-            this.AccCoords = new Point(x + this.Size.Width / 2, this.Coords.y + 40);
+            this.Accelerator.Scale(scale);
+            this.Accelerator.Coords = (x + this.Size.Width / 2, y + this.Size.Height / 4);
             //drift
-            Size driftSize = new Size((int)(40.0 * scale), (int)(60.0 * scale));
-            this.DriftCornerRadius = (int)(0.1 * (double)driftSize.Width);
-            this.Drift = new Rectangle(new Point((x + this.Size.Width / 2) - (driftSize.Width / 2), y + (int)(0.47 * (double)(this.Size.Height))), driftSize);
-            //tricks
-            this.TrickSpacing = (int)(10.0 * scale);
-            int trickWidth = (int)(15.0 * scale);
-            this.TrickUp = new Rectangle(new Point(x - this.TrickSpacing, y - (this.TrickSpacing + trickWidth)), new Size(this.Size.Width + 2 * this.TrickSpacing, trickWidth));
-            this.TrickRight = new Rectangle(new Point(x + this.Size.Width + 10, y - 10), new Size(trickWidth, this.Size.Height + this.TrickSpacing + trickWidth));
-            this.TrickDown = new Rectangle(new Point(x - this.TrickSpacing, y + this.Size.Height + this.TrickSpacing), new Size(this.Size.Width + 2 * this.TrickSpacing, trickWidth));
-            this.TrickLeft = new Rectangle(new Point(x - this.TrickSpacing + trickWidth, y - TrickSpacing), new Size(trickWidth, this.Size.Height + this.TrickSpacing + trickWidth));
+            this.Drift.Scale(scale);
+            this.Drift.Coords = ((x + (int)(0.22 * (double)this.Size.Width)), y + (int)(0.50 * (double)(this.Size.Height)));
+            //trick
+            this.Trick.Scale(scale);
         }
 
-        Point AccCoords;
-        int AccRadius;
-        Size Size;
-        int CornerRadius;
-        int DriftCornerRadius;
+        public void DisplayAllTricks(bool display)
+        {
+            this.Trick.DisplayAllTricks(display);
+        }
+
+        private Size Size;
+        private int CornerRadius;
+        private int Selected;
+        private Circle Accelerator;
+        private RectangularButton Drift;
+        private MotionTrick Trick;
 
         Rectangle Mote;
-        Rectangle Drift;
-        Rectangle TrickUp;
-        Rectangle TrickRight;
-        Rectangle TrickDown;
-        Rectangle TrickLeft;
 
         int TrickSpacing;
-
-        bool AccPressed = false;
-        bool DriftPressed = false;
-        int CurrentDirection = 0;
     }
 }

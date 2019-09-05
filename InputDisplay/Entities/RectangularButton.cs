@@ -9,12 +9,14 @@ using System.Drawing.Drawing2D;
 
 namespace InputDisplay.Entities
 {
-    class Bar: FaceButton
+    class RectangularButton: FaceButton
     {
-        public Bar(int x, int y): base(x, y)
+        public RectangularButton(int x, int y, Size size, double corner): base(x, y)
         {
-            this.Size = new Size(90, 23);
-            this.CornerRadius = (int)(0.5 * Math.Min(this.Size.Width, this.Size.Height));
+            this.BaseSize = size;
+            this.Size = size;
+            this.CornerPercentage = corner;
+            this.CornerRadius = (int)(corner * Math.Min(this.Size.Width, this.Size.Height));
         }
 
         public override void Draw(ref Graphics g, Color colour)
@@ -48,12 +50,14 @@ namespace InputDisplay.Entities
 
         public override void Scale(double scale)
         {
-            this.Size.Width = (int) (scale * 90);
-            this.Size.Height = (int) (scale * 23);
-            this.CornerRadius = (int)(0.5 * Math.Min(this.Size.Width, this.Size.Height));
+            this.Size.Width = (int) (scale * this.BaseSize.Width);
+            this.Size.Height = (int) (scale * this.BaseSize.Height);
+            this.CornerRadius = (int)(this.CornerPercentage * Math.Min(this.Size.Width, this.Size.Height));
         }
 
+        private Size BaseSize;
         private Size Size;
+        private double CornerPercentage;
         private int CornerRadius;
     }
 }

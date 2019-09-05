@@ -10,9 +10,10 @@ namespace InputDisplay.Entities
 {
     class Circle: FaceButton
     {
-        public Circle(int x, int y): base(x, y)
+        public Circle(int x, int y, int radius): base(x, y)
         {
-            this.Radius = 23;
+            this.BaseRadius = radius;
+            this.Radius = radius;
         }
 
         public override void Draw(ref Graphics g, Color colour)
@@ -28,7 +29,6 @@ namespace InputDisplay.Entities
                 SolidBrush brush = new SolidBrush(colour);
                 g.FillEllipse(brush, this.Coords.x - this.Radius, this.Coords.y - this.Radius, this.Radius * 2, this.Radius * 2);
             }
-
             if (Config.UseOutline)
             {
                 Pen outlinePen = new Pen(Config.OutlineColour, Config.LineWidth + 2 * Config.Outline);
@@ -46,9 +46,10 @@ namespace InputDisplay.Entities
 
         public override void Scale(double scale)
         {
-            this.Radius = (int)(scale * 23.0);
+            this.Radius = (int)(scale * this.BaseRadius);
         }
 
+        private int BaseRadius;
         private int Radius;
     }
 }

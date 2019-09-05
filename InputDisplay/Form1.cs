@@ -42,6 +42,7 @@ namespace InputDisplay
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ControllerType = new System.Windows.Forms.Label();
             this.SchemeTab = new System.Windows.Forms.TabPage();
             this.CustomiseTab = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -68,7 +69,6 @@ namespace InputDisplay
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.label22 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -205,6 +205,7 @@ namespace InputDisplay
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.ControllerType);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
@@ -213,6 +214,16 @@ namespace InputDisplay
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(455, 47);
             this.panel1.TabIndex = 7;
+            // 
+            // ControllerType
+            // 
+            this.ControllerType.AutoSize = true;
+            this.ControllerType.Location = new System.Drawing.Point(226, 29);
+            this.ControllerType.Name = "ControllerType";
+            this.ControllerType.Size = new System.Drawing.Size(51, 13);
+            this.ControllerType.TabIndex = 4;
+            this.ControllerType.Text = "Controller";
+            this.ControllerType.Visible = false;
             // 
             // SchemeTab
             // 
@@ -366,7 +377,6 @@ namespace InputDisplay
             this.GeneralTab.Controls.Add(this.numericUpDown4);
             this.GeneralTab.Controls.Add(this.label22);
             this.GeneralTab.Controls.Add(this.numericUpDown2);
-            this.GeneralTab.Controls.Add(this.checkBox1);
             this.GeneralTab.Controls.Add(this.numericUpDown1);
             this.GeneralTab.Controls.Add(this.label4);
             this.GeneralTab.Controls.Add(this.label3);
@@ -384,12 +394,12 @@ namespace InputDisplay
             this.LayoutBox.FormattingEnabled = true;
             this.LayoutBox.Items.AddRange(new object[] {
             "Classic/GCN",
-            "Nunchuck",
-            "Wii Wheel"});
+            "Nunchuck"});
             this.LayoutBox.Location = new System.Drawing.Point(143, 157);
             this.LayoutBox.Name = "LayoutBox";
             this.LayoutBox.Size = new System.Drawing.Size(91, 21);
             this.LayoutBox.TabIndex = 25;
+            this.LayoutBox.SelectedIndex = 0;
             // 
             // label11
             // 
@@ -500,19 +510,6 @@ namespace InputDisplay
             0});
             this.numericUpDown2.ValueChanged += new System.EventHandler(this.NumericUpDown2_ValueChanged);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(6, 211);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Display Timer";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
-            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(185, 34);
@@ -609,14 +606,6 @@ namespace InputDisplay
         private void Form1_Load(object sender, EventArgs e)
         {
             this.timer = new AccurateTimer(this, new Action(TimerCallback), 16);
-            if (this.checkBox1.Checked)
-            {
-                this.checkBox1.CheckState = CheckState.Checked;
-            }
-            else
-            {
-                this.checkBox1.CheckState = CheckState.Unchecked;
-            }
             if (Config.CustomColours)
             {
                 this.button2.Enabled = false;
@@ -689,13 +678,15 @@ namespace InputDisplay
                 this.button4.Enabled = true;
                 this.label6.Visible = false;
 
-                (string time, string name) info = this.Animator.GetGhostInfo();
+                (string time, string name, string controller) info = this.Animator.GetGhostInfo();
                 this.label5.Text = Path.GetFileName(ofd.FileName);
                 this.label7.Text = "Mii: " + info.name;
                 this.label8.Text = "Time: " + info.time;
+                this.ControllerType.Text = "Controller: " + info.controller;
                 this.label5.Visible = true;
                 this.label7.Visible = true;
                 this.label8.Visible = true;
+                this.ControllerType.Visible = true;
             }
         }
 

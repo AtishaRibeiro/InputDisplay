@@ -25,5 +25,7 @@ namespace InputDisplay.Controllers
         public abstract void Scale(double scale);
 
         public abstract void ChangeColour(Color colour);
+
+        public abstract void SetEditMode(bool edit);
     }
 }

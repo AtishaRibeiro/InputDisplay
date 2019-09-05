@@ -32,13 +32,29 @@ namespace InputDisplay
 
             byte[] data = File.ReadAllBytes(filename);
             // read completion time
-            int minutes = (data[4] & 254) >> 1;
-            int seconds = ((data[4] & 1) << 6) | ((data[5] & 252) >> 2);
-            int milliseconds = ((data[5] & 3) << 8) | data[6];
+            int minutes = (data[4] & 0xFE) >> 1;
+            int seconds = ((data[4] & 0x01) << 6) | ((data[5] & 0xFC) >> 2);
+            int milliseconds = ((data[5] & 0x03) << 8) | data[6];
             // this can probably be formatted in an easier way but I can't figure it out
             this.CompletionTime = String.Format("{0}:{1}.{2}", minutes.ToString("D2"), seconds.ToString("D2"), milliseconds.ToString("D3"));
             // read controller type
-            this.Controller_type = data[11] & 15;
+            int ctrl_type = data[11] & 0x0F;
+            switch (ctrl_type)
+            {
+                case 0:
+                    this.Controller_type = "Wii Wheel";
+                    break;
+                case 1:
+                    this.Controller_type = "Nunchuck";
+                    break;
+                case 2:
+                    this.Controller_type = "Classic";
+                    break;
+                default:
+                    this.Controller_type = "Gamecube";
+                    break;
+            }
+
             // read mii name
             byte[] name_bytes = new byte[20];
             Array.Copy(data, 62, name_bytes, 0, 20);
@@ -49,7 +65,7 @@ namespace InputDisplay
             Array.Copy(data, 136, input_data, 0, data.Length - 136);
             
             // if input data is compressed
-            if ((data[12] & 8) != 0)
+            if ((data[12] & 0x08) != 0)
             {
                 Console.WriteLine("Compressed file");
                 Yaz1dec decoder = new Yaz1dec();
@@ -62,9 +78,9 @@ namespace InputDisplay
             //
 
             //read header information
-            int face_button_inputs = (input_data[0] << 8) | input_data[1];
-            int directional_inputs = (input_data[2] << 8) | input_data[3];
-            int trick_inputs = (input_data[4] << 8) | input_data[5];
+            int face_button_inputs = (input_data[0] << 0x08) | input_data[1];
+            int directional_inputs = (input_data[2] << 0x08) | input_data[3];
+            int trick_inputs = (input_data[4] << 0x08) | input_data[5];
             int current_byte = 8;
 
             int endFrame = 0;
@@ -72,9 +88,9 @@ namespace InputDisplay
             {
                 int inputs = input_data[current_byte];
                 int duration = input_data[current_byte + 1];
-                bool accelerator = (inputs & 1) != 0;
-                bool drift = (inputs & 2) != 0;
-                bool item = (inputs & 4) != 0;
+                bool accelerator = (inputs & 0x01) != 0;
+                bool drift = (inputs & 0x02) != 0;
+                bool item = (inputs & 0x04) != 0;
 
                 endFrame += duration;
                 this.Face_inputs.Add((endFrame, (accelerator, drift, item)));
@@ -89,8 +105,8 @@ namespace InputDisplay
             {
                 int inputs = input_data[current_byte];
                 int duration = input_data[current_byte + 1];
-                int vertical = inputs & 15;
-                int horizontal = (inputs >> 4) & 15;
+                int vertical = inputs & 0x0F;
+                int horizontal = (inputs >> 4) & 0x0F;
 
                 endFrame += duration;
                 this.Analog_inputs.Add((endFrame, (horizontal / 14.0, vertical / 14.0)));
@@ -103,8 +119,8 @@ namespace InputDisplay
             {
                 int inputs = input_data[current_byte];
                 int duration = input_data[current_byte + 1];
-                int trick = Convert.ToInt32((inputs & 112) / 16);
-                int fullBytePresses = inputs & 15;
+                int trick = Convert.ToInt32((inputs & 0x70) / 16);
+                int fullBytePresses = inputs & 0x0F;
 
                 // fullBytePresses specifies how many times 255 frames was spent idling before the current action
                 for (int j = 0; j < fullBytePresses; ++j)
@@ -122,7 +138,7 @@ namespace InputDisplay
         }
 
         public string CompletionTime { get; set; }
-        public int Controller_type { get; set; }
+        public string Controller_type { get; set; }
         public String MiiName { get; set; }
         public int TotalFrames { get; set; }
         public List<(int endFrame, (bool, bool, bool) values)> Face_inputs { get; }

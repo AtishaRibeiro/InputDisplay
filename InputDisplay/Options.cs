@@ -20,7 +20,6 @@ namespace InputDisplay
             this.pictureBox1.BackColor = Config.BackgroundColour;
             this.numericUpDown1.Value = new decimal(new int[] {Config.LineWidth, 0, 0, 0});
             this.numericUpDown4.Value = new decimal(new int[] {Config.Outline, 0, 0, 0 });
-            this.checkBox1.Checked = Config.DisplayTimer;
             this.button6.BackColor = Config.OutlineColour;
             this.button1.BackColor = Config.BackgroundColour;
             this.button2.BackColor = Config.ButtonColour;
@@ -32,17 +31,12 @@ namespace InputDisplay
             this.ButtonColour.Click += new EventHandler(ButtonColour_Click);
             this.ButtonSlide.ValueChanged += new EventHandler(ButtonSlide_ValueChanged);
             this.LayoutBox.SelectedValueChanged += new EventHandler(LayoutBox_SelectedValueChanged);
+            this.tabControl1.SelectedIndexChanged += new EventHandler(TabControl1_SelectedIndexChanged);
         }
 
         //
         // General Tab
         //
-
-        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            Config.DisplayTimer = this.checkBox1.Checked;
-            this.pictureBox1.Invalidate();
-        }
 
         private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -65,6 +59,13 @@ namespace InputDisplay
         private void LayoutBox_SelectedValueChanged(object sender, EventArgs e)
         {
             this.Animator.SwitchController(this.LayoutBox.Text);
+            this.pictureBox1.Invalidate();
+        }
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // true if the newly selected tab is the customise tab
+            this.Animator.SetEditMode(this.tabControl1.SelectedIndex == 1);
             this.pictureBox1.Invalidate();
         }
 
@@ -116,6 +117,8 @@ namespace InputDisplay
                 Point pos = this.pictureBox1.PointToClient(Cursor.Position);
                 Cursor.Current = Cursors.Hand;
                 this.Dragging = this.Animator.EvaluateCursor(pos).Item1 != null;
+                this.Animator.Highlight();
+                this.pictureBox1.Invalidate();
             }
         }
 
@@ -138,9 +141,6 @@ namespace InputDisplay
                 this.ButtonScale.Text = Convert.ToString(scale);
             }
             this.groupBox3.Enabled = name != null && name != "Timer";
-
-            this.Animator.Highlight();
-            this.pictureBox1.Invalidate();
             //this.Animator.EvaluateCursor(this.pictureBox1.PointToClient(Cursor.Position));
         }
 

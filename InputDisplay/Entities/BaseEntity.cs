@@ -19,7 +19,7 @@ namespace InputDisplay.Entities
 
         public abstract void Scale(double scale);
 
-        protected (int x, int y) Coords;
+        public (int x, int y) Coords { get; set; }
         public bool Highlighted { get; set; } = false;
     }
 }

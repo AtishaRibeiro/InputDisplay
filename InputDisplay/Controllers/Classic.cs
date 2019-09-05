@@ -13,9 +13,9 @@ namespace InputDisplay.Controllers
         public Classic()
         {
             this.AnalogStick = new AnalogStick(221, 150);
-            this.Accelerator = new Circle(310, 150);
-            this.Drift = new Bar(250, 60);
-            this.Item = new Bar(80, 60);
+            this.Accelerator = new Circle(310, 150, 23);
+            this.Drift = new RectangularButton(250, 60, new Size(90, 23), 0.5);
+            this.Item = new RectangularButton(80, 60, new Size(90, 23), 0.5);
             this.DPad = new DPad(76, 110);
         }
 
@@ -140,10 +140,15 @@ namespace InputDisplay.Controllers
             if (this.SelectDPad) { Config.C_DPadColour = colour; }
         }
 
+        public override void SetEditMode(bool edit)
+        {
+            // doesn't do anything
+        }
+
         private AnalogStick AnalogStick;
         private Circle Accelerator;
-        private Bar Drift;
-        private Bar Item;
+        private RectangularButton Drift;
+        private RectangularButton Item;
         private DPad DPad;
 
         private bool SelectAcc = false;

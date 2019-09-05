@@ -20,6 +20,14 @@ namespace InputDisplay.Entities
         public void Update(int direction)
         {
             this.CurrentDirection = direction;
+            if (direction != 0) {
+                this.LastTrick = direction;
+            }
+            else
+            {
+                this.CurrentDirection = this.LastTrick;
+                this.LastTrick = 0;
+            }
         }
 
         public override void Draw(ref Graphics g, Color colour)
@@ -71,5 +79,6 @@ namespace InputDisplay.Entities
         private int CurrentDirection = 0;
         private double ThicknessFraction;
         private int CornerRadius;
+        private int LastTrick = 0;
     }
 }

@@ -43,9 +43,6 @@ namespace InputDisplay
                 case "Nunchuck":
                     this.Controller = new Nunchuck();
                     break;
-                /*case "Wheel":
-                    this.Controller = new Wheel();
-                    break;*/
             }
         }
 
@@ -72,6 +69,7 @@ namespace InputDisplay
             if (roundedFrame >= this.GhostReader.Trick_inputs[this.TrickIndex].endFrame)
             {
                 this.TrickIndex += 1;
+
             }
 
             (bool accelerator, bool drift, bool item) actions = this.GhostReader.Face_inputs[this.FaceIndex].values;
@@ -91,17 +89,19 @@ namespace InputDisplay
             this.Controller.Draw(ref g);
         }
 
-        public (string, string) GetGhostInfo()
+        public (string, string, string) GetGhostInfo()
         {
-            return (this.GhostReader.CompletionTime, this.GhostReader.MiiName);
+            return (this.GhostReader.CompletionTime, this.GhostReader.MiiName, this.GhostReader.Controller_type);
         }
 
         public (string, Color, double) EvaluateCursor(Point cursor)
         {
             this.MousePos = cursor;
             this.TimerMove = this.Timer.CheckMouse(cursor);
+            // controller has to be checked before return in case the timer is pressed, so the highlight can go away
+            (String, Color, double) controlRet = this.Controller.EvaluateCursor(cursor);
             if (this.TimerMove) { return ("Timer", Color.Transparent, 0); }
-            else { return this.Controller.EvaluateCursor(cursor);  }
+            else { return controlRet; }
         }
 
         public void Highlight()
@@ -126,6 +126,11 @@ namespace InputDisplay
         public void ChangeColour(Color colour)
         {
             this.Controller.ChangeColour(colour);
+        }
+
+        public void SetEditMode(bool edit)
+        {
+            this.Controller.SetEditMode(edit);
         }
 
         private GhostReader GhostReader = new GhostReader();

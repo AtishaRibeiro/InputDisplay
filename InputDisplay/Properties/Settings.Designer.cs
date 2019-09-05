@@ -301,6 +301,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
         public global::System.Drawing.Color N_AcceleratorColour {
             get {
                 return ((global::System.Drawing.Color)(this["N_AcceleratorColour"]));
@@ -312,6 +313,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
         public global::System.Drawing.Color N_DriftColour {
             get {
                 return ((global::System.Drawing.Color)(this["N_DriftColour"]));
@@ -323,6 +325,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
         public global::System.Drawing.Color N_ItemColour {
             get {
                 return ((global::System.Drawing.Color)(this["N_ItemColour"]));
@@ -334,6 +337,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
         public global::System.Drawing.Color N_DirectionalColour {
             get {
                 return ((global::System.Drawing.Color)(this["N_DirectionalColour"]));
@@ -345,6 +349,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
         public global::System.Drawing.Color N_TrickColour {
             get {
                 return ((global::System.Drawing.Color)(this["N_TrickColour"]));
@@ -387,6 +392,18 @@ namespace InputDisplay.Properties {
             }
             set {
                 this["N_ItemScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color N_WiiMoteColour {
+            get {
+                return ((global::System.Drawing.Color)(this["N_WiiMoteColour"]));
+            }
+            set {
+                this["N_WiiMoteColour"] = value;
             }
         }
     }
