@@ -43,9 +43,9 @@ namespace InputDisplay
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ControllerType = new System.Windows.Forms.Label();
-            this.SchemeTab = new System.Windows.Forms.TabPage();
             this.CustomiseTab = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ButtonSlide = new System.Windows.Forms.TrackBar();
@@ -225,15 +225,6 @@ namespace InputDisplay
             this.ControllerType.Text = "Controller";
             this.ControllerType.Visible = false;
             // 
-            // SchemeTab
-            // 
-            this.SchemeTab.Location = new System.Drawing.Point(4, 22);
-            this.SchemeTab.Name = "SchemeTab";
-            this.SchemeTab.Size = new System.Drawing.Size(240, 234);
-            this.SchemeTab.TabIndex = 3;
-            this.SchemeTab.Text = "Scheme";
-            this.SchemeTab.UseVisualStyleBackColor = true;
-            // 
             // CustomiseTab
             // 
             this.CustomiseTab.Controls.Add(this.groupBox5);
@@ -247,14 +238,25 @@ namespace InputDisplay
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.checkBox1);
             this.groupBox5.Controls.Add(this.groupBox3);
             this.groupBox5.Controls.Add(this.CurrentButton);
             this.groupBox5.Controls.Add(this.label10);
-            this.groupBox5.Location = new System.Drawing.Point(0, 66);
+            this.groupBox5.Location = new System.Drawing.Point(0, 60);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(237, 165);
+            this.groupBox5.Size = new System.Drawing.Size(237, 172);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(66, 69);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(99, 17);
+            this.checkBox1.TabIndex = 28;
+            this.checkBox1.Text = "Custom Colours";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -264,16 +266,16 @@ namespace InputDisplay
             this.groupBox3.Controls.Add(this.ButtonColour);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Enabled = false;
-            this.groupBox3.Location = new System.Drawing.Point(5, 75);
+            this.groupBox3.Location = new System.Drawing.Point(5, 92);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(226, 84);
+            this.groupBox3.Size = new System.Drawing.Size(226, 74);
             this.groupBox3.TabIndex = 27;
             this.groupBox3.TabStop = false;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.ButtonSlide);
-            this.panel2.Location = new System.Drawing.Point(109, 52);
+            this.panel2.Location = new System.Drawing.Point(109, 42);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(117, 23);
             this.panel2.TabIndex = 14;
@@ -292,7 +294,7 @@ namespace InputDisplay
             // ButtonScale
             // 
             this.ButtonScale.Enabled = false;
-            this.ButtonScale.Location = new System.Drawing.Point(67, 55);
+            this.ButtonScale.Location = new System.Drawing.Point(67, 45);
             this.ButtonScale.MaxLength = 4;
             this.ButtonScale.Name = "ButtonScale";
             this.ButtonScale.Size = new System.Drawing.Size(29, 20);
@@ -302,7 +304,7 @@ namespace InputDisplay
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 58);
+            this.label15.Location = new System.Drawing.Point(6, 48);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(34, 13);
             this.label15.TabIndex = 4;
@@ -311,7 +313,7 @@ namespace InputDisplay
             // ButtonColour
             // 
             this.ButtonColour.BackColor = System.Drawing.Color.Transparent;
-            this.ButtonColour.Location = new System.Drawing.Point(165, 20);
+            this.ButtonColour.Location = new System.Drawing.Point(163, 16);
             this.ButtonColour.Name = "ButtonColour";
             this.ButtonColour.Size = new System.Drawing.Size(57, 20);
             this.ButtonColour.TabIndex = 24;
@@ -320,7 +322,7 @@ namespace InputDisplay
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 26);
+            this.label9.Location = new System.Drawing.Point(6, 20);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(37, 13);
             this.label9.TabIndex = 23;
@@ -329,7 +331,7 @@ namespace InputDisplay
             // CurrentButton
             // 
             this.CurrentButton.Enabled = false;
-            this.CurrentButton.Location = new System.Drawing.Point(70, 49);
+            this.CurrentButton.Location = new System.Drawing.Point(65, 37);
             this.CurrentButton.Name = "CurrentButton";
             this.CurrentButton.ReadOnly = true;
             this.CurrentButton.Size = new System.Drawing.Size(100, 20);
@@ -339,11 +341,11 @@ namespace InputDisplay
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 21);
+            this.label10.Location = new System.Drawing.Point(7, 16);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(232, 13);
+            this.label10.Size = new System.Drawing.Size(213, 13);
             this.label10.TabIndex = 25;
-            this.label10.Text = "Click on a button to change its colour and scale";
+            this.label10.Text = "Click on an element to change its properties";
             // 
             // groupBox4
             // 
@@ -360,9 +362,9 @@ namespace InputDisplay
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(7, 20);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(181, 26);
+            this.label14.Size = new System.Drawing.Size(187, 26);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Drag and drop buttons to move them\nHold shift for more precise movement";
+            this.label14.Text = "Drag and drop elements to move them\r\nHold shift for more precise movement";
             // 
             // GeneralTab
             // 
@@ -399,7 +401,6 @@ namespace InputDisplay
             this.LayoutBox.Name = "LayoutBox";
             this.LayoutBox.Size = new System.Drawing.Size(91, 21);
             this.LayoutBox.TabIndex = 25;
-            this.LayoutBox.SelectedIndex = 0;
             // 
             // label11
             // 
@@ -555,7 +556,6 @@ namespace InputDisplay
             // 
             this.tabControl1.Controls.Add(this.GeneralTab);
             this.tabControl1.Controls.Add(this.CustomiseTab);
-            this.tabControl1.Controls.Add(this.SchemeTab);
             this.tabControl1.Location = new System.Drawing.Point(12, 55);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -606,10 +606,6 @@ namespace InputDisplay
         private void Form1_Load(object sender, EventArgs e)
         {
             this.timer = new AccurateTimer(this, new Action(TimerCallback), 16);
-            if (Config.CustomColours)
-            {
-                this.button2.Enabled = false;
-            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -664,7 +660,7 @@ namespace InputDisplay
         {
             OpenFileDialog ofd = new OpenFileDialog
             {
-                InitialDirectory = "c:\\",
+                InitialDirectory = Config.GhostFolder,
                 Filter = "rkg files (*.rkg)|*.rkg",
                 RestoreDirectory = true,
                 Title = ("Open File")
@@ -672,6 +668,7 @@ namespace InputDisplay
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                Config.GhostFolder = Path.GetDirectoryName(ofd.FileName);
                 this.Animator.ReadFile(ofd.FileName);
                 this.GhostLoaded = true;
                 this.button3.Enabled = true;
@@ -687,6 +684,19 @@ namespace InputDisplay
                 this.label7.Visible = true;
                 this.label8.Visible = true;
                 this.ControllerType.Visible = true;
+
+                switch(info.controller)
+                {
+                    case "Classic":
+                    case "Gamecube":
+                        this.LayoutBox.SelectedIndex = 0;
+                        break;
+                    case "Nunchuck":
+                        this.LayoutBox.SelectedIndex = 1;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -746,6 +756,5 @@ namespace InputDisplay
             this.button4.Location = new Point(12, 321 + heightChange);
             this.panel1.Location = new Point(257, 322 + heightChange);
         }
-
     }
 }

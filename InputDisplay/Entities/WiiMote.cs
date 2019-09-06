@@ -10,17 +10,18 @@ namespace InputDisplay.Entities
 {
     class WiiMote: BaseEntity
     {
-        public WiiMote(int x, int y)
+        public WiiMote(Point coords)
         {
-            this.Coords = (x, y);
+            // Keep size here as well because the other elements need it as a reference
+            // I know this isn't cood coding practice but I just want to finish the project
             this.Size = new Size(70, 170);
-            this.CornerRadius = (int)(0.1 * (double)this.Size.Width);
+            // the wiimote shape is just a rectangular button that never gets pressed
+            this.Mote = new RectangularButton(coords, this.Size, 0.1);
+            this.Accelerator = new Circle(new Point(coords.X + this.Size.Width / 2, coords.Y + this.Size.Height / 4), 20);
+            this.Drift = new RectangularButton(new Point(coords.X + (int)(0.22 * (double)this.Size.Width), coords.Y + (int)(0.50 * (double)this.Size.Height)), new Size(40, 60), 0.1);
+            this.Trick = new MotionTrick(coords);
 
-            this.Accelerator = new Circle(x + this.Size.Width / 2, y + this.Size.Height / 4, 20);
-            this.Drift = new RectangularButton((x + (int)(0.22 * (double)this.Size.Width)), y + (int)(0.50 * (double)this.Size.Height), new Size(40, 60), 0.1);
-            this.Trick = new MotionTrick(x, y);
-
-            // 0 when nothing is selected, 1: accelerator, 2: drift, 3: trick, 4: wiimote
+            // 0 when nothing is selected, 1: wiimote, 2: accelerator, 3: drift, 4: trick
             this.Selected = 0;
         }
 
@@ -36,16 +37,8 @@ namespace InputDisplay.Entities
 
         public void Draw(ref Graphics g, Color border, Color acc, Color drift, Color trick)
         {
-            if (Config.UseOutline)
-            {
-                Pen outlinePen = new Pen(Config.OutlineColour, Config.LineWidth + 2 * Config.Outline);
-                g.DrawRoundedRectangle(outlinePen, new Rectangle(new Point(this.Coords.x, this.Coords.y), this.Size), this.CornerRadius);
-            }
-
-            Pen motePen = new Pen(border, Config.LineWidth);
-            g.DrawRoundedRectangle(motePen, new Rectangle(new Point(this.Coords.x, this.Coords.y), this.Size), this.CornerRadius);
-
-            this.Accelerator.Draw(ref g, Config.N_AcceleratorColour);
+            this.Mote.Draw(ref g, border);
+            this.Accelerator.Draw(ref g, acc);
             this.Drift.Draw(ref g, drift);
             this.Trick.Draw(ref g, trick);
         }
@@ -54,48 +47,52 @@ namespace InputDisplay.Entities
         {
             this.Selected = 0;
 
-            if (CustomShapes.RoundedRect(new Rectangle(new Point(this.Coords.x, this.Coords.y), this.Size), this.CornerRadius).IsVisible(cursor))
-            {
-                this.Selected = 4;
-            }
-            if (this.Accelerator.CheckMouse(cursor))
+            if (this.Mote.CheckMouse(cursor))
             {
                 this.Selected = 1;
             }
-            if (this.Drift.CheckMouse(cursor))
+            if (this.Accelerator.CheckMouse(cursor))
             {
                 this.Selected = 2;
             }
-            if (this.Trick.CheckMouse(cursor))
+            if (this.Drift.CheckMouse(cursor))
             {
                 this.Selected = 3;
+            }
+            if (this.Trick.CheckMouse(cursor))
+            {
+                this.Selected = 4;
             }
             return this.Selected != 0;
         }
 
-        public override void Translate((int x, int y) coords)
+        public override void Translate(Point vector)
         {
-            this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
-            this.Accelerator.Translate(coords);
-            this.Drift.Translate(coords);
-            this.Trick.Translate(coords);
+            this.Coords.X += vector.X;
+            this.Coords.Y += vector.Y;
+            this.Mote.Translate(vector);
+            this.Accelerator.Translate(vector);
+            this.Drift.Translate(vector);
+            this.Trick.Translate(vector);
         }
 
         public override void Scale(double scale)
         {
             //wiimote
-            this.Size.Width = (int)(scale * 70);
-            this.Size.Height = (int)(scale * 170);
-            this.CornerRadius = (int)(0.1 * (double)this.Size.Width);
+            this.Size.Width = (int)(70 * scale);
+            this.Size.Height = (int)(170 * scale);
+            this.Mote.Scale(scale);
 
-            int x = this.Coords.x;
-            int y = this.Coords.y;
+            int x = this.Mote.Coords.X;
+            int y = this.Mote.Coords.Y;
             //accelerator
             this.Accelerator.Scale(scale);
-            this.Accelerator.Coords = (x + this.Size.Width / 2, y + this.Size.Height / 4);
+            this.Accelerator.Coords.X = x + this.Size.Width / 2;
+            this.Accelerator.Coords.Y = y + this.Size.Height / 4;
             //drift
             this.Drift.Scale(scale);
-            this.Drift.Coords = ((x + (int)(0.22 * (double)this.Size.Width)), y + (int)(0.50 * (double)(this.Size.Height)));
+            this.Drift.Coords.X = x + (int)(0.22 * (double)this.Size.Width);
+            this.Drift.Coords.Y = y + (int)(0.50 * (double)(this.Size.Height));
             //trick
             this.Trick.Scale(scale);
         }
@@ -105,15 +102,67 @@ namespace InputDisplay.Entities
             this.Trick.DisplayAllTricks(display);
         }
 
+        public (string, Color, double) GetSelectedInfo()
+        {
+            switch (this.Selected)
+            {
+                case 1:
+                    return ("Wii Mote", Config.N_WiiMoteColour, Config.N_WiiMoteScale);
+                case 2:
+                    return ("Accelerator", Config.N_AcceleratorColour, Config.N_WiiMoteScale);
+                case 3:
+                    return ("Drift", Config.N_DriftColour, Config.N_WiiMoteScale);
+                case 4:
+                    return ("Tricks", Config.N_TrickColour, Config.N_WiiMoteScale);
+                default:
+                    return (null, Color.Transparent, 0);
+            }
+        }
+
+        public void ChangeColour(Color colour)
+        {
+            switch (this.Selected)
+            {
+                case 1:
+                    Config.N_WiiMoteColour = colour;
+                    break;
+                case 2:
+                    Config.N_AcceleratorColour = colour;
+                    break;
+                case 3:
+                    Config.N_DriftColour = colour;
+                    break;
+                case 4:
+                    Config.N_TrickColour = colour;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public override bool Highlighted
+        {
+            get => base.Highlighted;
+            set {
+                base.Highlighted = value;
+                //If highlight needs to be turned off
+                if (!value)
+                {
+                    this.Selected = 0;
+                }
+                this.Mote.Highlighted = this.Selected == 1;
+                this.Accelerator.Highlighted = this.Selected == 2;
+                this.Drift.Highlighted = this.Selected == 3;
+                this.Trick.Highlighted = this.Selected == 4;
+
+            }
+        }
+
         private Size Size;
-        private int CornerRadius;
         private int Selected;
+        private RectangularButton Mote;
         private Circle Accelerator;
         private RectangularButton Drift;
         private MotionTrick Trick;
-
-        Rectangle Mote;
-
-        int TrickSpacing;
     }
 }

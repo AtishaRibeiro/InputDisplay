@@ -15,7 +15,7 @@ namespace InputDisplay
         public Animator(double fps) {
             this.Fps = fps;
             this.Controller = new Classic();
-            this.Timer = new Timer();
+            this.Timer = new Timer(new Point(322, 245));
         }
 
         public void ReadFile(String FileName)
@@ -113,8 +113,9 @@ namespace InputDisplay
         {
             int xChange = cursor.X - this.MousePos.X;
             int yChange = cursor.Y - this.MousePos.Y;
-            if (this.TimerMove) { this.Timer.Translate((xChange, yChange)); }
-            else { this.Controller.MoveShapes(xChange, yChange); }
+            Point changeVector = new Point(xChange, yChange);
+            if (this.TimerMove) { this.Timer.Translate(changeVector); }
+            else { this.Controller.MoveShapes(changeVector); }
             this.MousePos = cursor;
         }
 

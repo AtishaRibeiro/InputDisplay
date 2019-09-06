@@ -15,11 +15,11 @@ namespace InputDisplay.Entities
 
         public abstract bool CheckMouse(Point cursor);
 
-        public abstract void Translate((int x, int y) coords);
+        public abstract void Translate(Point vector);
 
         public abstract void Scale(double scale);
 
-        public (int x, int y) Coords { get; set; }
-        public bool Highlighted { get; set; } = false;
+        public Point Coords;
+        public virtual bool Highlighted { get; set; } = false;
     }
 }

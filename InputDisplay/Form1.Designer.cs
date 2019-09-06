@@ -31,7 +31,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TabPage SchemeTab;
         private System.Windows.Forms.TabPage CustomiseTab;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Panel panel2;
@@ -62,6 +61,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox LayoutBox;
         private System.Windows.Forms.Label ControllerType;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

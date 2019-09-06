@@ -9,6 +9,24 @@ namespace InputDisplay
 {
     static partial class Config
     {
+        static public void Save()
+        {
+            Properties.Settings.Default.Save();
+        }
+
+        static public string GhostFolder
+        {
+            get
+            {
+                return Properties.Settings.Default.GhostFolder;
+            }
+            set
+            {
+                Properties.Settings.Default.GhostFolder = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
         static public Color BackgroundColour {
             get
             {

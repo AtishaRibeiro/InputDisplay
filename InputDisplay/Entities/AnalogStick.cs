@@ -10,17 +10,18 @@ namespace InputDisplay.Entities
 {
     class AnalogStick: BaseEntity
     {
-        public AnalogStick(int x, int y)
+        public AnalogStick(Point coords)
         {
-            this.Coords = (x, y);
-            this.StickCoords = (x, y);
+            this.Coords = coords;
+            this.StickCoords = coords;
             this.Radius = 43;
             this.StickRadius = (int) (43 * 0.65);
         }
 
         public void Update(double horizontal, double vertical)
         {
-            this.StickCoords = ((int) (this.Coords.x + (horizontal - 0.5) * this.StickRadius * 1.8), (int) (this.Coords.y - ((float)vertical - 0.5) * this.StickRadius * 1.8));
+            this.StickCoords.X = (int)(this.Coords.X + (horizontal - 0.5) * this.StickRadius * 1.8);
+            this.StickCoords.Y = (int)(this.Coords.Y - ((float)vertical - 0.5) * this.StickRadius * 1.8);
         }
 
         public override void Draw(ref Graphics g, Color colour)
@@ -29,38 +30,40 @@ namespace InputDisplay.Entities
             {
                 Color highlightColour = Color.FromArgb(200, 255 - Config.BackgroundColour.R, 255 - Config.BackgroundColour.G, 255 - Config.BackgroundColour.B);
                 Pen outlinePen = new Pen(highlightColour, (Config.LineWidth + 2 * Config.Outline) + 8);
-                g.DrawOctagon(outlinePen, new Point(this.Coords.x, this.Coords.y), this.Radius);
+                g.DrawOctagon(outlinePen, new Point(this.Coords.X, this.Coords.Y), this.Radius);
             }
             if (Config.UseOutline)
             {
                 Pen outlinePen = new Pen(Config.OutlineColour, Config.LineWidth + 2 * Config.Outline);
-                g.DrawOctagon(outlinePen, new Point(this.Coords.x, this.Coords.y), this.Radius);
+                g.DrawOctagon(outlinePen, new Point(this.Coords.X, this.Coords.Y), this.Radius);
             }
 
             Pen pen = new Pen(colour, Config.LineWidth);
-            g.DrawOctagon(pen, new Point(this.Coords.x, this.Coords.y), this.Radius);
+            g.DrawOctagon(pen, new Point(this.Coords.X, this.Coords.Y), this.Radius);
 
             SolidBrush analogFill = new SolidBrush(Config.BackgroundColour);
-            g.FillEllipse(analogFill, this.StickCoords.x - this.StickRadius, this.StickCoords.y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
+            g.FillEllipse(analogFill, this.StickCoords.X - this.StickRadius, this.StickCoords.Y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
 
             if (Config.UseOutline)
             {
                 Pen outlinePen = new Pen(Config.OutlineColour, Config.LineWidth + 2 * Config.Outline);
-                g.DrawEllipse(outlinePen, this.StickCoords.x - this.StickRadius, this.StickCoords.y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
+                g.DrawEllipse(outlinePen, this.StickCoords.X - this.StickRadius, this.StickCoords.Y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
             }
 
-            g.DrawEllipse(pen, this.StickCoords.x - this.StickRadius, this.StickCoords.y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
+            g.DrawEllipse(pen, this.StickCoords.X - this.StickRadius, this.StickCoords.Y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
         }
 
         public override bool CheckMouse(Point cursor)
         {
-            return CustomShapes.CreateOctagon(new Point(this.Coords.x, this.Coords.y), this.Radius).IsVisible(cursor);
+            return CustomShapes.CreateOctagon(new Point(this.Coords.X, this.Coords.Y), this.Radius).IsVisible(cursor);
         }
 
-        public override void Translate((int x, int y) coords)
+        public override void Translate(Point vector)
         {
-            this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
-            this.StickCoords = (this.StickCoords.x + coords.x, this.StickCoords.y + coords.y);
+            this.Coords.X += vector.X;
+            this.Coords.Y += vector.Y;
+            this.StickCoords.X += vector.X;
+            this.StickCoords.Y += vector.Y;
         }
 
         public override void Scale(double scale)
@@ -69,7 +72,7 @@ namespace InputDisplay.Entities
             this.StickRadius = (int)(43 * 0.65 * scale);
         }
 
-        private (int x, int y) StickCoords;
+        private Point StickCoords;
         private int Radius;
         private int StickRadius;
     }

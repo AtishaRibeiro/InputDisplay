@@ -20,7 +20,7 @@ namespace InputDisplay.Controllers
 
         public abstract void Highlight();
 
-        public abstract void MoveShapes(int xChange, int yChange);
+        public abstract void MoveShapes(Point changeVector);
 
         public abstract void Scale(double scale);
 

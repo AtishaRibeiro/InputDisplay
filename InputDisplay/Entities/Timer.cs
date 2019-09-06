@@ -11,9 +11,9 @@ namespace InputDisplay.Entities
     class Timer : BaseEntity
     {
 
-        public Timer()
+        public Timer(Point coords)
         {
-            this.Coords = (322, 245);
+            this.Coords = coords;
             this.Size = new Size(100, 30);
         } 
 
@@ -24,27 +24,28 @@ namespace InputDisplay.Entities
             Font drawFont = new Font("Arial", 16);
 
             SolidBrush blackBrush = new SolidBrush(Color.Black);
-            g.FillRectangle(blackBrush, new Rectangle(new Point(this.Coords.x, this.Coords.y), this.Size));
+            g.FillRectangle(blackBrush, new Rectangle(new Point(this.Coords.X, this.Coords.Y), this.Size));
 
             int actualFrame = (int)Math.Floor(currentFrame) - 240;
             double seconds = actualFrame * (1.0 / 60.0);
             SolidBrush whiteBrush = new SolidBrush(Color.White);
-            g.DrawString(seconds.ToString("0.000", CultureInfo.CreateSpecificCulture("en-CA")), drawFont, whiteBrush, this.Coords.x, this.Coords.y + 5, new StringFormat());
+            g.DrawString(seconds.ToString("0.000", CultureInfo.CreateSpecificCulture("en-CA")), drawFont, whiteBrush, this.Coords.X, this.Coords.Y + 5, new StringFormat());
         }
 
         public override bool CheckMouse(Point cursor)
         {
-            return cursor.X >= this.Coords.x && cursor.X <= this.Coords.x + this.Size.Width && cursor.Y >= this.Coords.y && cursor.Y <= this.Coords.y + this.Size.Height;
+            return cursor.X >= this.Coords.X && cursor.X <= this.Coords.Y + this.Size.Width && cursor.Y >= this.Coords.Y && cursor.Y <= this.Coords.Y + this.Size.Height;
         }
 
-        public override void Translate((int x, int y) coords)
+        public override void Translate(Point vector)
         {
-            this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
+            this.Coords.X += vector.X;
+            this.Coords.Y += vector.Y;
         }
 
         public override void Scale(double scale)
         {
-
+            //doesn't do anything
         }
 
         private Size Size;

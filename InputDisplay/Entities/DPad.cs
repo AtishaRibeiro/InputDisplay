@@ -9,9 +9,9 @@ namespace InputDisplay.Entities
 {
     class DPad: BaseEntity
     {
-        public DPad(int x, int y)
+        public DPad(Point coords)
         {
-            this.Coords = (x, y);
+            this.Coords = coords;
             this.Size = 80;
             this.ThicknessFraction = 2.0 / 7.0;
             this.CornerRadius = (int)(0.1 * this.ThicknessFraction * (double)this.Size);
@@ -36,7 +36,7 @@ namespace InputDisplay.Entities
             if (this.CurrentDirection != 0)
             {
                 SolidBrush brush = new SolidBrush(colour);
-                g.FillPointDirection(brush, new Point(Coords.x + this.Size / 2, Coords.y + this.Size / 2), thickness, this.Size, this.CornerRadius, this.CurrentDirection);
+                g.FillPointDirection(brush, new Point(Coords.X + this.Size / 2, Coords.Y + this.Size / 2), thickness, this.Size, this.CornerRadius, this.CurrentDirection);
             }
 
             if (this.Highlighted)
@@ -44,28 +44,29 @@ namespace InputDisplay.Entities
                 Color highlightColour = Color.FromArgb(200, 255 - Config.BackgroundColour.R, 255 - Config.BackgroundColour.G, 255 - Config.BackgroundColour.B);
                 Pen outlinePen = new Pen(highlightColour, (Config.LineWidth + 2 * Config.Outline) + 8);
                 outlinePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
-                g.DrawPlus(outlinePen, new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
+                g.DrawPlus(outlinePen, new Rectangle(new Point(Coords.X, Coords.Y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
             }
 
             if (Config.UseOutline)
             {
                 Pen outlinePen = new Pen(Config.OutlineColour, Config.LineWidth + 2 * Config.Outline);
-                g.DrawPlus(outlinePen, new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
+                g.DrawPlus(outlinePen, new Rectangle(new Point(Coords.X, Coords.Y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
             }
 
             Pen pen = new Pen(colour, Config.LineWidth);
-            g.DrawPlus(pen, new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
+            g.DrawPlus(pen, new Rectangle(new Point(Coords.X, Coords.Y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
         }
 
         public override bool CheckMouse(Point cursor)
         {
             int thickness = (int)(this.ThicknessFraction * this.Size);
-            return CustomShapes.Plus(new Rectangle(new Point(Coords.x, Coords.y), new Size(this.Size, this.Size)), thickness, this.CornerRadius).IsVisible(cursor);
+            return CustomShapes.Plus(new Rectangle(new Point(Coords.X, Coords.Y), new Size(this.Size, this.Size)), thickness, this.CornerRadius).IsVisible(cursor);
         }
 
-        public override void Translate((int x, int y) coords)
+        public override void Translate(Point vector)
         {
-            this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
+            this.Coords.X += vector.X;
+            this.Coords.Y += vector.Y;
         }
 
         public override void Scale(double scale)

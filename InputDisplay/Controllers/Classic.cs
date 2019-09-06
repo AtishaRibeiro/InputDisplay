@@ -12,11 +12,11 @@ namespace InputDisplay.Controllers
     {
         public Classic()
         {
-            this.AnalogStick = new AnalogStick(221, 150);
-            this.Accelerator = new Circle(310, 150, 23);
-            this.Drift = new RectangularButton(250, 60, new Size(90, 23), 0.5);
-            this.Item = new RectangularButton(80, 60, new Size(90, 23), 0.5);
-            this.DPad = new DPad(76, 110);
+            this.AnalogStick = new AnalogStick(new Point(231, 150));
+            this.Accelerator = new Circle(new Point(320, 150), 23);
+            this.Drift = new RectangularButton(new Point(260, 60), new Size(90, 23), 0.5);
+            this.Item = new RectangularButton(new Point(90, 60), new Size(90, 23), 0.5);
+            this.DPad = new DPad(new Point(86, 110));
         }
 
         public override void Clear()
@@ -98,13 +98,13 @@ namespace InputDisplay.Controllers
             this.AnalogStick.Highlighted = this.SelectAnalog;
         }
 
-        public override void MoveShapes(int xChange, int yChange)
+        public override void MoveShapes(Point changeVector)
         {
-            if (this.SelectAcc) { this.Accelerator.Translate((xChange, yChange)); }
-            if (this.SelectDrift) { this.Drift.Translate((xChange, yChange)); }
-            if (this.SelectItem) { this.Item.Translate((xChange, yChange)); }
-            if (this.SelectAnalog) { this.AnalogStick.Translate((xChange, yChange)); }
-            if (this.SelectDPad) { this.DPad.Translate((xChange, yChange)); }
+            if (this.SelectAcc) { this.Accelerator.Translate(changeVector); }
+            if (this.SelectDrift) { this.Drift.Translate(changeVector); }
+            if (this.SelectItem) { this.Item.Translate(changeVector); }
+            if (this.SelectAnalog) { this.AnalogStick.Translate(changeVector); }
+            if (this.SelectDPad) { this.DPad.Translate(changeVector); }
         }
 
         public override void Scale(double scale)
@@ -142,7 +142,15 @@ namespace InputDisplay.Controllers
 
         public override void SetEditMode(bool edit)
         {
-            // doesn't do anything
+            if (!edit)
+            {
+                this.SelectAcc = false;
+                this.SelectDrift = false;
+                this.SelectItem = false;
+                this.SelectAnalog = false;
+                this.SelectDPad = false;
+                this.Highlight();
+            }
         }
 
         private AnalogStick AnalogStick;

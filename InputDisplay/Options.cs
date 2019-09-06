@@ -22,7 +22,10 @@ namespace InputDisplay
             this.numericUpDown4.Value = new decimal(new int[] {Config.Outline, 0, 0, 0 });
             this.button6.BackColor = Config.OutlineColour;
             this.button1.BackColor = Config.BackgroundColour;
+            this.button2.Enabled = !Config.CustomColours;
             this.button2.BackColor = Config.ButtonColour;
+            this.LayoutBox.SelectedIndex = 0;
+            this.checkBox1.Checked = Config.CustomColours;
 
             //events
             this.button1.Click += new EventHandler(Button1_Click);
@@ -32,6 +35,7 @@ namespace InputDisplay
             this.ButtonSlide.ValueChanged += new EventHandler(ButtonSlide_ValueChanged);
             this.LayoutBox.SelectedValueChanged += new EventHandler(LayoutBox_SelectedValueChanged);
             this.tabControl1.SelectedIndexChanged += new EventHandler(TabControl1_SelectedIndexChanged);
+            this.checkBox1.CheckedChanged += new EventHandler(Checkbox1_CheckedChange);
         }
 
         //
@@ -65,7 +69,18 @@ namespace InputDisplay
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // true if the newly selected tab is the customise tab
-            this.Animator.SetEditMode(this.tabControl1.SelectedIndex == 1);
+            if (this.tabControl1.SelectedIndex == 1)
+            {
+                this.Animator.SetEditMode(true);
+            } else
+            {
+                this.Animator.SetEditMode(false);
+                this.CurrentButton.Text = null;
+                this.ButtonSlide.Value = 10;
+                this.ButtonScale.Text = null;
+                this.ButtonColour.BackColor = Color.Transparent;
+                this.groupBox3.Enabled = false;
+            }
             this.pictureBox1.Invalidate();
         }
 
@@ -124,24 +139,28 @@ namespace InputDisplay
 
         private void PictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            this.Dragging = false;
-            Cursor.Current = Cursors.Default;
+            if (this.tabControl1.SelectedTab == this.CustomiseTab)
+            {
+                this.Dragging = false;
+                Cursor.Current = Cursors.Default;
 
-            Point pos = this.pictureBox1.PointToClient(Cursor.Position);
-            (string name, Color colour, double scale) = this.Animator.EvaluateCursor(pos);
-            this.CurrentButton.Text = name;
-            this.ButtonColour.BackColor = colour;
-            if (scale == 0)
-            {
-                this.ButtonSlide.Value = 10;
-                this.ButtonScale.Text = null;
-            } else
-            {
-                this.ButtonSlide.Value = (int)(10 * scale);
-                this.ButtonScale.Text = Convert.ToString(scale);
+                Point pos = this.pictureBox1.PointToClient(Cursor.Position);
+                (string name, Color colour, double scale) = this.Animator.EvaluateCursor(pos);
+                this.CurrentButton.Text = name;
+                this.ButtonColour.BackColor = colour;
+                if (scale == 0)
+                {
+                    this.ButtonSlide.Value = 10;
+                    this.ButtonScale.Text = null;
+                }
+                else
+                {
+                    this.ButtonSlide.Value = (int)(10 * scale);
+                    this.ButtonScale.Text = Convert.ToString(scale);
+                }
+                this.groupBox3.Enabled = name != null && name != "Timer";
+                //this.Animator.EvaluateCursor(this.pictureBox1.PointToClient(Cursor.Position));
             }
-            this.groupBox3.Enabled = name != null && name != "Timer";
-            //this.Animator.EvaluateCursor(this.pictureBox1.PointToClient(Cursor.Position));
         }
 
         private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -162,6 +181,22 @@ namespace InputDisplay
                 Cursor.Position = this.MousePos;
             }
         }
+
+        private void Checkbox1_CheckedChange(object sender, EventArgs e)
+        {
+            if (this.checkBox1.Checked)
+            {
+                Config.CustomColours = true;
+                this.button2.Enabled = false;
+                this.ButtonColour.Enabled = true;
+            } else
+            {
+                Config.CustomColours = false;
+                this.button2.Enabled = true;
+                this.ButtonColour.Enabled = false;
+            }
+            this.pictureBox1.Invalidate();
+        } 
 
         private void ButtonColour_Click(object sender, EventArgs e)
         {

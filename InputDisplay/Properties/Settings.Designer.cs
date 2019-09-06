@@ -406,5 +406,17 @@ namespace InputDisplay.Properties {
                 this["N_WiiMoteColour"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\\\")]
+        public string GhostFolder {
+            get {
+                return ((string)(this["GhostFolder"]));
+            }
+            set {
+                this["GhostFolder"] = value;
+            }
+        }
     }
 }

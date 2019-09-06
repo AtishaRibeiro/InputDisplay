@@ -13,9 +13,9 @@ namespace InputDisplay.Controllers
 
         public Nunchuck()
         {
-            this.AnalogStick = new AnalogStick(145, 160);
-            this.Item = new RectangularButton(100, 70, new Size(90, 23), 0.5);
-            this.Mote = new WiiMote(250, 50);
+            this.AnalogStick = new AnalogStick(new Point(145, 160));
+            this.Item = new RectangularButton(new Point(100, 70), new Size(90, 23), 0.5);
+            this.Mote = new WiiMote(new Point(240, 50));
         }
 
         public override void Clear()
@@ -57,16 +57,16 @@ namespace InputDisplay.Controllers
             if (this.Item.CheckMouse(cursor))
             {
                 this.SelectItem = true;
-                return ("Item", Config.C_ItemColour, Config.C_ItemScale);
+                return ("Item", Config.N_ItemColour, Config.N_ItemScale);
             }
             else if (this.AnalogStick.CheckMouse(cursor))
             {
                 this.SelectAnalog = true;
-                return ("Analog Stick", Config.C_DirectionalColour, Config.C_DirectionalScale);
+                return ("Analog Stick", Config.N_DirectionalColour, Config.N_DirectionalScale);
             } else if (this.Mote.CheckMouse(cursor))
             {
                 this.SelectMote = true;
-                return ("Wii Mote", Config.N_AcceleratorColour, Config.N_WiiMoteScale);
+                return this.Mote.GetSelectedInfo();
             }
             return (null, Color.Transparent, 0);
         }
@@ -75,13 +75,14 @@ namespace InputDisplay.Controllers
         {
             this.Item.Highlighted = this.SelectItem;
             this.AnalogStick.Highlighted = this.SelectAnalog;
+            this.Mote.Highlighted = this.SelectMote;
         }
 
-        public override void MoveShapes(int xChange, int yChange)
+        public override void MoveShapes(Point changeVector)
         {
-            if (this.SelectItem) { this.Item.Translate((xChange, yChange)); }
-            if (this.SelectAnalog) { this.AnalogStick.Translate((xChange, yChange)); }
-            if (this.SelectMote) { this.Mote.Translate((xChange, yChange)); }
+            if (this.SelectItem) { this.Item.Translate(changeVector); }
+            if (this.SelectAnalog) { this.AnalogStick.Translate(changeVector); }
+            if (this.SelectMote) { this.Mote.Translate(changeVector); }
         }
 
         public override void Scale(double scale)
@@ -107,12 +108,20 @@ namespace InputDisplay.Controllers
         {
             if (this.SelectItem) { Config.C_ItemColour = colour; }
             if (this.SelectAnalog) { Config.C_DirectionalColour = colour; }
+            if (this.SelectMote) { this.Mote.ChangeColour(colour); }
         }
 
         public override void SetEditMode(bool edit)
         {
             // True if the customise tab is selected, used to show the trick inputs on the wiimote so they can be selected
             this.Mote.DisplayAllTricks(edit);
+            if (!edit)
+            {
+                this.SelectItem = false;
+                this.SelectAnalog = false;
+                this.SelectMote = false;
+                this.Highlight();
+            }
         }
 
         private AnalogStick AnalogStick;

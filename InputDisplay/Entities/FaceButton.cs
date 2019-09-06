@@ -11,9 +11,9 @@ namespace InputDisplay.Entities
     abstract class FaceButton: BaseEntity
     {
 
-        public FaceButton(int x, int y)
+        public FaceButton(Point coords)
         {
-            this.Coords = (x, y);
+            this.Coords = coords;
         }
 
         public virtual void Update(bool pressed)
@@ -21,9 +21,10 @@ namespace InputDisplay.Entities
             this.Pressed = pressed;
         }
 
-        public override void Translate((int x, int y) coords)
+        public override void Translate(Point vector)
         {
-            this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
+            this.Coords.X += vector.X;
+            this.Coords.Y += vector.Y;
         }
 
         protected bool Pressed = false;

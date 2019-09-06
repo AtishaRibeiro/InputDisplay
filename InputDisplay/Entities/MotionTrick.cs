@@ -10,9 +10,9 @@ namespace InputDisplay.Entities
 {
     class MotionTrick: BaseEntity
     {
-        public MotionTrick(int x, int y)
+        public MotionTrick(Point coords)
         {
-            this.Coords = (x, y);
+            this.Coords = coords;
             this.Scale(1);
         }
 
@@ -23,50 +23,75 @@ namespace InputDisplay.Entities
 
         public override void Draw(ref Graphics g, Color colour)
         {
+            if (DisplayAll && this.Highlighted)
+            {
+                Color highlightColour = Color.FromArgb(200, 255 - Config.BackgroundColour.R, 255 - Config.BackgroundColour.G, 255 - Config.BackgroundColour.B);
+                Pen outlinePen = new Pen(highlightColour, (Config.LineWidth + 2 * Config.Outline) + 4);
+                g.DrawRoundedRectangle(outlinePen, this.TrickUp, this.CornerRadius);
+                g.DrawRoundedRectangle(outlinePen, this.TrickDown, this.CornerRadius);
+                g.DrawRoundedRectangle(outlinePen, this.TrickLeft, this.CornerRadius);
+                g.DrawRoundedRectangle(outlinePen, this.TrickRight, this.CornerRadius);
+            }
+
             SolidBrush trickBrush = new SolidBrush(colour);
 
             if (this.CurrentDirection == 1 || this.DisplayAll)
             {
-                g.FillRoundedRectangle(trickBrush, this.TrickUp, 7);
+                g.FillRoundedRectangle(trickBrush, this.TrickUp, this.CornerRadius);
             }
             if (this.CurrentDirection == 2 || this.DisplayAll)
             {
-                g.FillRoundedRectangle(trickBrush, this.TrickDown, 7);
+                g.FillRoundedRectangle(trickBrush, this.TrickDown, this.CornerRadius);
             }
             if (this.CurrentDirection == 3 || this.DisplayAll)
             {
-                g.FillRoundedRectangle(trickBrush, this.TrickLeft, 7);
+                g.FillRoundedRectangle(trickBrush, this.TrickLeft, this.CornerRadius);
             }
             if (this.CurrentDirection == 4 || this.DisplayAll)
             {
-                g.FillRoundedRectangle(trickBrush, this.TrickRight, 7);
+                g.FillRoundedRectangle(trickBrush, this.TrickRight, this.CornerRadius);
             }
         }
 
         public override bool CheckMouse(Point cursor)
         {
+            if (CustomShapes.RoundedRect(this.TrickUp, this.CornerRadius).IsVisible(cursor))
+            {
+                return true;
+            } else if (CustomShapes.RoundedRect(this.TrickDown, this.CornerRadius).IsVisible(cursor))
+            {
+                return true;
+            } else if (CustomShapes.RoundedRect(this.TrickLeft, this.CornerRadius).IsVisible(cursor))
+            {
+                return true;
+            } else if (CustomShapes.RoundedRect(this.TrickRight, this.CornerRadius).IsVisible(cursor))
+            {
+                return true;
+            }
             return false;
         }
 
-        public override void Translate((int x, int y) coords)
+        public override void Translate(Point vector)
         {
-            this.Coords = (this.Coords.x + coords.x, this.Coords.y + coords.y);
-            this.TrickUp.X += coords.x;
-            this.TrickUp.Y += coords.y;
-            this.TrickDown.X += coords.x;
-            this.TrickDown.Y += coords.y;
-            this.TrickLeft.X += coords.x;
-            this.TrickLeft.Y += coords.y;
-            this.TrickRight.X += coords.x;
-            this.TrickRight.Y += coords.y;
+            this.Coords.X += vector.X;
+            this.Coords.Y += vector.Y;
+            this.TrickUp.X += vector.X;
+            this.TrickUp.Y += vector.Y;
+            this.TrickDown.X += vector.X;
+            this.TrickDown.Y += vector.Y;
+            this.TrickLeft.X += vector.X;
+            this.TrickLeft.Y += vector.Y;
+            this.TrickRight.X += vector.X;
+            this.TrickRight.Y += vector.Y;
         }
 
         public override void Scale(double scale)
         {
+            this.CornerRadius = (int)(scale * 7.0);
             this.MoteSize.Width = (int)(scale * 70);
             this.MoteSize.Height = (int)(scale * 170);
-            int x = this.Coords.x;
-            int y = this.Coords.y;
+            int x = this.Coords.X;
+            int y = this.Coords.Y;
             this.Spacing = (int)(10.0 * scale);
             int trickWidth = (int)(15.0 * scale);
             this.TrickUp = new Rectangle(new Point(x - this.Spacing, y - (this.Spacing + trickWidth)), new Size(this.MoteSize.Width + 2 * this.Spacing, trickWidth));
@@ -91,5 +116,6 @@ namespace InputDisplay.Entities
         bool DisplayAll = false;
 
         int Spacing; // amount of space between trick indicator and wiimote
+        int CornerRadius = 7;
     }
 }
