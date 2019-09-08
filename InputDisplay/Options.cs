@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Globalization;
+using System.Diagnostics;
+using System.IO;
+using System.ComponentModel;
 
 namespace InputDisplay
 {
@@ -26,7 +29,10 @@ namespace InputDisplay
             this.button2.BackColor = Config.ButtonColour;
             this.LayoutBox.SelectedIndex = 0;
             this.checkBox1.Checked = Config.CustomColours;
-
+            this.recordButton.Enabled = false;
+            this.progressBar1.Visible = false;
+            this.ProgressBarText.Visible = false;
+          
             //events
             this.button1.Click += new EventHandler(Button1_Click);
             this.button2.Click += new EventHandler(Button2_Click);
@@ -36,6 +42,7 @@ namespace InputDisplay
             this.LayoutBox.SelectedValueChanged += new EventHandler(LayoutBox_SelectedValueChanged);
             this.tabControl1.SelectedIndexChanged += new EventHandler(TabControl1_SelectedIndexChanged);
             this.checkBox1.CheckedChanged += new EventHandler(Checkbox1_CheckedChange);
+            this.recordButton.Click += new EventHandler(RecordButton_Click);
         }
 
         //
@@ -81,6 +88,33 @@ namespace InputDisplay
                 this.ButtonColour.BackColor = Color.Transparent;
                 this.groupBox3.Enabled = false;
             }
+
+            // true if the newly selected tab is the record tab
+            if (this.tabControl1.SelectedIndex == 2)
+            {
+                this.timer.Stop();
+                // emulate pressing the stop button
+                this.Button4_Click(null, null);
+                this.button3.Enabled = false;
+                this.button4.Enabled = false;
+                this.pictureBox1.Visible = false;
+                this.progressBar1.Value = 0;
+                this.progressBar1.Visible = true;
+            }
+            else
+            {
+                this.timer.Stop();
+                this.timer = new AccurateTimer(this, new Action(TimerCallback), 16);
+                this.pictureBox1.Visible = true;
+                this.progressBar1.Visible = false;
+                this.ProgressBarText.Visible = false;
+                if (this.GhostLoaded)
+                {
+                    this.button3.Enabled = true;
+                    this.button4.Enabled = true;
+                }
+            }
+
             this.pictureBox1.Invalidate();
         }
 
@@ -214,6 +248,121 @@ namespace InputDisplay
             this.Animator.Scale(scale);
             this.pictureBox1.Invalidate();
             this.ButtonScale.Text = Convert.ToString(scale);
+        }
+
+        //
+        // Record Tab
+        //
+
+        private void RecordButton_Click(object sender, EventArgs e)
+        {
+            this.ProgressBarText.Text = "Processing...\nThis can take a few minutes";
+            this.ProgressBarText.Visible = true;
+            // disable controls
+            foreach (Control c in this.Controls)
+            {
+                c.Enabled = false;
+            }
+
+            // empty the temp directory
+            System.IO.DirectoryInfo di = new DirectoryInfo("temp");
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+
+            // prepare the animator
+            this.Animator.Clear();
+            this.Animate = true;
+            Color savedColour = Config.BackgroundColour;
+            if (this.checkBox2.Checked)
+            {
+                Config.BackgroundColour = Color.Transparent;
+            }
+            
+            // fill the progress bar just a little bit to let the user know that the process is working
+            this.progressBar1.Value = 25;
+
+            // start rendering
+            this.Render();
+
+            // empty the temp directory again
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+
+            // re-enable control
+            foreach (Control c in this.Controls)
+            {
+                c.Enabled = true;
+            }
+
+            Config.BackgroundColour = savedColour;
+            this.ProgressBarText.Text = "Done";
+        }
+
+        private void Render()
+        {
+            // prepare the animator and write all the frames to the temp directory
+            int frameNr = 0;
+            int totalFrames = this.Animator.GetGhostInfo().Item4;
+            while (this.AdvanceAnimator())
+            {
+                bmp.Save(String.Format("temp\\{0}.png", frameNr), System.Drawing.Imaging.ImageFormat.Png);
+                if (frameNr % 100 == 0)
+                {
+                    this.progressBar1.Value = 25 + (frameNr / totalFrames) * 50;
+                }
+                ++frameNr;
+            }
+            this.Animate = false;
+
+            // compile all the frames into a video using png encoding to preserve transparent background
+            Process proc = new Process();
+            proc.StartInfo.FileName = "ffmpeg\\ffmpeg";
+            proc.StartInfo.Arguments = String.Format("-framerate 62.5 -i temp\\%d.png -vcodec png {0}.avi", DateTime.Now.ToString("yy-MM-dd-hh-mm-ss"));
+            //proc.StartInfo.Arguments = "-framerate 62.5 -i temp\\%d.png -vcodec png output.avi";
+            proc.StartInfo.RedirectStandardError = true;
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.CreateNoWindow = true;
+            if (!proc.Start())
+            {
+                Console.WriteLine("Error starting");
+                return;
+            }
+
+            // extract info from the console to know how far we are in the compilation process
+            StreamReader reader = proc.StandardError;
+            string line;
+            char[] delimChar = { ' ' };
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] words = line.Split(delimChar);
+                if (words[0] == "frame=")
+                {
+                    int i = 1;
+                    while (words[i] == "") { ++i; }
+                    int currentFrame = Int32.Parse(words[i]);
+                    //backgroundWorker1.ReportProgress(75 + (currentFrame / totalFrames) * 25);
+                    this.progressBar1.Value = 75 + (currentFrame / totalFrames) * 25;
+                }
+            }
+            proc.Close();
+            return;
+        }
+
+        private void BackgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            // The progress percentage is a property of e
+            this.progressBar1.Value = e.ProgressPercentage;
+
+            // Disable all controls, this has to be done here because every progressbar update seems to reset the controls
+            foreach (Control c in this.Controls)
+            {
+                c.Enabled = false;
+            }
+            this.ProgressBarText.Visible = true;
         }
     }
 }

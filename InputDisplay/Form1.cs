@@ -21,11 +21,14 @@ namespace InputDisplay
         private Stopwatch stopWatch = new Stopwatch();
         private AccurateTimer timer;
 
+        private Bitmap bmp;
+
         public Form1()
         {
             InitializeComponent();
             VariableSetup();
             this.Animator = new Animator(62.5);
+            this.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }
 
         private void InitializeComponent()
@@ -36,6 +39,7 @@ namespace InputDisplay
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -73,6 +77,15 @@ namespace InputDisplay
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.RecordTab = new System.Windows.Forms.TabPage();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.recordButton = new System.Windows.Forms.Button();
+            this.AboutTab = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label13 = new System.Windows.Forms.Label();
+            this.ProgressBarText = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -88,6 +101,8 @@ namespace InputDisplay
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.RecordTab.SuspendLayout();
+            this.AboutTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorDialog1
@@ -142,12 +157,21 @@ namespace InputDisplay
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ProgressBarText);
+            this.groupBox2.Controls.Add(this.progressBar1);
             this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Location = new System.Drawing.Point(262, 1);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(455, 314);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(51, 163);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(358, 33);
+            this.progressBar1.TabIndex = 2;
             // 
             // pictureBox1
             // 
@@ -556,11 +580,99 @@ namespace InputDisplay
             // 
             this.tabControl1.Controls.Add(this.GeneralTab);
             this.tabControl1.Controls.Add(this.CustomiseTab);
+            this.tabControl1.Controls.Add(this.RecordTab);
+            this.tabControl1.Controls.Add(this.AboutTab);
             this.tabControl1.Location = new System.Drawing.Point(12, 55);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(248, 260);
             this.tabControl1.TabIndex = 8;
+            // 
+            // RecordTab
+            // 
+            this.RecordTab.Controls.Add(this.label13);
+            this.RecordTab.Controls.Add(this.checkBox2);
+            this.RecordTab.Controls.Add(this.recordButton);
+            this.RecordTab.Location = new System.Drawing.Point(4, 22);
+            this.RecordTab.Name = "RecordTab";
+            this.RecordTab.Size = new System.Drawing.Size(240, 234);
+            this.RecordTab.TabIndex = 3;
+            this.RecordTab.Text = "Record";
+            this.RecordTab.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(5, 72);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(144, 17);
+            this.checkBox2.TabIndex = 1;
+            this.checkBox2.Text = "Transparent Background";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // recordButton
+            // 
+            this.recordButton.Location = new System.Drawing.Point(5, 97);
+            this.recordButton.Name = "recordButton";
+            this.recordButton.Size = new System.Drawing.Size(75, 23);
+            this.recordButton.TabIndex = 0;
+            this.recordButton.Text = "Record";
+            this.recordButton.UseVisualStyleBackColor = true;
+            // 
+            // AboutTab
+            // 
+            this.AboutTab.Controls.Add(this.linkLabel1);
+            this.AboutTab.Controls.Add(this.label12);
+            this.AboutTab.Location = new System.Drawing.Point(4, 22);
+            this.AboutTab.Name = "AboutTab";
+            this.AboutTab.Size = new System.Drawing.Size(240, 234);
+            this.AboutTab.TabIndex = 4;
+            this.AboutTab.Text = "About";
+            this.AboutTab.ToolTipText = "WhatisLoaf\'s youtube channel";
+            this.AboutTab.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(3, 95);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(47, 13);
+            this.linkLabel1.TabIndex = 1;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Youtube";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 12);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(134, 78);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Ghost Input Display\r\nBeta version 1.0\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatisLoa" +
+    "f#9370\r\n";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(47, 21);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(132, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Create a video of the input";
+            // 
+            // ProgressBarText
+            // 
+            this.ProgressBarText.AutoSize = true;
+            this.ProgressBarText.BackColor = System.Drawing.Color.Transparent;
+            this.ProgressBarText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.ProgressBarText.Location = new System.Drawing.Point(96, 97);
+            this.ProgressBarText.Name = "ProgressBarText";
+            this.ProgressBarText.Size = new System.Drawing.Size(279, 50);
+            this.ProgressBarText.TabIndex = 3;
+            this.ProgressBarText.Text = "Processing...\r\nThis can take a few minutes";
+            this.ProgressBarText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -574,12 +686,13 @@ namespace InputDisplay
             this.Controls.Add(this.button3);
             this.MinimumSize = new System.Drawing.Size(745, 420);
             this.Name = "Form1";
-            this.Text = "Input Display";
+            this.Text = "Ghost Input Display Beta 1.0 - DON\'T REDISTRIBUTE";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -599,6 +712,10 @@ namespace InputDisplay
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.RecordTab.ResumeLayout(false);
+            this.RecordTab.PerformLayout();
+            this.AboutTab.ResumeLayout(false);
+            this.AboutTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -631,29 +748,30 @@ namespace InputDisplay
         private void TimerCallback()
         {
             this.stopWatch.Stop();
-            // Get the elapsed time as a TimeSpan value.
-            //Console.WriteLine(stopWatch.Elapsed);
+            if (this.AdvanceAnimator())
+            {
+                this.pictureBox1.Invalidate();
+            }
+            this.stopWatch.Restart();
+            return;
+        }
 
-            //this.stopWatch.Restart();
+        private bool AdvanceAnimator() {
             if (this.Animate)
             {
                 if (this.Animator.Update())
                 {
-                    this.pictureBox1.Invalidate();
-                } else
+                    this.DrawFrame();
+                    return true;
+                }
+                else
                 {
                     this.Animator.Clear();
                     this.Button3_Click(null, null);
+                    return false;
                 }
-                
             }
-            //this.stopWatch.Stop();
-            //Console.WriteLine(stopWatch.Elapsed);
-
-
-            this.stopWatch.Restart();
-
-            return;
+            return false;
         }
 
         private void Button5_Click(object sender, EventArgs e)
@@ -671,11 +789,16 @@ namespace InputDisplay
                 Config.GhostFolder = Path.GetDirectoryName(ofd.FileName);
                 this.Animator.ReadFile(ofd.FileName);
                 this.GhostLoaded = true;
-                this.button3.Enabled = true;
-                this.button4.Enabled = true;
+                // if the record tab is selected
+                if (this.tabControl1.SelectedIndex != 2)
+                {
+                    this.button3.Enabled = true;
+                    this.button4.Enabled = true;
+                }
                 this.label6.Visible = false;
+                this.recordButton.Enabled = true;
 
-                (string time, string name, string controller) info = this.Animator.GetGhostInfo();
+                (string time, string name, string controller, int frames) info = this.Animator.GetGhostInfo();
                 this.label5.Text = Path.GetFileName(ofd.FileName);
                 this.label7.Text = "Mii: " + info.name;
                 this.label8.Text = "Time: " + info.time;
@@ -700,9 +823,18 @@ namespace InputDisplay
             }
         }
 
+        private void DrawFrame()
+        {
+            Graphics g = Graphics.FromImage(this.bmp);
+            g.Clear(Config.BackgroundColour);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            this.Animator.Draw(ref g);
+        }
+
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            g.DrawImageUnscaled(this.bmp, new Point(0, 0));
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             this.Animator.Draw(ref g);

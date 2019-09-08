@@ -70,7 +70,6 @@ namespace InputDisplay
                 Console.WriteLine("Compressed file");
                 Yaz1dec decoder = new Yaz1dec();
                 input_data = decoder.DecodeAll(input_data).ToArray();
-                //File.WriteAllBytes("C:\\Users\\Atisha\\Downloads\\szstools\\libyaz0-master\\libyaz0-master\\debug.rkg", input_data);
             }
 
             //

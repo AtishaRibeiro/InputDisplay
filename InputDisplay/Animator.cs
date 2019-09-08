@@ -89,9 +89,9 @@ namespace InputDisplay
             this.Controller.Draw(ref g);
         }
 
-        public (string, string, string) GetGhostInfo()
+        public (string, string, string, int) GetGhostInfo()
         {
-            return (this.GhostReader.CompletionTime, this.GhostReader.MiiName, this.GhostReader.Controller_type);
+            return (this.GhostReader.CompletionTime, this.GhostReader.MiiName, this.GhostReader.Controller_type, this.GhostReader.TotalFrames);
         }
 
         public (string, Color, double) EvaluateCursor(Point cursor)
