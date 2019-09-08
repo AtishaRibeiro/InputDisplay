@@ -85,7 +85,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Teal")]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
         public global::System.Drawing.Color C_AcceleratorColour {
             get {
                 return ((global::System.Drawing.Color)(this["C_AcceleratorColour"]));

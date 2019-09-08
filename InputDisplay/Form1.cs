@@ -452,7 +452,7 @@ namespace InputDisplay
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 157);
+            this.label11.Location = new System.Drawing.Point(6, 160);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(39, 13);
             this.label11.TabIndex = 24;

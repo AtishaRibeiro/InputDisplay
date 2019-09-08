@@ -18,7 +18,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="C_AcceleratorColour" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Teal</Value>
+      <Value Profile="(Default)">White</Value>
     </Setting>
     <Setting Name="C_DriftColour" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
