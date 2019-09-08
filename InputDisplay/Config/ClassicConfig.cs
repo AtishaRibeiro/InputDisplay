@@ -134,5 +134,65 @@ namespace InputDisplay
                 Properties.Settings.Default.Save();
             }
         }
+
+        static public Point C_AcceleratorPos
+        {
+            get
+            {
+                return Properties.Settings.Default.C_AcceleratorPos;
+            }
+            set
+            {
+                Properties.Settings.Default.C_AcceleratorPos = value;
+            }
+        }
+
+        static public Point C_DriftPos
+        {
+            get
+            {
+                return Properties.Settings.Default.C_DriftPos;
+            }
+            set
+            {
+                Properties.Settings.Default.C_DriftPos = value;
+            }
+        }
+
+        static public Point C_DirectionalPos
+        {
+            get
+            {
+                return Properties.Settings.Default.C_DirectionalPos;
+            }
+            set
+            {
+                Properties.Settings.Default.C_DirectionalPos = value;
+            }
+        }
+
+        static public Point C_ItemPos
+        {
+            get
+            {
+                return Properties.Settings.Default.C_ItemPos;
+            }
+            set
+            {
+                Properties.Settings.Default.C_ItemPos = value;
+            }
+        }
+
+        static public Point C_DPadPos
+        {
+            get
+            {
+                return Properties.Settings.Default.C_DPadPos;
+            }
+            set
+            {
+                Properties.Settings.Default.C_DPadPos = value;
+            }
+        }
     }
 }

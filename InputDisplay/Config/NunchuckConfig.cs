@@ -120,5 +120,41 @@ namespace InputDisplay
                 Properties.Settings.Default.Save();
             }
         }
+
+        static public Point N_ItemPos
+        {
+            get
+            {
+                return Properties.Settings.Default.N_ItemPos;
+            }
+            set
+            {
+                Properties.Settings.Default.N_ItemPos = value;
+            }
+        }
+
+        static public Point N_DirectionalPos
+        {
+            get
+            {
+                return Properties.Settings.Default.N_DirectionalPos;
+            }
+            set
+            {
+                Properties.Settings.Default.N_DirectionalPos = value;
+            }
+        }
+
+        static public Point N_WiiMotePos
+        {
+            get
+            {
+                return Properties.Settings.Default.N_WiiMotePos;
+            }
+            set
+            {
+                Properties.Settings.Default.N_WiiMotePos = value;
+            }
+        }
     }
 }

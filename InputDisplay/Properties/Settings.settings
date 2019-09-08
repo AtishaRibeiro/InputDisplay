@@ -57,19 +57,19 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="C_AcceleratorPos" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">320, 150</Value>
     </Setting>
     <Setting Name="C_DriftPos" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">260, 60</Value>
     </Setting>
     <Setting Name="C_ItemPos" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">90, 60</Value>
     </Setting>
     <Setting Name="C_DPadPos" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">85, 110</Value>
     </Setting>
     <Setting Name="C_DirectionalPos" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">230, 150</Value>
     </Setting>
     <Setting Name="N_AcceleratorColour" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
@@ -100,6 +100,15 @@
     </Setting>
     <Setting Name="GhostFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">c:\\</Value>
+    </Setting>
+    <Setting Name="N_ItemPos" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">100, 70</Value>
+    </Setting>
+    <Setting Name="N_DirectionalPos" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">145, 160</Value>
+    </Setting>
+    <Setting Name="N_WiiMotePos" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">240, 50</Value>
     </Setting>
   </Settings>
 </SettingsFile>

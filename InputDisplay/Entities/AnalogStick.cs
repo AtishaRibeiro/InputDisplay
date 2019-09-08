@@ -39,7 +39,10 @@ namespace InputDisplay.Entities
             }
 
             Pen pen = new Pen(colour, Config.LineWidth);
-            g.DrawOctagon(pen, new Point(this.Coords.X, this.Coords.Y), this.Radius);
+            if (Config.LineWidth != 0)
+            {
+                g.DrawOctagon(pen, new Point(this.Coords.X, this.Coords.Y), this.Radius);
+            }
 
             SolidBrush analogFill = new SolidBrush(Config.BackgroundColour);
             g.FillEllipse(analogFill, this.StickCoords.X - this.StickRadius, this.StickCoords.Y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
@@ -50,7 +53,10 @@ namespace InputDisplay.Entities
                 g.DrawEllipse(outlinePen, this.StickCoords.X - this.StickRadius, this.StickCoords.Y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
             }
 
-            g.DrawEllipse(pen, this.StickCoords.X - this.StickRadius, this.StickCoords.Y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
+            if (Config.LineWidth != 0)
+            {
+                g.DrawEllipse(pen, this.StickCoords.X - this.StickRadius, this.StickCoords.Y - this.StickRadius, this.StickRadius * 2, this.StickRadius * 2);
+            }
         }
 
         public override bool CheckMouse(Point cursor)

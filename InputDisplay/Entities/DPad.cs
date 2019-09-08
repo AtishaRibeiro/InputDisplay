@@ -53,8 +53,11 @@ namespace InputDisplay.Entities
                 g.DrawPlus(outlinePen, new Rectangle(new Point(Coords.X, Coords.Y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
             }
 
-            Pen pen = new Pen(colour, Config.LineWidth);
-            g.DrawPlus(pen, new Rectangle(new Point(Coords.X, Coords.Y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
+            if (Config.LineWidth != 0)
+            {
+                Pen pen = new Pen(colour, Config.LineWidth);
+                g.DrawPlus(pen, new Rectangle(new Point(Coords.X, Coords.Y), new Size(this.Size, this.Size)), thickness, this.CornerRadius);
+            }
         }
 
         public override bool CheckMouse(Point cursor)

@@ -14,6 +14,9 @@ namespace InputDisplay
 {
     public partial class Form1: Form
     {
+        private int xChange = 0;
+        private int yChange = 0;
+
         //
         // Variable Setup
         //
@@ -26,6 +29,7 @@ namespace InputDisplay
             this.button6.BackColor = Config.OutlineColour;
             this.button1.BackColor = Config.BackgroundColour;
             this.button2.Enabled = !Config.CustomColours;
+            this.ButtonColour.Enabled = Config.CustomColours;
             this.button2.BackColor = Config.ButtonColour;
             this.LayoutBox.SelectedIndex = 0;
             this.checkBox1.Checked = Config.CustomColours;
@@ -37,12 +41,14 @@ namespace InputDisplay
             this.button1.Click += new EventHandler(Button1_Click);
             this.button2.Click += new EventHandler(Button2_Click);
             this.button6.Click += new EventHandler(Button6_Click);
+            this.button7.Click += new EventHandler(Button7_Click);
             this.ButtonColour.Click += new EventHandler(ButtonColour_Click);
             this.ButtonSlide.ValueChanged += new EventHandler(ButtonSlide_ValueChanged);
             this.LayoutBox.SelectedValueChanged += new EventHandler(LayoutBox_SelectedValueChanged);
             this.tabControl1.SelectedIndexChanged += new EventHandler(TabControl1_SelectedIndexChanged);
             this.checkBox1.CheckedChanged += new EventHandler(Checkbox1_CheckedChange);
             this.recordButton.Click += new EventHandler(RecordButton_Click);
+            this.linkLabel1.Click += new EventHandler(LinkLabel1_Click);
         }
 
         //
@@ -204,15 +210,35 @@ namespace InputDisplay
                 bool shift = (ModifierKeys & Keys.Shift) != 0;
                 int xChange = Cursor.Position.X - this.MousePos.X;
                 int yChange = Cursor.Position.Y - this.MousePos.Y;
+
+                // grid based movement implementation
                 if (shift)
                 {
-                    if (xChange != 0) { xChange = xChange > 0 ? 1 : -1; }
-                    if (yChange != 0) { yChange = yChange > 0 ? 1 : -1; }
+                    this.xChange += xChange;
+                    int xmo5 = xChange / 5;
+                    if (xmo5 != 0) {
+                        this.xChange = xChange % 5;
+                        xChange -= this.xChange;
+                    } else
+                    {
+                        xChange = 0;
+                    }
+                    this.yChange += yChange;
+                    int ymo5 = yChange / 5;
+                    if (ymo5 != 0)
+                    {
+                        this.yChange = yChange % 5;
+                        yChange -= this.yChange;
+                    }
+                    else
+                    {
+                        yChange = 0;
+                    }
                 }
                 this.MousePos = new Point(this.MousePos.X + xChange, this.MousePos.Y + yChange);
                 this.Animator.MoveShapes(this.pictureBox1.PointToClient(this.MousePos));
                 this.pictureBox1.Invalidate();
-                Cursor.Position = this.MousePos;
+                //Cursor.Position = this.MousePos;
             }
         }
 
@@ -250,6 +276,22 @@ namespace InputDisplay
             this.ButtonScale.Text = Convert.ToString(scale);
         }
 
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            this.Animator.ResetSizePosition();
+        }
+
+        //
+        // About Tab
+        //
+
+        private void LinkLabel1_Click(object sender, EventArgs e)
+        {
+            this.linkLabel1.LinkVisited = true;
+            // Navigate to a URL.
+            System.Diagnostics.Process.Start("https://www.youtube.com/channel/UCkbRo8h8Fy7lbgBBpKdurCw");
+        }
+
         //
         // Record Tab
         //
@@ -264,11 +306,20 @@ namespace InputDisplay
                 c.Enabled = false;
             }
 
-            // empty the temp directory
-            System.IO.DirectoryInfo di = new DirectoryInfo("temp");
-            foreach (FileInfo file in di.GetFiles())
+            string path = "temp";
+            DirectoryInfo di;
+            if (!Directory.Exists(path))
             {
-                file.Delete();
+                di = Directory.CreateDirectory(path);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            } else
+            {
+                di = new DirectoryInfo("temp");
+                // empty the temp directory
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
             }
 
             // prepare the animator
@@ -286,12 +337,6 @@ namespace InputDisplay
             // start rendering
             this.Render();
 
-            // empty the temp directory again
-            foreach (FileInfo file in di.GetFiles())
-            {
-                file.Delete();
-            }
-
             // re-enable control
             foreach (Control c in this.Controls)
             {
@@ -306,16 +351,17 @@ namespace InputDisplay
         {
             // prepare the animator and write all the frames to the temp directory
             int frameNr = 0;
-            int totalFrames = this.Animator.GetGhostInfo().Item4;
+            //int totalFrames = this.Animator.GetGhostInfo().Item4;
             while (this.AdvanceAnimator())
             {
                 bmp.Save(String.Format("temp\\{0}.png", frameNr), System.Drawing.Imaging.ImageFormat.Png);
-                if (frameNr % 100 == 0)
+                /*if (frameNr % 100 == 0)
                 {
                     this.progressBar1.Value = 25 + (frameNr / totalFrames) * 50;
-                }
+                }*/
                 ++frameNr;
             }
+            this.progressBar1.Value = 50;
             this.Animate = false;
 
             // compile all the frames into a video using png encoding to preserve transparent background
@@ -345,9 +391,11 @@ namespace InputDisplay
                     while (words[i] == "") { ++i; }
                     int currentFrame = Int32.Parse(words[i]);
                     //backgroundWorker1.ReportProgress(75 + (currentFrame / totalFrames) * 25);
-                    this.progressBar1.Value = 75 + (currentFrame / totalFrames) * 25;
+                    //this.progressBar1.Value = 75 + (currentFrame / totalFrames) * 25;
                 }
             }
+
+            this.progressBar1.Value = 100;
             proc.Close();
             return;
         }

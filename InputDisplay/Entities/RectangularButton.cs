@@ -39,8 +39,11 @@ namespace InputDisplay.Entities
                 g.DrawRoundedRectangle(outlinePen, new Rectangle(new Point(this.Coords.X, this.Coords.Y), this.Size), this.CornerRadius);
             }
 
-            Pen pen = new Pen(colour, Config.LineWidth);
-            g.DrawRoundedRectangle(pen, new Rectangle(new Point(this.Coords.X, this.Coords.Y), this.Size), this.CornerRadius);
+            if (Config.LineWidth != 0)
+            {
+                Pen pen = new Pen(colour, Config.LineWidth);
+                g.DrawRoundedRectangle(pen, new Rectangle(new Point(this.Coords.X, this.Coords.Y), this.Size), this.CornerRadius);
+            }
         }
 
         public override bool CheckMouse(Point cursor)

@@ -35,8 +35,12 @@ namespace InputDisplay.Entities
                 g.DrawEllipse(outlinePen, this.Coords.X - this.Radius, this.Coords.Y - this.Radius, this.Radius * 2, this.Radius * 2);
             }
 
-            Pen pen = new Pen(colour, Config.LineWidth);
-            g.DrawEllipse(pen, this.Coords.X - this.Radius, this.Coords.Y - this.Radius, this.Radius * 2, this.Radius * 2);
+            if (Config.LineWidth != 0)
+            {
+                Pen pen = new Pen(colour, Config.LineWidth);
+                g.DrawEllipse(pen, this.Coords.X - this.Radius, this.Coords.Y - this.Radius, this.Radius * 2, this.Radius * 2);
+            }
+            
         }
 
         public override bool CheckMouse(Point cursor)

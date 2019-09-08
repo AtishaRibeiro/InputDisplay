@@ -13,9 +13,13 @@ namespace InputDisplay.Controllers
 
         public Nunchuck()
         {
-            this.AnalogStick = new AnalogStick(new Point(145, 160));
-            this.Item = new RectangularButton(new Point(100, 70), new Size(90, 23), 0.5);
-            this.Mote = new WiiMote(new Point(240, 50));
+            this.AnalogStick = new AnalogStick(Config.N_DirectionalPos);
+            this.Item = new RectangularButton(Config.N_ItemPos, new Size(90, 23), 0.5);
+            this.Mote = new WiiMote(Config.N_WiiMotePos);
+
+            this.Mote.Scale(Config.N_WiiMoteScale);
+            this.Item.Scale(Config.N_ItemScale);
+            this.AnalogStick.Scale(Config.N_DirectionalScale);
         }
 
         public override void Clear()
@@ -30,6 +34,27 @@ namespace InputDisplay.Controllers
             this.Item.Update(item);
             this.AnalogStick.Update(pos.x, pos.y);
             this.Mote.Update(acc, drift, trick);
+        }
+
+        public override void ResetSizePosition()
+        {
+            this.AnalogStick = new AnalogStick(new Point(145, 160));
+            this.Item = new RectangularButton(new Point(100, 70), new Size(90, 23), 0.5);
+            this.Mote = new WiiMote(new Point(240, 50));
+
+            Config.N_DirectionalPos = new Point(145, 160);
+            Config.N_ItemPos = new Point(100, 70);
+            Config.N_WiiMotePos = new Point(240, 50);
+            this.AnalogStick = new AnalogStick(Config.N_DirectionalPos);
+            this.Item = new RectangularButton(Config.N_ItemPos, new Size(90, 23), 0.5);
+            this.Mote = new WiiMote(Config.N_WiiMotePos);
+
+            Config.N_DirectionalScale = 1;
+            Config.N_ItemScale = 1;
+            Config.N_WiiMoteScale = 1;
+            this.Item.Scale(Config.N_ItemScale);
+            this.AnalogStick.Scale(Config.N_DirectionalScale);
+            this.Mote.Scale(Config.N_WiiMoteScale);
         }
 
         public override void Draw(ref Graphics g)
@@ -80,9 +105,18 @@ namespace InputDisplay.Controllers
 
         public override void MoveShapes(Point changeVector)
         {
-            if (this.SelectItem) { this.Item.Translate(changeVector); }
-            if (this.SelectAnalog) { this.AnalogStick.Translate(changeVector); }
-            if (this.SelectMote) { this.Mote.Translate(changeVector); }
+            if (this.SelectItem) {
+                this.Item.Translate(changeVector);
+                Config.N_ItemPos = this.Item.Coords;
+            }
+            if (this.SelectAnalog) {
+                this.AnalogStick.Translate(changeVector);
+                Config.N_DirectionalPos = this.AnalogStick.Coords;
+            }
+            if (this.SelectMote) {
+                this.Mote.Translate(changeVector);
+                Config.N_WiiMotePos = this.Mote.Coords;
+            }
         }
 
         public override void Scale(double scale)

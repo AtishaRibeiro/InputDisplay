@@ -241,7 +241,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("320, 150")]
         public global::System.Drawing.Point C_AcceleratorPos {
             get {
                 return ((global::System.Drawing.Point)(this["C_AcceleratorPos"]));
@@ -253,7 +253,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("260, 60")]
         public global::System.Drawing.Point C_DriftPos {
             get {
                 return ((global::System.Drawing.Point)(this["C_DriftPos"]));
@@ -265,7 +265,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("90, 60")]
         public global::System.Drawing.Point C_ItemPos {
             get {
                 return ((global::System.Drawing.Point)(this["C_ItemPos"]));
@@ -277,7 +277,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("85, 110")]
         public global::System.Drawing.Point C_DPadPos {
             get {
                 return ((global::System.Drawing.Point)(this["C_DPadPos"]));
@@ -289,7 +289,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("230, 150")]
         public global::System.Drawing.Point C_DirectionalPos {
             get {
                 return ((global::System.Drawing.Point)(this["C_DirectionalPos"]));
@@ -416,6 +416,42 @@ namespace InputDisplay.Properties {
             }
             set {
                 this["GhostFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100, 70")]
+        public global::System.Drawing.Point N_ItemPos {
+            get {
+                return ((global::System.Drawing.Point)(this["N_ItemPos"]));
+            }
+            set {
+                this["N_ItemPos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("145, 160")]
+        public global::System.Drawing.Point N_DirectionalPos {
+            get {
+                return ((global::System.Drawing.Point)(this["N_DirectionalPos"]));
+            }
+            set {
+                this["N_DirectionalPos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("240, 50")]
+        public global::System.Drawing.Point N_WiiMotePos {
+            get {
+                return ((global::System.Drawing.Point)(this["N_WiiMotePos"]));
+            }
+            set {
+                this["N_WiiMotePos"] = value;
             }
         }
     }

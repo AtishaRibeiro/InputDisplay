@@ -39,6 +39,7 @@ namespace InputDisplay
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ProgressBarText = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -49,6 +50,7 @@ namespace InputDisplay
             this.ControllerType = new System.Windows.Forms.Label();
             this.CustomiseTab = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -78,14 +80,13 @@ namespace InputDisplay
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.RecordTab = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.recordButton = new System.Windows.Forms.Button();
             this.AboutTab = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label13 = new System.Windows.Forms.Label();
-            this.ProgressBarText = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -165,6 +166,18 @@ namespace InputDisplay
             this.groupBox2.Size = new System.Drawing.Size(455, 314);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
+            // 
+            // ProgressBarText
+            // 
+            this.ProgressBarText.AutoSize = true;
+            this.ProgressBarText.BackColor = System.Drawing.Color.Transparent;
+            this.ProgressBarText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.ProgressBarText.Location = new System.Drawing.Point(96, 97);
+            this.ProgressBarText.Name = "ProgressBarText";
+            this.ProgressBarText.Size = new System.Drawing.Size(279, 50);
+            this.ProgressBarText.TabIndex = 3;
+            this.ProgressBarText.Text = "Processing...\r\nThis can take a few minutes";
+            this.ProgressBarText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBar1
             // 
@@ -262,6 +275,7 @@ namespace InputDisplay
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button7);
             this.groupBox5.Controls.Add(this.checkBox1);
             this.groupBox5.Controls.Add(this.groupBox3);
             this.groupBox5.Controls.Add(this.CurrentButton);
@@ -272,10 +286,19 @@ namespace InputDisplay
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(55, 143);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(129, 23);
+            this.button7.TabIndex = 29;
+            this.button7.Text = "Reset Scale && Position";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(66, 69);
+            this.checkBox1.Location = new System.Drawing.Point(125, 43);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(99, 17);
             this.checkBox1.TabIndex = 28;
@@ -290,7 +313,7 @@ namespace InputDisplay
             this.groupBox3.Controls.Add(this.ButtonColour);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Enabled = false;
-            this.groupBox3.Location = new System.Drawing.Point(5, 92);
+            this.groupBox3.Location = new System.Drawing.Point(5, 63);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(226, 74);
             this.groupBox3.TabIndex = 27;
@@ -355,7 +378,7 @@ namespace InputDisplay
             // CurrentButton
             // 
             this.CurrentButton.Enabled = false;
-            this.CurrentButton.Location = new System.Drawing.Point(65, 37);
+            this.CurrentButton.Location = new System.Drawing.Point(6, 41);
             this.CurrentButton.Name = "CurrentButton";
             this.CurrentButton.ReadOnly = true;
             this.CurrentButton.Size = new System.Drawing.Size(100, 20);
@@ -388,7 +411,7 @@ namespace InputDisplay
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(187, 26);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Drag and drop elements to move them\r\nHold shift for more precise movement";
+            this.label14.Text = "Drag and drop elements to move them\r\nHold shift for grid-based movement";
             // 
             // GeneralTab
             // 
@@ -543,11 +566,6 @@ namespace InputDisplay
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(44, 20);
             this.numericUpDown1.TabIndex = 8;
@@ -600,6 +618,15 @@ namespace InputDisplay
             this.RecordTab.Text = "Record";
             this.RecordTab.UseVisualStyleBackColor = true;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(47, 21);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(132, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Create a video of the input";
+            // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
@@ -648,31 +675,10 @@ namespace InputDisplay
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(3, 12);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(134, 78);
+            this.label12.Size = new System.Drawing.Size(135, 78);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Ghost Input Display\r\nBeta version 1.0\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatisLoa" +
+            this.label12.Text = "Ghost Input Display\r\nBeta version 1.0\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoa" +
     "f#9370\r\n";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(47, 21);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(132, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Create a video of the input";
-            // 
-            // ProgressBarText
-            // 
-            this.ProgressBarText.AutoSize = true;
-            this.ProgressBarText.BackColor = System.Drawing.Color.Transparent;
-            this.ProgressBarText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.ProgressBarText.Location = new System.Drawing.Point(96, 97);
-            this.ProgressBarText.Name = "ProgressBarText";
-            this.ProgressBarText.Size = new System.Drawing.Size(279, 50);
-            this.ProgressBarText.TabIndex = 3;
-            this.ProgressBarText.Text = "Processing...\r\nThis can take a few minutes";
-            this.ProgressBarText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -728,30 +734,27 @@ namespace InputDisplay
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.timer.Stop();
-        }
 
-        public void Redraw()
-        {
-            this.pictureBox1.Invalidate();
-        }
+            Config.Save();
 
-        public void AnimatorScale(string button, double scale)
-        {
-            //this.Animator.Scale(button, scale);
-        }
-
-        public void SwitchButtonColourButton()
-        {
-            this.button2.Enabled = !this.button2.Enabled;
+            string path = "temp";
+            // delete the temp folder
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo di = new DirectoryInfo("temp");
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                Directory.Delete(path);
+            }
         }
 
         private void TimerCallback()
         {
             this.stopWatch.Stop();
-            if (this.AdvanceAnimator())
-            {
-                this.pictureBox1.Invalidate();
-            }
+            this.AdvanceAnimator();
+            this.pictureBox1.Invalidate();
             this.stopWatch.Restart();
             return;
         }
@@ -770,8 +773,12 @@ namespace InputDisplay
                     this.Button3_Click(null, null);
                     return false;
                 }
+            } else
+            {
+                this.DrawFrame();
+                return false;
             }
-            return false;
+            
         }
 
         private void Button5_Click(object sender, EventArgs e)
@@ -835,9 +842,6 @@ namespace InputDisplay
         {
             Graphics g = e.Graphics;
             g.DrawImageUnscaled(this.bmp, new Point(0, 0));
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            this.Animator.Draw(ref g);
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -868,6 +872,8 @@ namespace InputDisplay
                 this.button3.Text = "Play";
                 this.button3.BackColor = Color.LightGreen;
                 this.Animator.Clear();
+                Graphics g = Graphics.FromImage(this.bmp);
+                g.Clear(Config.BackgroundColour);
                 this.pictureBox1.Invalidate();
             }
         }
@@ -886,7 +892,9 @@ namespace InputDisplay
             this.pictureBox1.Height = 295 + heightChange;
             this.button3.Location = new Point(81, 321 + heightChange);
             this.button4.Location = new Point(12, 321 + heightChange);
-            this.panel1.Location = new Point(257, 322 + heightChange);
+            this.panel1.Location = new Point(262, 322 + heightChange);
+
+            this.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }
     }
 }

@@ -33,6 +33,11 @@ namespace InputDisplay
             this.Controller.Clear();
         }
 
+        public void ResetSizePosition()
+        {
+            this.Controller.ResetSizePosition();
+        }
+
         public void SwitchController(string controller)
         {
             switch (controller)

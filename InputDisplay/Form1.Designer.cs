@@ -72,6 +72,7 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label ProgressBarText;
+        private System.Windows.Forms.Button button7;
     }
 }
 

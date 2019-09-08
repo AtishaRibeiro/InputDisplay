@@ -16,6 +16,8 @@ namespace InputDisplay.Controllers
 
         public abstract void Draw(ref Graphics g);
 
+        public abstract void ResetSizePosition();
+
         public abstract (string, Color, double) EvaluateCursor(Point cursor);
 
         public abstract void Highlight();

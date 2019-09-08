@@ -12,11 +12,17 @@ namespace InputDisplay.Controllers
     {
         public Classic()
         {
-            this.AnalogStick = new AnalogStick(new Point(231, 150));
-            this.Accelerator = new Circle(new Point(320, 150), 23);
-            this.Drift = new RectangularButton(new Point(260, 60), new Size(90, 23), 0.5);
-            this.Item = new RectangularButton(new Point(90, 60), new Size(90, 23), 0.5);
-            this.DPad = new DPad(new Point(86, 110));
+            this.AnalogStick = new AnalogStick(Config.C_DirectionalPos);
+            this.Accelerator = new Circle(Config.C_AcceleratorPos, 23);
+            this.Drift = new RectangularButton(Config.C_DriftPos, new Size(90, 23), 0.5);
+            this.Item = new RectangularButton(Config.C_ItemPos, new Size(90, 23), 0.5);
+            this.DPad = new DPad(Config.C_DPadPos);
+
+            this.Accelerator.Scale(Config.C_AcceleratorScale);
+            this.Drift.Scale(Config.C_DriftScale);
+            this.Item.Scale(Config.C_ItemScale);
+            this.AnalogStick.Scale(Config.C_DirectionalScale);
+            this.DPad.Scale(Config.C_DPadScale);
         }
 
         public override void Clear()
@@ -35,6 +41,32 @@ namespace InputDisplay.Controllers
             this.Item.Update(item);
             this.AnalogStick.Update(pos.x, pos.y);
             this.DPad.Update(trick);
+        }
+
+        public override void ResetSizePosition()
+        {
+            Config.C_AcceleratorPos = new Point(320, 150);
+            Config.C_DirectionalPos = new Point(230, 150);
+            Config.C_DriftPos = new Point(260, 60);
+            Config.C_ItemPos = new Point(90, 60);
+            Config.C_DPadPos = new Point(85, 110);
+            this.AnalogStick = new AnalogStick(Config.C_DirectionalPos);
+            this.Accelerator = new Circle(Config.C_AcceleratorPos, 23);
+            this.Drift = new RectangularButton(Config.C_DriftPos, new Size(90, 23), 0.5);
+            this.Item = new RectangularButton(Config.C_ItemPos, new Size(90, 23), 0.5);
+            this.DPad = new DPad(Config.C_DPadPos);
+
+            Config.C_AcceleratorScale = 1;
+            Config.C_DirectionalScale = 1;
+            Config.C_DriftScale = 1;
+            Config.C_ItemScale = 1;
+            Config.C_DPadScale = 1;
+            this.AnalogStick.Scale(1);
+            this.Accelerator.Scale(Config.C_AcceleratorScale);
+            this.Drift.Scale(Config.C_DriftScale);
+            this.Item.Scale(Config.C_ItemScale);
+            this.AnalogStick.Scale(Config.C_DirectionalScale);
+            this.DPad.Scale(Config.C_DPadScale);
         }
 
         public override void Draw(ref Graphics g)
@@ -100,11 +132,26 @@ namespace InputDisplay.Controllers
 
         public override void MoveShapes(Point changeVector)
         {
-            if (this.SelectAcc) { this.Accelerator.Translate(changeVector); }
-            if (this.SelectDrift) { this.Drift.Translate(changeVector); }
-            if (this.SelectItem) { this.Item.Translate(changeVector); }
-            if (this.SelectAnalog) { this.AnalogStick.Translate(changeVector); }
-            if (this.SelectDPad) { this.DPad.Translate(changeVector); }
+            if (this.SelectAcc) {
+                this.Accelerator.Translate(changeVector);
+                Config.C_AcceleratorPos = this.Accelerator.Coords;
+            }
+            if (this.SelectDrift) {
+                this.Drift.Translate(changeVector);
+                Config.C_DriftPos = this.Drift.Coords;
+            }
+            if (this.SelectItem) {
+                this.Item.Translate(changeVector);
+                Config.C_ItemPos = this.Item.Coords;
+            }
+            if (this.SelectAnalog) {
+                this.AnalogStick.Translate(changeVector);
+                Config.C_DirectionalPos = this.AnalogStick.Coords;
+            }
+            if (this.SelectDPad) {
+                this.DPad.Translate(changeVector);
+                Config.C_DPadPos = this.DPad.Coords;
+            }
         }
 
         public override void Scale(double scale)
