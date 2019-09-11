@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
 
 namespace InputDisplay
 {
     static partial class Config
     {
+        public static bool CheckConfigFileIsPresent()
+        {
+            return File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+        }
+
         static public void Save()
         {
             Properties.Settings.Default.Save();

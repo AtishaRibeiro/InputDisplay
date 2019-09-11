@@ -76,17 +76,17 @@ namespace InputDisplay.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.RecordTab = new System.Windows.Forms.TabPage();
-            this.label13 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.FileFormatBox = new System.Windows.Forms.ComboBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.recordButton = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.AboutTab = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.FileFormatBox = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -103,9 +103,9 @@ namespace InputDisplay.Forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.RecordTab.SuspendLayout();
-            this.AboutTab.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.AboutTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorDialog1
@@ -598,14 +598,39 @@ namespace InputDisplay.Forms
             this.RecordTab.Text = "Record";
             this.RecordTab.UseVisualStyleBackColor = true;
             // 
-            // label13
+            // groupBox7
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(50, 16);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(132, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Create a video of the input";
+            this.groupBox7.Controls.Add(this.label16);
+            this.groupBox7.Controls.Add(this.FileFormatBox);
+            this.groupBox7.Controls.Add(this.checkBox2);
+            this.groupBox7.Controls.Add(this.recordButton);
+            this.groupBox7.Location = new System.Drawing.Point(3, 49);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(234, 182);
+            this.groupBox7.TabIndex = 4;
+            this.groupBox7.TabStop = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(8, 45);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(69, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Video Format";
+            // 
+            // FileFormatBox
+            // 
+            this.FileFormatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FileFormatBox.FormattingEnabled = true;
+            this.FileFormatBox.Items.AddRange(new object[] {
+            "AVI",
+            "MOV",
+            "MP4"});
+            this.FileFormatBox.Location = new System.Drawing.Point(99, 42);
+            this.FileFormatBox.Name = "FileFormatBox";
+            this.FileFormatBox.Size = new System.Drawing.Size(51, 21);
+            this.FileFormatBox.TabIndex = 2;
             // 
             // checkBox2
             // 
@@ -628,6 +653,24 @@ namespace InputDisplay.Forms
             this.recordButton.TabIndex = 0;
             this.recordButton.Text = "Record";
             this.recordButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label13);
+            this.groupBox6.Location = new System.Drawing.Point(3, 3);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(234, 40);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(50, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(132, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Create a video of the input";
             // 
             // AboutTab
             // 
@@ -658,51 +701,8 @@ namespace InputDisplay.Forms
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(135, 78);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Ghost Input Display\r\nBeta version 1.0\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoa" +
+            this.label12.Text = "Ghost Input Display\r\nBeta version 1.1\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoa" +
     "f#9370\r\n";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.label13);
-            this.groupBox6.Location = new System.Drawing.Point(3, 3);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(234, 40);
-            this.groupBox6.TabIndex = 3;
-            this.groupBox6.TabStop = false;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label16);
-            this.groupBox7.Controls.Add(this.FileFormatBox);
-            this.groupBox7.Controls.Add(this.checkBox2);
-            this.groupBox7.Controls.Add(this.recordButton);
-            this.groupBox7.Location = new System.Drawing.Point(3, 49);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(234, 182);
-            this.groupBox7.TabIndex = 4;
-            this.groupBox7.TabStop = false;
-            // 
-            // FileFormatBox
-            // 
-            this.FileFormatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FileFormatBox.FormattingEnabled = true;
-            this.FileFormatBox.Items.AddRange(new object[] {
-            "AVI",
-            "MOV",
-            "MP4"});
-            this.FileFormatBox.Location = new System.Drawing.Point(99, 42);
-            this.FileFormatBox.Name = "FileFormatBox";
-            this.FileFormatBox.Size = new System.Drawing.Size(51, 21);
-            this.FileFormatBox.TabIndex = 2;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(8, 45);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(69, 13);
-            this.label16.TabIndex = 3;
-            this.label16.Text = "Video Format";
             // 
             // MainForm
             // 
@@ -716,7 +716,7 @@ namespace InputDisplay.Forms
             this.Controls.Add(this.button3);
             this.MinimumSize = new System.Drawing.Size(745, 420);
             this.Name = "MainForm";
-            this.Text = "Ghost Input Display Beta 1.0 - DON\'T REDISTRIBUTE";
+            this.Text = "Ghost Input Display Beta 1.1 - DON\'T REDISTRIBUTE";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
@@ -742,12 +742,12 @@ namespace InputDisplay.Forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.RecordTab.ResumeLayout(false);
-            this.AboutTab.ResumeLayout(false);
-            this.AboutTab.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.AboutTab.ResumeLayout(false);
+            this.AboutTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -917,7 +917,12 @@ namespace InputDisplay.Forms
             this.button4.Location = new Point(12, 321 + heightChange);
             this.panel1.Location = new Point(262, 322 + heightChange);
 
-            this.Animator.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            if (this.pictureBox1.ClientSize.Width > 0 && this.pictureBox1.ClientSize.Height > 0)
+            {
+                Console.WriteLine(this.pictureBox1.ClientSize.Width);
+                Console.WriteLine(this.pictureBox1.ClientSize.Height);
+                this.Animator.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            }
         }
     }
 }

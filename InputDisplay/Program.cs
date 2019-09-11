@@ -17,7 +17,14 @@ namespace InputDisplay
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            if (Config.CheckConfigFileIsPresent())
+            {
+                Application.Run(new MainForm());
+            } else
+            {
+                Application.Run(new NoConfigForm());
+            }
+            
         }
 
     }

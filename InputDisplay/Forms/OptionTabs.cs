@@ -192,7 +192,6 @@ namespace InputDisplay.Forms
                     this.ButtonScale.Text = Convert.ToString(scale);
                 }
                 this.groupBox3.Enabled = name != null && name != "Timer";
-                //this.Animator.EvaluateCursor(this.pictureBox1.PointToClient(Cursor.Position));
             }
         }
 
@@ -231,7 +230,6 @@ namespace InputDisplay.Forms
                 this.MousePos = new Point(this.MousePos.X + xChange, this.MousePos.Y + yChange);
                 this.Animator.MoveShapes(this.pictureBox1.PointToClient(this.MousePos));
                 this.pictureBox1.Invalidate();
-                //Cursor.Position = this.MousePos;
             }
         }
 
