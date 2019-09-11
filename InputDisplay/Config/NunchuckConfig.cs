@@ -18,7 +18,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_WiiMoteColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color N_AcceleratorColour
@@ -30,7 +29,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_AcceleratorColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color N_DriftColour
@@ -42,7 +40,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_DriftColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color N_ItemColour
@@ -54,7 +51,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_ItemColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color N_DirectionalColour
@@ -66,7 +62,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_DirectionalColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color N_TrickColour
@@ -78,7 +73,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_TrickColour = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -91,7 +85,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_WiiMoteScale = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -104,7 +97,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_ItemScale = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -117,7 +109,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.N_DirectionalScale = value;
-                Properties.Settings.Default.Save();
             }
         }
 

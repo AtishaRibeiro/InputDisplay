@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using InputDisplay.Entities;
+using InputDisplay.Core;
 
 namespace InputDisplay.Controllers
 {
     class Classic: BaseController
     {
-        public Classic()
+        public Classic(Animator animator)
         {
-            this.AnalogStick = new AnalogStick(Config.C_DirectionalPos);
+            this.AnalogStick = new AnalogStick(Config.C_DirectionalPos, animator);
             this.Accelerator = new Circle(Config.C_AcceleratorPos, 23);
             this.Drift = new RectangularButton(Config.C_DriftPos, new Size(90, 23), 0.5);
             this.Item = new RectangularButton(Config.C_ItemPos, new Size(90, 23), 0.5);
@@ -50,11 +51,11 @@ namespace InputDisplay.Controllers
             Config.C_DriftPos = new Point(260, 60);
             Config.C_ItemPos = new Point(90, 60);
             Config.C_DPadPos = new Point(85, 110);
-            this.AnalogStick = new AnalogStick(Config.C_DirectionalPos);
-            this.Accelerator = new Circle(Config.C_AcceleratorPos, 23);
-            this.Drift = new RectangularButton(Config.C_DriftPos, new Size(90, 23), 0.5);
-            this.Item = new RectangularButton(Config.C_ItemPos, new Size(90, 23), 0.5);
-            this.DPad = new DPad(Config.C_DPadPos);
+            this.AnalogStick.Coords = Config.C_DirectionalPos;
+            this.Accelerator.Coords = Config.C_AcceleratorPos;
+            this.Drift.Coords = Config.C_DriftPos;
+            this.Item.Coords = Config.C_ItemPos;
+            this.DPad.Coords = Config.C_DPadPos;
 
             Config.C_AcceleratorScale = 1;
             Config.C_DirectionalScale = 1;

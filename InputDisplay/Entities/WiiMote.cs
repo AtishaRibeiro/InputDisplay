@@ -8,10 +8,11 @@ using System.Drawing.Drawing2D;
 
 namespace InputDisplay.Entities
 {
-    class WiiMote: BaseEntity
+    class WiiMote : BaseEntity
     {
         public WiiMote(Point coords)
         {
+            base.Coords = coords;
             // Keep size here as well because the other elements need it as a reference
             // I know this isn't cood coding practice but I just want to finish the project
             this.Size = new Size(70, 170);
@@ -33,7 +34,7 @@ namespace InputDisplay.Entities
         }
 
         // not used
-        public override void Draw(ref Graphics g, Color colour) {}
+        public override void Draw(ref Graphics g, Color colour) { }
 
         public void Draw(ref Graphics g, Color border, Color acc, Color drift, Color trick)
         {
@@ -68,8 +69,8 @@ namespace InputDisplay.Entities
 
         public override void Translate(Point vector)
         {
-            this.Coords.X += vector.X;
-            this.Coords.Y += vector.Y;
+            base.Coords.X += vector.X;
+            base.Coords.Y += vector.Y;
             this.Mote.Translate(vector);
             this.Accelerator.Translate(vector);
             this.Drift.Translate(vector);
@@ -158,6 +159,18 @@ namespace InputDisplay.Entities
             }
         }
 
+        public new Point Coords
+        {
+            get => base.Coords;
+            set
+            {
+                base.Coords = value;
+                this.Mote.Coords = value;
+                this.Trick.Coords = value;
+                this.Accelerator.Coords = new Point(value.X + this.Size.Width / 2, value.Y + this.Size.Height / 4);
+                this.Drift.Coords = new Point(value.X + (int)(0.22 * (double)this.Size.Width), value.Y + (int)(0.50 * (double)this.Size.Height));
+            }
+        }
         private Size Size;
         private int Selected;
         private RectangularButton Mote;

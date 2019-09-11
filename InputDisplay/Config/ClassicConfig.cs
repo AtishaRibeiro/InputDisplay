@@ -18,7 +18,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_AcceleratorColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color C_DriftColour
@@ -30,7 +29,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_DriftColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color C_ItemColour
@@ -42,7 +40,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_ItemColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color C_DirectionalColour
@@ -54,7 +51,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_DirectionalColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color C_DPadColour
@@ -66,7 +62,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_DPadColour = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -79,7 +74,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_AcceleratorScale = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -92,7 +86,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_DriftScale = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -105,7 +98,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_ItemScale = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -118,7 +110,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_DirectionalScale = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -131,7 +122,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.C_DPadScale = value;
-                Properties.Settings.Default.Save();
             }
         }
 

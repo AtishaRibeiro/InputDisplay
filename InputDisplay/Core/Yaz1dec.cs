@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//This code was translated from Thakis' c++ Yaz0 decoder into c#
+//This code was translated from Thakis' C++ Yaz0 decoder into C#
 
-namespace InputDisplay
+namespace InputDisplay.Core
 {
     class Yaz1dec
     {

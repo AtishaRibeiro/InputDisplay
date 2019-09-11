@@ -34,7 +34,7 @@ namespace InputDisplay.Entities
 
         public override bool CheckMouse(Point cursor)
         {
-            return cursor.X >= this.Coords.X && cursor.X <= this.Coords.Y + this.Size.Width && cursor.Y >= this.Coords.Y && cursor.Y <= this.Coords.Y + this.Size.Height;
+            return cursor.X >= this.Coords.X && cursor.X <= this.Coords.X + this.Size.Width && cursor.Y >= this.Coords.Y && cursor.Y <= this.Coords.Y + this.Size.Height;
         }
 
         public override void Translate(Point vector)

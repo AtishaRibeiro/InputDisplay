@@ -25,7 +25,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Gray")]
         public global::System.Drawing.Color BackgroundColour {
             get {
                 return ((global::System.Drawing.Color)(this["BackgroundColour"]));
@@ -205,7 +205,7 @@ namespace InputDisplay.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Cyan")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
         public global::System.Drawing.Color OutlineColour {
             get {
                 return ((global::System.Drawing.Color)(this["OutlineColour"]));

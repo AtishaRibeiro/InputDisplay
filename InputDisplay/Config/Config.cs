@@ -23,7 +23,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.GhostFolder = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -35,7 +34,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.BackgroundColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color ButtonColour
@@ -47,7 +45,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.ButtonColour = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public Color OutlineColour
@@ -59,7 +56,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.OutlineColour = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -72,7 +68,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.CustomColours = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -84,7 +79,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.DisplayTimer = value;
-                Properties.Settings.Default.Save();
             }
         }
         static public int LineWidth {
@@ -95,7 +89,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.LineWidth = value;
-                Properties.Settings.Default.Save();
             }
         }
         
@@ -109,7 +102,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.UseOutline = value;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -122,7 +114,6 @@ namespace InputDisplay
             set
             {
                 Properties.Settings.Default.Outline = value;
-                Properties.Settings.Default.Save();
             }
         }
 

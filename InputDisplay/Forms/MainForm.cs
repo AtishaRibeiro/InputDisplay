@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics; //testing
+using InputDisplay.Core;
 
-namespace InputDisplay
+namespace InputDisplay.Forms
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private Animator Animator;
         private bool GhostLoaded = false;
@@ -21,14 +22,11 @@ namespace InputDisplay
         private Stopwatch stopWatch = new Stopwatch();
         private AccurateTimer timer;
 
-        private Bitmap bmp;
-
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             VariableSetup();
-            this.Animator = new Animator(62.5);
-            this.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            this.Animator = new Animator(62.5, this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height);
         }
 
         private void InitializeComponent()
@@ -39,8 +37,6 @@ namespace InputDisplay
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ProgressBarText = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -87,6 +83,10 @@ namespace InputDisplay
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.FileFormatBox = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -104,6 +104,8 @@ namespace InputDisplay
             this.tabControl1.SuspendLayout();
             this.RecordTab.SuspendLayout();
             this.AboutTab.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorDialog1
@@ -158,33 +160,12 @@ namespace InputDisplay
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.ProgressBarText);
-            this.groupBox2.Controls.Add(this.progressBar1);
             this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Location = new System.Drawing.Point(262, 1);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(455, 314);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            // 
-            // ProgressBarText
-            // 
-            this.ProgressBarText.AutoSize = true;
-            this.ProgressBarText.BackColor = System.Drawing.Color.Transparent;
-            this.ProgressBarText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.ProgressBarText.Location = new System.Drawing.Point(96, 97);
-            this.ProgressBarText.Name = "ProgressBarText";
-            this.ProgressBarText.Size = new System.Drawing.Size(279, 50);
-            this.ProgressBarText.TabIndex = 3;
-            this.ProgressBarText.Text = "Processing...\r\nThis can take a few minutes";
-            this.ProgressBarText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(51, 163);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(358, 33);
-            this.progressBar1.TabIndex = 2;
             // 
             // pictureBox1
             // 
@@ -608,9 +589,8 @@ namespace InputDisplay
             // 
             // RecordTab
             // 
-            this.RecordTab.Controls.Add(this.label13);
-            this.RecordTab.Controls.Add(this.checkBox2);
-            this.RecordTab.Controls.Add(this.recordButton);
+            this.RecordTab.Controls.Add(this.groupBox7);
+            this.RecordTab.Controls.Add(this.groupBox6);
             this.RecordTab.Location = new System.Drawing.Point(4, 22);
             this.RecordTab.Name = "RecordTab";
             this.RecordTab.Size = new System.Drawing.Size(240, 234);
@@ -621,7 +601,7 @@ namespace InputDisplay
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(47, 21);
+            this.label13.Location = new System.Drawing.Point(50, 16);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(132, 13);
             this.label13.TabIndex = 2;
@@ -632,8 +612,9 @@ namespace InputDisplay
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(5, 72);
+            this.checkBox2.Location = new System.Drawing.Point(6, 19);
             this.checkBox2.Name = "checkBox2";
+            this.checkBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBox2.Size = new System.Drawing.Size(144, 17);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Transparent Background";
@@ -641,9 +622,9 @@ namespace InputDisplay
             // 
             // recordButton
             // 
-            this.recordButton.Location = new System.Drawing.Point(5, 97);
+            this.recordButton.Location = new System.Drawing.Point(6, 137);
             this.recordButton.Name = "recordButton";
-            this.recordButton.Size = new System.Drawing.Size(75, 23);
+            this.recordButton.Size = new System.Drawing.Size(222, 39);
             this.recordButton.TabIndex = 0;
             this.recordButton.Text = "Record";
             this.recordButton.UseVisualStyleBackColor = true;
@@ -680,7 +661,50 @@ namespace InputDisplay
             this.label12.Text = "Ghost Input Display\r\nBeta version 1.0\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoa" +
     "f#9370\r\n";
             // 
-            // Form1
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label13);
+            this.groupBox6.Location = new System.Drawing.Point(3, 3);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(234, 40);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label16);
+            this.groupBox7.Controls.Add(this.FileFormatBox);
+            this.groupBox7.Controls.Add(this.checkBox2);
+            this.groupBox7.Controls.Add(this.recordButton);
+            this.groupBox7.Location = new System.Drawing.Point(3, 49);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(234, 182);
+            this.groupBox7.TabIndex = 4;
+            this.groupBox7.TabStop = false;
+            // 
+            // FileFormatBox
+            // 
+            this.FileFormatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FileFormatBox.FormattingEnabled = true;
+            this.FileFormatBox.Items.AddRange(new object[] {
+            "AVI",
+            "MOV",
+            "MP4"});
+            this.FileFormatBox.Location = new System.Drawing.Point(99, 42);
+            this.FileFormatBox.Name = "FileFormatBox";
+            this.FileFormatBox.Size = new System.Drawing.Size(51, 21);
+            this.FileFormatBox.TabIndex = 2;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(8, 45);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(69, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Video Format";
+            // 
+            // MainForm
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(729, 381);
@@ -691,14 +715,13 @@ namespace InputDisplay
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.MinimumSize = new System.Drawing.Size(745, 420);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Ghost Input Display Beta 1.0 - DON\'T REDISTRIBUTE";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -719,9 +742,12 @@ namespace InputDisplay
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.RecordTab.ResumeLayout(false);
-            this.RecordTab.PerformLayout();
             this.AboutTab.ResumeLayout(false);
             this.AboutTab.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -764,7 +790,7 @@ namespace InputDisplay
             {
                 if (this.Animator.Update())
                 {
-                    this.DrawFrame();
+                    this.Animator.DrawFrame();
                     return true;
                 }
                 else
@@ -775,7 +801,7 @@ namespace InputDisplay
                 }
             } else
             {
-                this.DrawFrame();
+                this.Animator.DrawFrame();
                 return false;
             }
             
@@ -805,17 +831,17 @@ namespace InputDisplay
                 this.label6.Visible = false;
                 this.recordButton.Enabled = true;
 
-                (string time, string name, string controller, int frames) info = this.Animator.GetGhostInfo();
+                (string time, string name, string controller, int frames) = this.Animator.GetGhostInfo();
                 this.label5.Text = Path.GetFileName(ofd.FileName);
-                this.label7.Text = "Mii: " + info.name;
-                this.label8.Text = "Time: " + info.time;
-                this.ControllerType.Text = "Controller: " + info.controller;
+                this.label7.Text = "Mii: " + name;
+                this.label8.Text = "Time: " + time;
+                this.ControllerType.Text = "Controller: " + controller;
                 this.label5.Visible = true;
                 this.label7.Visible = true;
                 this.label8.Visible = true;
                 this.ControllerType.Visible = true;
 
-                switch(info.controller)
+                switch(controller)
                 {
                     case "Classic":
                     case "Gamecube":
@@ -830,18 +856,10 @@ namespace InputDisplay
             }
         }
 
-        private void DrawFrame()
-        {
-            Graphics g = Graphics.FromImage(this.bmp);
-            g.Clear(Config.BackgroundColour);
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            this.Animator.Draw(ref g);
-        }
-
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.DrawImageUnscaled(this.bmp, new Point(0, 0));
+            g.DrawImageUnscaled(this.Animator.bmp, new Point(0, 0));
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -864,6 +882,11 @@ namespace InputDisplay
 
         }
 
+        public void SimulateStopClick()
+        {
+            this.Button4_Click(null, null);
+        }
+
         private void Button4_Click(object sender, EventArgs e)
         {
             if (this.GhostLoaded)
@@ -872,7 +895,7 @@ namespace InputDisplay
                 this.button3.Text = "Play";
                 this.button3.BackColor = Color.LightGreen;
                 this.Animator.Clear();
-                Graphics g = Graphics.FromImage(this.bmp);
+                Graphics g = Graphics.FromImage(this.Animator.bmp);
                 g.Clear(Config.BackgroundColour);
                 this.pictureBox1.Invalidate();
             }
@@ -894,7 +917,7 @@ namespace InputDisplay
             this.button4.Location = new Point(12, 321 + heightChange);
             this.panel1.Location = new Point(262, 322 + heightChange);
 
-            this.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            this.Animator.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }
     }
 }

@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using InputDisplay.Entities;
+using InputDisplay.Core;
 
 namespace InputDisplay.Controllers
 {
     class Nunchuck : BaseController
     {
 
-        public Nunchuck()
+        public Nunchuck(Animator animator)
         {
-            this.AnalogStick = new AnalogStick(Config.N_DirectionalPos);
+            this.AnalogStick = new AnalogStick(Config.N_DirectionalPos, animator);
             this.Item = new RectangularButton(Config.N_ItemPos, new Size(90, 23), 0.5);
             this.Mote = new WiiMote(Config.N_WiiMotePos);
 
@@ -38,16 +39,12 @@ namespace InputDisplay.Controllers
 
         public override void ResetSizePosition()
         {
-            this.AnalogStick = new AnalogStick(new Point(145, 160));
-            this.Item = new RectangularButton(new Point(100, 70), new Size(90, 23), 0.5);
-            this.Mote = new WiiMote(new Point(240, 50));
-
             Config.N_DirectionalPos = new Point(145, 160);
             Config.N_ItemPos = new Point(100, 70);
             Config.N_WiiMotePos = new Point(240, 50);
-            this.AnalogStick = new AnalogStick(Config.N_DirectionalPos);
-            this.Item = new RectangularButton(Config.N_ItemPos, new Size(90, 23), 0.5);
-            this.Mote = new WiiMote(Config.N_WiiMotePos);
+            this.AnalogStick.Coords = Config.N_DirectionalPos;
+            this.Item.Coords = Config.N_ItemPos;
+            this.Mote.Coords = Config.N_WiiMotePos;
 
             Config.N_DirectionalScale = 1;
             Config.N_ItemScale = 1;
@@ -116,6 +113,7 @@ namespace InputDisplay.Controllers
             if (this.SelectMote) {
                 this.Mote.Translate(changeVector);
                 Config.N_WiiMotePos = this.Mote.Coords;
+                Console.WriteLine(Config.N_WiiMotePos);
             }
         }
 
@@ -140,8 +138,8 @@ namespace InputDisplay.Controllers
 
         public override void ChangeColour(Color colour)
         {
-            if (this.SelectItem) { Config.C_ItemColour = colour; }
-            if (this.SelectAnalog) { Config.C_DirectionalColour = colour; }
+            if (this.SelectItem) { Config.N_ItemColour = colour; }
+            if (this.SelectAnalog) { Config.N_DirectionalColour = colour; }
             if (this.SelectMote) { this.Mote.ChangeColour(colour); }
         }
 

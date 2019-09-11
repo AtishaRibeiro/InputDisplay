@@ -1,6 +1,6 @@
-﻿namespace InputDisplay
+﻿namespace InputDisplay.Forms
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -62,7 +62,6 @@
         private System.Windows.Forms.ComboBox LayoutBox;
         private System.Windows.Forms.Label ControllerType;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.TabPage RecordTab;
         private System.Windows.Forms.Button recordButton;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
@@ -71,8 +70,11 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label ProgressBarText;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox FileFormatBox;
     }
 }
 

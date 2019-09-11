@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="BackgroundColour" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Black</Value>
+      <Value Profile="(Default)">Gray</Value>
     </Setting>
     <Setting Name="ButtonColour" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
@@ -48,7 +48,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="OutlineColour" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Cyan</Value>
+      <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="UseOutline" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
