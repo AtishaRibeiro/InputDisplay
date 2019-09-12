@@ -31,6 +31,7 @@ namespace InputDisplay.Forms
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -701,8 +702,8 @@ namespace InputDisplay.Forms
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(135, 78);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Ghost Input Display\r\nBeta version 1.1\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoa" +
-    "f#9370\r\n";
+            this.label12.Text = "Ghost Input Display\r\nVersion 1.0\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoaf#937" +
+    "0\r\n";
             // 
             // MainForm
             // 
@@ -714,9 +715,10 @@ namespace InputDisplay.Forms
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(745, 420);
             this.Name = "MainForm";
-            this.Text = "Ghost Input Display Beta 1.1 - DON\'T REDISTRIBUTE";
+            this.Text = "Ghost Input Display";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);

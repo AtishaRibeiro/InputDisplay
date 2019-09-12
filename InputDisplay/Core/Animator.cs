@@ -173,7 +173,7 @@ namespace InputDisplay.Core
             int err = (dx > dy ? dx : -dy) / 2, e2;
             for (; ; )
             {
-                this.bmp.SetPixel(x0, y0, Color.Transparent);
+                this.bmp.SetPixel(x0, y0, Color.FromArgb(255, 0, 0, 0));
                 if (x0 == x1 && y0 == y1) break;
                 e2 = err;
                 if (e2 > -dx) { err -= dy; x0 += sx; }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecordForm));
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.LeftButton = new System.Windows.Forms.Button();
             this.RightButton = new System.Windows.Forms.Button();
@@ -90,6 +91,7 @@
             this.Controls.Add(this.RightButton);
             this.Controls.Add(this.LeftButton);
             this.Controls.Add(this.progressBar1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RecordForm";
             this.Text = "Record";
             this.ResumeLayout(false);
