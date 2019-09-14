@@ -139,9 +139,11 @@ namespace InputDisplay.Forms
             
             // Set the background colour to transparent if necessary
             this.SavedColour = Config.BackgroundColour;
+            string codec = "mjpeg -q:v 1";
             if (this.AlphaChannel)
             {
                 Config.BackgroundColour = Color.Transparent;
+                codec = "png";
             }
 
             this.backgroundWorker1.ReportProgress(25);
@@ -169,7 +171,7 @@ namespace InputDisplay.Forms
             Process proc = new Process();
             proc.StartInfo.FileName = "ffmpeg\\ffmpeg";
             this.FileName = String.Format("{0}.{1}", DateTime.Now.ToString("yy-MM-dd-hh-mm-ss"), this.FileFormat);
-            proc.StartInfo.Arguments = "-framerate 62.5 -i temp\\%d.png -vcodec png " + this.FileName;
+            proc.StartInfo.Arguments = String.Format("-framerate 62.5 -i temp\\%d.png -vcodec {0} {1}", codec, this.FileName);
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.CreateNoWindow = true;

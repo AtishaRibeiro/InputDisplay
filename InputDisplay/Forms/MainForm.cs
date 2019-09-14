@@ -27,6 +27,9 @@ namespace InputDisplay.Forms
             InitializeComponent();
             VariableSetup();
             this.Animator = new Animator(62.5, this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height);
+            this.AllowDrop = true;
+            this.DragEnter += new DragEventHandler(Form1_DragEnter);
+            this.DragDrop += new DragEventHandler(Form1_DragDrop);
         }
 
         private void InitializeComponent()
@@ -702,7 +705,7 @@ namespace InputDisplay.Forms
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(135, 78);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Ghost Input Display\r\nVersion 1.0\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoaf#937" +
+            this.label12.Text = "Ghost Input Display\r\nVersion 1.1\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoaf#937" +
     "0\r\n";
             // 
             // MainForm
@@ -809,6 +812,44 @@ namespace InputDisplay.Forms
             
         }
 
+        private void ReadFile(string fileName)
+        {
+            Config.GhostFolder = Path.GetDirectoryName(fileName);
+            this.Animator.ReadFile(fileName);
+            this.GhostLoaded = true;
+            // if the record tab is selected
+            if (this.tabControl1.SelectedIndex != 2)
+            {
+                this.button3.Enabled = true;
+                this.button4.Enabled = true;
+            }
+            this.label6.Visible = false;
+            this.recordButton.Enabled = true;
+
+            (string time, string name, string controller, int frames) = this.Animator.GetGhostInfo();
+            this.label5.Text = Path.GetFileName(fileName);
+            this.label7.Text = "Mii: " + name;
+            this.label8.Text = "Time: " + time;
+            this.ControllerType.Text = "Controller: " + controller;
+            this.label5.Visible = true;
+            this.label7.Visible = true;
+            this.label8.Visible = true;
+            this.ControllerType.Visible = true;
+
+            switch (controller)
+            {
+                case "Classic":
+                case "Gamecube":
+                    this.LayoutBox.SelectedIndex = 0;
+                    break;
+                case "Nunchuck":
+                    this.LayoutBox.SelectedIndex = 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void Button5_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog
@@ -821,39 +862,26 @@ namespace InputDisplay.Forms
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                Config.GhostFolder = Path.GetDirectoryName(ofd.FileName);
-                this.Animator.ReadFile(ofd.FileName);
-                this.GhostLoaded = true;
-                // if the record tab is selected
-                if (this.tabControl1.SelectedIndex != 2)
-                {
-                    this.button3.Enabled = true;
-                    this.button4.Enabled = true;
-                }
-                this.label6.Visible = false;
-                this.recordButton.Enabled = true;
+                this.ReadFile(ofd.FileName);
+            }
+        }
 
-                (string time, string name, string controller, int frames) = this.Animator.GetGhostInfo();
-                this.label5.Text = Path.GetFileName(ofd.FileName);
-                this.label7.Text = "Mii: " + name;
-                this.label8.Text = "Time: " + time;
-                this.ControllerType.Text = "Controller: " + controller;
-                this.label5.Visible = true;
-                this.label7.Visible = true;
-                this.label8.Visible = true;
-                this.ControllerType.Visible = true;
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
 
-                switch(controller)
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string fileName = files[0];
+            // Check if it is a file
+            FileAttributes attr = File.GetAttributes(@fileName);
+            if (!attr.HasFlag(FileAttributes.Directory))
+            {
+                if (Path.GetExtension(fileName) == ".rkg")
                 {
-                    case "Classic":
-                    case "Gamecube":
-                        this.LayoutBox.SelectedIndex = 0;
-                        break;
-                    case "Nunchuck":
-                        this.LayoutBox.SelectedIndex = 1;
-                        break;
-                    default:
-                        break;
+                    this.ReadFile(fileName);
                 }
             }
         }
