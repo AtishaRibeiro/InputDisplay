@@ -764,6 +764,7 @@ namespace InputDisplay.Forms
             // 
             // cheatCheckBtn
             // 
+            this.cheatCheckBtn.Enabled = false;
             this.cheatCheckBtn.Location = new System.Drawing.Point(6, 137);
             this.cheatCheckBtn.Name = "cheatCheckBtn";
             this.cheatCheckBtn.Size = new System.Drawing.Size(222, 39);
@@ -946,6 +947,7 @@ namespace InputDisplay.Forms
             }
             this.label6.Visible = false;
             this.recordButton.Enabled = true;
+            this.cheatCheckBtn.Enabled = true;
 
             (string time, string name, string controller, int frames) = this.Animator.GetGhostInfo();
             this.label5.Text = Path.GetFileName(fileName);
@@ -1079,12 +1081,6 @@ namespace InputDisplay.Forms
 
         private void cheatCheckBtn_Click(object sender, EventArgs e)
         {
-            if (!this.GhostLoaded)
-            {
-                MessageBox.Show("No ghost file has been loaded!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             if (this.Animator == null)
                 return;
 

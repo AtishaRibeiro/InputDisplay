@@ -63,6 +63,7 @@ namespace InputDisplay.Core
             int prevWheelieFrame = 0;
             bool streak = false;
             bool streakOver = false;
+            int streakWheelieFrame = 0;
             int wheelieCount = 0;
             int frameCount = 0;
             gapSize++;
@@ -78,6 +79,9 @@ namespace InputDisplay.Core
                         frameCount += (input.endFrame - prevWheelieFrame);
                         streak = true;
                         wheelieCount++;
+
+                        if (streakWheelieFrame == 0)
+                            streakWheelieFrame = prevEndingFrame;
                     }
 
                     prevWheelieFrame = input.endFrame;
@@ -95,12 +99,15 @@ namespace InputDisplay.Core
                     wheelieCount++;
                     frameCount++;
 
-                    messages.Add(String.Format("{0} wheelies in {1} frames ({2:0.000} seconds)", wheelieCount, frameCount, ((double)frameCount / 60)));
-
+                    double seconds = ((double)(streakWheelieFrame - 240) / 60);
+                    TimeSpan ts = TimeSpan.FromSeconds(seconds);
+                    messages.Add(String.Format("[Frame 0x{0:X} ({1})] - {2} wheelies in {3} frames ({4:0.000} seconds)", streakWheelieFrame, (seconds >= 0 ? "" : "-") + ts.ToString("mm':'ss':'fff"), wheelieCount, frameCount, ((double)frameCount / 60)));
+                    
                     streak = false;
                     streakOver = false;
                     wheelieCount = 0;
                     frameCount = 0;
+                    streakWheelieFrame = 0;
                 }
 
                 // writetext.WriteLine(String.Format("{0} - {1}", input.values, input.endFrame - prevEndingFrame));
@@ -127,7 +134,7 @@ namespace InputDisplay.Core
                 return messages;
             }
 
-            int prevFrame = analogInputs[0].endFrame;
+            int prevEndingFrame = analogInputs[0].endFrame;
             foreach ((int endFrame, (double, double) values) input in analogInputs)
             {
 
@@ -136,9 +143,14 @@ namespace InputDisplay.Core
                     : this.IllegalInputsNunchuck.Contains(input.values);
 
                 if (illegal)
-                    messages.Add(String.Format("At frame {0} illegal input found ({1}, {2})!", prevFrame, input.values.Item1, input.values.Item2));
+                {
+                    double seconds = ((double)(prevEndingFrame - 240) / 60);
+                    TimeSpan ts = TimeSpan.FromSeconds(seconds);
 
-                prevFrame = input.endFrame;
+                    messages.Add(String.Format("[Frame 0x{0:X} ({1})] - illegal input found ({2}, {3})!", prevEndingFrame, (seconds >= 0 ? "" : "-") + ts.ToString("mm':'ss':'fff"), input.values.Item1, input.values.Item2));
+                }
+
+                prevEndingFrame = input.endFrame;
 
             }
 
