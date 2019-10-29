@@ -108,9 +108,9 @@ namespace InputDisplay.Core
             return (this.GhostReader.CompletionTime, this.GhostReader.MiiName, this.GhostReader.Controller_type, this.GhostReader.TotalFrames);
         }
 
-        public List<String> DetectRapidFire()
+        public List<String> DetectRapidFire(int gapSize)
         {
-            return this.GhostReader.DetectRapidFire();
+            return this.GhostReader.DetectRapidFire(gapSize);
         }
         public List<String> DetectIllegalInputs()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +54,7 @@ namespace InputDisplay.Core
 
         }
 
-        public List<String> DetectRapidFire(List<(int endFrame, int values)> trickInputs)
+        public List<String> DetectRapidFire(List<(int endFrame, int values)> trickInputs, int gapSize)
         {
 
             List<String> messages = new List<string>();
@@ -64,15 +65,15 @@ namespace InputDisplay.Core
             bool streakOver = false;
             int wheelieCount = 0;
             int frameCount = 0;
+            gapSize++;
 
             // checking RapidFire (specifically wheelie input)
             foreach ((int endFrame, int values) input in trickInputs)
             {
-
                 if (input.values == 0x1) // TODO: check any kind of input for Rapid Fire.
                 {
 
-                    if ((input.endFrame - prevWheelieFrame) == 2 && prevWheelieFrame != 0)
+                    if ((input.endFrame - prevWheelieFrame) <= gapSize && prevWheelieFrame != 0)
                     {
                         frameCount += (input.endFrame - prevWheelieFrame);
                         streak = true;
@@ -84,7 +85,7 @@ namespace InputDisplay.Core
                 }
                 else
                 {
-                    if (streak && (input.endFrame - prevEndingFrame) > 1)
+                    if (streak && (input.endFrame - prevEndingFrame) > gapSize)
                         streakOver = true;
                 }
 
@@ -101,6 +102,8 @@ namespace InputDisplay.Core
                     wheelieCount = 0;
                     frameCount = 0;
                 }
+
+                // writetext.WriteLine(String.Format("{0} - {1}", input.values, input.endFrame - prevEndingFrame));
 
                 prevEndingFrame = input.endFrame;
 

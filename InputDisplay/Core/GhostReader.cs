@@ -148,9 +148,9 @@ namespace InputDisplay.Core
 
         }
 
-        public List<String> DetectRapidFire()
+        public List<String> DetectRapidFire(int gapSize)
         {
-            return this.CheatDetetor.DetectRapidFire(this.Trick_inputs);
+            return this.CheatDetetor.DetectRapidFire(this.Trick_inputs, gapSize);
         }
 
         public List<String> DetectIllegalInputs()

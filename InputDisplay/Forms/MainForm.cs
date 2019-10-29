@@ -30,6 +30,7 @@ namespace InputDisplay.Forms
             this.AllowDrop = true;
             this.DragEnter += new DragEventHandler(Form1_DragEnter);
             this.DragDrop += new DragEventHandler(Form1_DragDrop);
+            this.frameGapCombo.SelectedIndex = 0;
         }
 
         private void InitializeComponent()
@@ -89,6 +90,8 @@ namespace InputDisplay.Forms
             this.label13 = new System.Windows.Forms.Label();
             this.CheatTab = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.frameGapCombo = new System.Windows.Forms.ComboBox();
             this.rapidFireCheck = new System.Windows.Forms.CheckBox();
             this.illegalInputCheck = new System.Windows.Forms.CheckBox();
             this.cheatCheckBtn = new System.Windows.Forms.Button();
@@ -701,6 +704,8 @@ namespace InputDisplay.Forms
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.label17);
+            this.groupBox8.Controls.Add(this.frameGapCombo);
             this.groupBox8.Controls.Add(this.rapidFireCheck);
             this.groupBox8.Controls.Add(this.illegalInputCheck);
             this.groupBox8.Controls.Add(this.cheatCheckBtn);
@@ -709,6 +714,27 @@ namespace InputDisplay.Forms
             this.groupBox8.Size = new System.Drawing.Size(234, 182);
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(104, 43);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(78, 13);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "Frame gap size";
+            // 
+            // frameGapCombo
+            // 
+            this.frameGapCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.frameGapCombo.FormattingEnabled = true;
+            this.frameGapCombo.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.frameGapCombo.Location = new System.Drawing.Point(188, 40);
+            this.frameGapCombo.Name = "frameGapCombo";
+            this.frameGapCombo.Size = new System.Drawing.Size(40, 21);
+            this.frameGapCombo.TabIndex = 26;
             // 
             // rapidFireCheck
             // 
@@ -883,7 +909,8 @@ namespace InputDisplay.Forms
             return;
         }
 
-        private bool AdvanceAnimator() {
+        private bool AdvanceAnimator()
+        {
             if (this.Animate)
             {
                 if (this.Animator.Update())
@@ -897,12 +924,13 @@ namespace InputDisplay.Forms
                     this.Button3_Click(null, null);
                     return false;
                 }
-            } else
+            }
+            else
             {
                 this.Animator.DrawFrame();
                 return false;
             }
-            
+
         }
 
         private void ReadFile(string fileName)
@@ -995,7 +1023,8 @@ namespace InputDisplay.Forms
                     this.button3.Text = "Play";
                     this.button3.BackColor = Color.LightGreen;
 
-                } else
+                }
+                else
                 {
                     this.Animate = true;
                     this.button3.Text = "Pause";
@@ -1050,14 +1079,22 @@ namespace InputDisplay.Forms
 
         private void cheatCheckBtn_Click(object sender, EventArgs e)
         {
+            if (!this.GhostLoaded)
+            {
+                MessageBox.Show("No ghost file has been loaded!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (this.Animator == null)
                 return;
 
             List<String> RapidFireMessages = null;
             List<String> IllegalInputMessages = null;
 
+            int gapSize = int.Parse(this.frameGapCombo.SelectedItem.ToString());
+
             if (this.rapidFireCheck.Checked)
-                RapidFireMessages = this.Animator.DetectRapidFire();
+                RapidFireMessages = this.Animator.DetectRapidFire(gapSize);
             if (this.illegalInputCheck.Checked)
                 IllegalInputMessages = this.Animator.DetectIllegalInputs();
 

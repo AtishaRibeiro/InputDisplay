@@ -82,6 +82,8 @@
         private System.Windows.Forms.Button cheatCheckBtn;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox frameGapCombo;
     }
 }
 
