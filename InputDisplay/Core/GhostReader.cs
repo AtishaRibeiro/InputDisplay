@@ -9,6 +9,16 @@ namespace InputDisplay.Core
 {
     class GhostReader
     {
+        public string CompletionTime { get; set; }
+        public string Controller_type { get; set; }
+        public String MiiName { get; set; }
+        public int TotalFrames { get; set; }
+        public List<(int endFrame, (bool, bool, bool) values)> Face_inputs { get; }
+        public List<(int endFrame, (double, double) values)> Analog_inputs { get; }
+        public List<(int endFrame, int values)> Trick_inputs { get; }
+        public CheatDetector CheatDetetor { get; set; }
+
+
         public GhostReader()
         {
             // (Accelerator, Drift, Item)
@@ -17,6 +27,8 @@ namespace InputDisplay.Core
             this.Analog_inputs = new List<(int, (double, double))>();
             // 0 -> none, 1 -> up, 2 -> down, 3 -> left, 4 -> right 
             this.Trick_inputs = new List<(int, int)>();
+
+            this.CheatDetetor = new CheatDetector();
         }
 
         public void ReadFile(string filename)
@@ -138,70 +150,31 @@ namespace InputDisplay.Core
 
         public List<String> DetectRapidFire()
         {
-
-            List<String> messages = new List<string>();
-
-            int prevEndingFrame = 0;
-            int prevWheelieFrame = 0;
-            bool streak = false;
-            bool streakOver = false;
-            int wheelieCount = 0;
-            int frameCount = 0;
-
-            // checking RapidFire (specifically wheelie input)
-            foreach ((int endFrame, int values) input in this.Trick_inputs)
-            {
-
-                if (input.values == 0x1) // TODO: check any kind of input for Rapid Fire.
-                {
-
-                    if ((input.endFrame - prevWheelieFrame) == 2 && prevWheelieFrame != 0)
-                    {
-                        frameCount += (input.endFrame - prevWheelieFrame);
-                        streak = true;
-                        wheelieCount++;
-                    }
-
-                    prevWheelieFrame = input.endFrame;
-
-                }
-                else
-                {
-                    if (streak && (input.endFrame - prevEndingFrame) > 1)
-                        streakOver = true;
-                }
-
-
-                if (streak && streakOver)
-                {
-                    wheelieCount++;
-                    frameCount++;
-
-                    messages.Add(String.Format("{0} wheelies in {1} frames ({2:0.000} seconds)", wheelieCount, frameCount, ((double)frameCount / 60)));
-
-                    streak = false;
-                    streakOver = false;
-                    wheelieCount = 0;
-                    frameCount = 0;
-                }
-
-                prevEndingFrame = input.endFrame;
-
-            }
-
-            if (messages.Count == 0)
-                messages.Add("No Rapid Fire inputs found.");
-
-            return messages;
-
+            return this.CheatDetetor.DetectRapidFire(this.Trick_inputs);
         }
 
-        public string CompletionTime { get; set; }
-        public string Controller_type { get; set; }
-        public String MiiName { get; set; }
-        public int TotalFrames { get; set; }
-        public List<(int endFrame, (bool, bool, bool) values)> Face_inputs { get; }
-        public List<(int endFrame, (double, double) values)> Analog_inputs { get; }
-        public List<(int endFrame, int values)> Trick_inputs { get; }
+        public List<String> DetectIllegalInputs()
+        {
+            int controllerType = 0;
+
+            switch (this.Controller_type)
+            {
+                case "Wii Wheel":
+                    controllerType = 0;
+                    break;
+                case "Nunchuck":
+                    controllerType = 1;
+                    break;
+                case "Classic":
+                    controllerType = 2;
+                    break;
+                default:
+                    controllerType = 3;
+                    break;
+            }
+
+            return this.CheatDetetor.DetectIllegalInputs(this.Analog_inputs, controllerType);
+        }
+
     }
 }

@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CheatDetector.cs" />
     <Compile Include="Forms\AccurateTimer.cs" />
     <Compile Include="Config\ClassicConfig.cs" />
     <Compile Include="Config\NunchuckConfig.cs" />

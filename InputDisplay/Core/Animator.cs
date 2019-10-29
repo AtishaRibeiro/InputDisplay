@@ -112,7 +112,11 @@ namespace InputDisplay.Core
         {
             return this.GhostReader.DetectRapidFire();
         }
-       
+        public List<String> DetectIllegalInputs()
+        {
+            return this.GhostReader.DetectIllegalInputs();
+        }
+
         public (string, Color, double) EvaluateCursor(Point cursor)
         {
             this.MousePos = cursor;

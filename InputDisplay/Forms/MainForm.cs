@@ -1053,9 +1053,10 @@ namespace InputDisplay.Forms
             if (this.Animator == null)
                 return;
 
-            List<String> rapidFireMessages = this.Animator.DetectRapidFire();
+            List<String> messages = this.Animator.DetectRapidFire();
+            messages.AddRange(this.Animator.DetectIllegalInputs());
 
-            CheatsReportForm crf = new CheatsReportForm(rapidFireMessages);
+            CheatsReportForm crf = new CheatsReportForm(messages);
             crf.Show();
         }
 
