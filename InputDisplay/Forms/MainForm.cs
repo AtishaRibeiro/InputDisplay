@@ -89,7 +89,7 @@ namespace InputDisplay.Forms
             this.label13 = new System.Windows.Forms.Label();
             this.CheatTab = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.rapidFireBtn = new System.Windows.Forms.CheckBox();
+            this.rapidFireCheck = new System.Windows.Forms.CheckBox();
             this.illegalInputCheck = new System.Windows.Forms.CheckBox();
             this.cheatCheckBtn = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -701,7 +701,7 @@ namespace InputDisplay.Forms
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.rapidFireBtn);
+            this.groupBox8.Controls.Add(this.rapidFireCheck);
             this.groupBox8.Controls.Add(this.illegalInputCheck);
             this.groupBox8.Controls.Add(this.cheatCheckBtn);
             this.groupBox8.Location = new System.Drawing.Point(3, 49);
@@ -710,18 +710,18 @@ namespace InputDisplay.Forms
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             // 
-            // rapidFireBtn
+            // rapidFireCheck
             // 
-            this.rapidFireBtn.AutoSize = true;
-            this.rapidFireBtn.Checked = true;
-            this.rapidFireBtn.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.rapidFireBtn.Location = new System.Drawing.Point(6, 42);
-            this.rapidFireBtn.Name = "rapidFireBtn";
-            this.rapidFireBtn.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.rapidFireBtn.Size = new System.Drawing.Size(74, 17);
-            this.rapidFireBtn.TabIndex = 2;
-            this.rapidFireBtn.Text = "Rapid Fire";
-            this.rapidFireBtn.UseVisualStyleBackColor = true;
+            this.rapidFireCheck.AutoSize = true;
+            this.rapidFireCheck.Checked = true;
+            this.rapidFireCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rapidFireCheck.Location = new System.Drawing.Point(6, 42);
+            this.rapidFireCheck.Name = "rapidFireCheck";
+            this.rapidFireCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.rapidFireCheck.Size = new System.Drawing.Size(74, 17);
+            this.rapidFireCheck.TabIndex = 2;
+            this.rapidFireCheck.Text = "Rapid Fire";
+            this.rapidFireCheck.UseVisualStyleBackColor = true;
             // 
             // illegalInputCheck
             // 
@@ -1053,10 +1053,15 @@ namespace InputDisplay.Forms
             if (this.Animator == null)
                 return;
 
-            List<String> messages = this.Animator.DetectRapidFire();
-            messages.AddRange(this.Animator.DetectIllegalInputs());
+            List<String> RapidFireMessages = null;
+            List<String> IllegalInputMessages = null;
 
-            CheatsReportForm crf = new CheatsReportForm(messages);
+            if (this.rapidFireCheck.Checked)
+                RapidFireMessages = this.Animator.DetectRapidFire();
+            if (this.illegalInputCheck.Checked)
+                IllegalInputMessages = this.Animator.DetectIllegalInputs();
+
+            CheatsReportForm crf = new CheatsReportForm(RapidFireMessages, IllegalInputMessages);
             crf.Show();
         }
 
