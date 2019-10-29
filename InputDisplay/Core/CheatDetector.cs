@@ -101,7 +101,7 @@ namespace InputDisplay.Core
 
                     double seconds = ((double)(streakWheelieFrame - 240) / 60);
                     TimeSpan ts = TimeSpan.FromSeconds(seconds);
-                    messages.Add(String.Format("[Frame 0x{0:X} ({1})] - {2} wheelies in {3} frames ({4:0.000} seconds)", streakWheelieFrame, (seconds >= 0 ? "" : "-") + ts.ToString("mm':'ss':'fff"), wheelieCount, frameCount, ((double)frameCount / 60)));
+                    messages.Add(String.Format("[Frame {0} ({1})] - {2} wheelies in {3} frames ({4:0.000} seconds)", streakWheelieFrame, (seconds >= 0 ? "" : "-") + ts.ToString("mm':'ss':'fff"), wheelieCount, frameCount, ((double)frameCount / 60)));
                     
                     streak = false;
                     streakOver = false;
@@ -147,7 +147,7 @@ namespace InputDisplay.Core
                     double seconds = ((double)(prevEndingFrame - 240) / 60);
                     TimeSpan ts = TimeSpan.FromSeconds(seconds);
 
-                    messages.Add(String.Format("[Frame 0x{0:X} ({1})] - illegal input found ({2}, {3})!", prevEndingFrame, (seconds >= 0 ? "" : "-") + ts.ToString("mm':'ss':'fff"), input.values.Item1, input.values.Item2));
+                    messages.Add(String.Format("[Frame {0} ({1})] - illegal input found ({2}, {3})!", prevEndingFrame, (seconds >= 0 ? "" : "-") + ts.ToString("mm':'ss':'fff"), input.values.Item1, input.values.Item2));
                 }
 
                 prevEndingFrame = input.endFrame;
