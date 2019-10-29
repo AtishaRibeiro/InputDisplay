@@ -17,7 +17,7 @@ namespace InputDisplay.Core
             this.Analog_inputs = new List<(int, (double, double))>();
             // 0 -> none, 1 -> up, 2 -> down, 3 -> left, 4 -> right 
             this.Trick_inputs = new List<(int, int)>();
-    }
+        }
 
         public void ReadFile(string filename)
         {
@@ -63,7 +63,7 @@ namespace InputDisplay.Core
             //extract the input data and put it in its own array
             byte[] input_data = new byte[data.Length - 136];
             Array.Copy(data, 136, input_data, 0, data.Length - 136);
-            
+
             // if input data is compressed
             if ((data[12] & 0x08) != 0)
             {
@@ -133,6 +133,66 @@ namespace InputDisplay.Core
 
                 current_byte += 2;
             }
+
+        }
+
+        public List<String> DetectRapidFire()
+        {
+
+            List<String> messages = new List<string>();
+
+            int prevEndingFrame = 0;
+            int prevWheelieFrame = 0;
+            bool streak = false;
+            bool streakOver = false;
+            int wheelieCount = 0;
+            int frameCount = 0;
+
+            // checking RapidFire (specifically wheelie input)
+            foreach ((int endFrame, int values) input in this.Trick_inputs)
+            {
+
+                if (input.values == 0x1) // TODO: check any kind of input for Rapid Fire.
+                {
+
+                    if ((input.endFrame - prevWheelieFrame) == 2 && prevWheelieFrame != 0)
+                    {
+                        frameCount += (input.endFrame - prevWheelieFrame);
+                        streak = true;
+                        wheelieCount++;
+                    }
+
+                    prevWheelieFrame = input.endFrame;
+
+                }
+                else
+                {
+                    if (streak && (input.endFrame - prevEndingFrame) > 1)
+                        streakOver = true;
+                }
+
+
+                if (streak && streakOver)
+                {
+                    wheelieCount++;
+                    frameCount++;
+
+                    messages.Add(String.Format("{0} wheelies in {1} frames ({2:0.000} seconds)", wheelieCount, frameCount, ((double)frameCount / 60)));
+
+                    streak = false;
+                    streakOver = false;
+                    wheelieCount = 0;
+                    frameCount = 0;
+                }
+
+                prevEndingFrame = input.endFrame;
+
+            }
+
+            if (messages.Count == 0)
+                messages.Add("No Rapid Fire inputs found.");
+
+            return messages;
 
         }
 

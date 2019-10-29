@@ -87,6 +87,13 @@ namespace InputDisplay.Forms
             this.recordButton = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.CheatTab = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.rapidFireBtn = new System.Windows.Forms.CheckBox();
+            this.illegalInputCheck = new System.Windows.Forms.CheckBox();
+            this.cheatCheckBtn = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.AboutTab = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
@@ -109,6 +116,9 @@ namespace InputDisplay.Forms
             this.RecordTab.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.CheatTab.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.AboutTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -584,6 +594,7 @@ namespace InputDisplay.Forms
             this.tabControl1.Controls.Add(this.GeneralTab);
             this.tabControl1.Controls.Add(this.CustomiseTab);
             this.tabControl1.Controls.Add(this.RecordTab);
+            this.tabControl1.Controls.Add(this.CheatTab);
             this.tabControl1.Controls.Add(this.AboutTab);
             this.tabControl1.Location = new System.Drawing.Point(12, 55);
             this.tabControl1.Name = "tabControl1";
@@ -676,6 +687,83 @@ namespace InputDisplay.Forms
             this.label13.TabIndex = 2;
             this.label13.Text = "Create a video of the input";
             // 
+            // CheatTab
+            // 
+            this.CheatTab.Controls.Add(this.groupBox8);
+            this.CheatTab.Controls.Add(this.groupBox9);
+            this.CheatTab.Location = new System.Drawing.Point(4, 22);
+            this.CheatTab.Name = "CheatTab";
+            this.CheatTab.Padding = new System.Windows.Forms.Padding(3);
+            this.CheatTab.Size = new System.Drawing.Size(240, 234);
+            this.CheatTab.TabIndex = 5;
+            this.CheatTab.Text = "Cheats";
+            this.CheatTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.rapidFireBtn);
+            this.groupBox8.Controls.Add(this.illegalInputCheck);
+            this.groupBox8.Controls.Add(this.cheatCheckBtn);
+            this.groupBox8.Location = new System.Drawing.Point(3, 49);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(234, 182);
+            this.groupBox8.TabIndex = 6;
+            this.groupBox8.TabStop = false;
+            // 
+            // rapidFireBtn
+            // 
+            this.rapidFireBtn.AutoSize = true;
+            this.rapidFireBtn.Checked = true;
+            this.rapidFireBtn.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rapidFireBtn.Location = new System.Drawing.Point(6, 42);
+            this.rapidFireBtn.Name = "rapidFireBtn";
+            this.rapidFireBtn.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.rapidFireBtn.Size = new System.Drawing.Size(74, 17);
+            this.rapidFireBtn.TabIndex = 2;
+            this.rapidFireBtn.Text = "Rapid Fire";
+            this.rapidFireBtn.UseVisualStyleBackColor = true;
+            // 
+            // illegalInputCheck
+            // 
+            this.illegalInputCheck.AutoSize = true;
+            this.illegalInputCheck.Checked = true;
+            this.illegalInputCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.illegalInputCheck.Location = new System.Drawing.Point(6, 19);
+            this.illegalInputCheck.Name = "illegalInputCheck";
+            this.illegalInputCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.illegalInputCheck.Size = new System.Drawing.Size(80, 17);
+            this.illegalInputCheck.TabIndex = 1;
+            this.illegalInputCheck.Text = "Illegal Input";
+            this.illegalInputCheck.UseVisualStyleBackColor = true;
+            // 
+            // cheatCheckBtn
+            // 
+            this.cheatCheckBtn.Location = new System.Drawing.Point(6, 137);
+            this.cheatCheckBtn.Name = "cheatCheckBtn";
+            this.cheatCheckBtn.Size = new System.Drawing.Size(222, 39);
+            this.cheatCheckBtn.TabIndex = 0;
+            this.cheatCheckBtn.Text = "Check";
+            this.cheatCheckBtn.UseVisualStyleBackColor = true;
+            this.cheatCheckBtn.Click += new System.EventHandler(this.cheatCheckBtn_Click);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label18);
+            this.groupBox9.Location = new System.Drawing.Point(3, 3);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(234, 40);
+            this.groupBox9.TabIndex = 5;
+            this.groupBox9.TabStop = false;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(50, 16);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(122, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Check ghosts for cheats";
+            // 
             // AboutTab
             // 
             this.AboutTab.Controls.Add(this.linkLabel1);
@@ -751,6 +839,11 @@ namespace InputDisplay.Forms
             this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.CheatTab.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.AboutTab.ResumeLayout(false);
             this.AboutTab.PerformLayout();
             this.ResumeLayout(false);
@@ -954,5 +1047,17 @@ namespace InputDisplay.Forms
                 this.Animator.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             }
         }
+
+        private void cheatCheckBtn_Click(object sender, EventArgs e)
+        {
+            if (this.Animator == null)
+                return;
+
+            List<String> rapidFireMessages = this.Animator.DetectRapidFire();
+
+            CheatsReportForm crf = new CheatsReportForm(rapidFireMessages);
+            crf.Show();
+        }
+
     }
 }

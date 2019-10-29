@@ -108,6 +108,11 @@ namespace InputDisplay.Core
             return (this.GhostReader.CompletionTime, this.GhostReader.MiiName, this.GhostReader.Controller_type, this.GhostReader.TotalFrames);
         }
 
+        public List<String> DetectRapidFire()
+        {
+            return this.GhostReader.DetectRapidFire();
+        }
+       
         public (string, Color, double) EvaluateCursor(Point cursor)
         {
             this.MousePos = cursor;
