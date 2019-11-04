@@ -84,6 +84,11 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox frameGapCombo;
+        private System.Windows.Forms.Button compareGhostBtn;
+        private System.Windows.Forms.Label compareGhostLbl;
+        private System.Windows.Forms.CheckBox tasCodeCheck;
+        private System.Windows.Forms.Label cheatsSeperatorLbl;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 
