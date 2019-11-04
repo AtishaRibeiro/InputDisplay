@@ -178,7 +178,7 @@ namespace InputDisplay.Core
         {
 
             List<String> messages = new List<String>();
-            messages.Add(String.Format("Comparing {0}: {1} ({2})   to   {3}: {4} ({5})", main.MiiName, main.CompletionTime, main.Controller_type, second.MiiName, second.CompletionTime, second.Controller_type));
+            messages.Add(String.Format("Comparing {0}: {1} ({2})   to   {3}: {4} ({5})\r\n", main.MiiName, main.CompletionTime, main.Controller_type, second.MiiName, second.CompletionTime, second.Controller_type));
 
             int streakCount = 0;
             int actualInputCount = 0;
@@ -256,12 +256,12 @@ namespace InputDisplay.Core
                 double seconds = ((double)(streakCount - this.FrameCount_CountDown) / 60);
                 TimeSpan ts = TimeSpan.FromSeconds(seconds);
                 TimeSpan ts2 = TimeSpan.FromSeconds(((double)streakCount / 60));
-                messages.Add(String.Format("TAS Code detected for {0} frames!!!", streakCount));
-                messages.Add(String.Format("Duration: {0}. TAS Code released at: {1}", ts2.ToString("mm':'ss':'fff"), (seconds >= 0 ? "" : "-") + ts.ToString("mm':'ss':'fff")));
+                messages.Add(String.Format("Live Replay detected for {0} frames!!!", streakCount));
+                messages.Add(String.Format("Duration: {0}. Live Replay released at: {1}\r\n", ts2.ToString("mm':'ss':'fff"), (seconds >= 0 ? "" : "-") + ts.ToString("mm':'ss':'fff")));
             }
             else
             {
-                messages.Add("No TAS Code inputs found.");
+                messages.Add("No Live Replay inputs found.");
             }
 
             return messages;

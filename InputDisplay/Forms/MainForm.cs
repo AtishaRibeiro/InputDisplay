@@ -98,7 +98,7 @@ namespace InputDisplay.Forms
             this.cheatsSeperatorLbl = new System.Windows.Forms.Label();
             this.compareGhostBtn = new System.Windows.Forms.Button();
             this.compareGhostLbl = new System.Windows.Forms.Label();
-            this.tasCodeCheck = new System.Windows.Forms.CheckBox();
+            this.liveReplayCheck = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.frameGapCombo = new System.Windows.Forms.ComboBox();
             this.rapidFireCheck = new System.Windows.Forms.CheckBox();
@@ -718,7 +718,7 @@ namespace InputDisplay.Forms
             this.groupBox8.Controls.Add(this.cheatsSeperatorLbl);
             this.groupBox8.Controls.Add(this.compareGhostBtn);
             this.groupBox8.Controls.Add(this.compareGhostLbl);
-            this.groupBox8.Controls.Add(this.tasCodeCheck);
+            this.groupBox8.Controls.Add(this.liveReplayCheck);
             this.groupBox8.Controls.Add(this.label17);
             this.groupBox8.Controls.Add(this.frameGapCombo);
             this.groupBox8.Controls.Add(this.rapidFireCheck);
@@ -745,7 +745,7 @@ namespace InputDisplay.Forms
             this.compareGhostBtn.Name = "compareGhostBtn";
             this.compareGhostBtn.Size = new System.Drawing.Size(75, 23);
             this.compareGhostBtn.TabIndex = 30;
-            this.compareGhostBtn.Text = "Chose .rkg";
+            this.compareGhostBtn.Text = "Select .rkg";
             this.compareGhostBtn.UseVisualStyleBackColor = true;
             this.compareGhostBtn.Click += new System.EventHandler(this.compareGhostBtn_Click);
             // 
@@ -758,17 +758,17 @@ namespace InputDisplay.Forms
             this.compareGhostLbl.TabIndex = 29;
             this.compareGhostLbl.Text = "(No ghost selected)";
             // 
-            // tasCodeCheck
+            // liveReplayCheck
             // 
-            this.tasCodeCheck.AutoSize = true;
-            this.tasCodeCheck.Location = new System.Drawing.Point(5, 93);
-            this.tasCodeCheck.Name = "tasCodeCheck";
-            this.tasCodeCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tasCodeCheck.Size = new System.Drawing.Size(75, 17);
-            this.tasCodeCheck.TabIndex = 28;
-            this.tasCodeCheck.Text = "TAS Code";
-            this.tasCodeCheck.UseVisualStyleBackColor = true;
-            this.tasCodeCheck.CheckedChanged += new System.EventHandler(this.tasCodeCheck_CheckedChanged);
+            this.liveReplayCheck.AutoSize = true;
+            this.liveReplayCheck.Location = new System.Drawing.Point(5, 93);
+            this.liveReplayCheck.Name = "liveReplayCheck";
+            this.liveReplayCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.liveReplayCheck.Size = new System.Drawing.Size(82, 17);
+            this.liveReplayCheck.TabIndex = 28;
+            this.liveReplayCheck.Text = "Live Replay";
+            this.liveReplayCheck.UseVisualStyleBackColor = true;
+            this.liveReplayCheck.CheckedChanged += new System.EventHandler(this.LiveReplayCheck_CheckedChanged);
             // 
             // label17
             // 
@@ -1140,13 +1140,13 @@ namespace InputDisplay.Forms
             if (this.Animator == null)
                 return;
 
-            if (this.tasCodeCheck.Checked && !this.ComparisonGhost.HasGhost)
+            if (this.liveReplayCheck.Checked && !this.ComparisonGhost.HasGhost)
                 return;
 
             GhostReader main = this.Animator.GetGhost();
             List<String> RapidFireMessages = null;
             List<String> IllegalInputMessages = null;
-            List<String> TasCodeMessages = null;
+            List<String> LiveReplayMessages = null;
 
             int gapSize = int.Parse(this.frameGapCombo.SelectedItem.ToString());
 
@@ -1154,30 +1154,30 @@ namespace InputDisplay.Forms
                 RapidFireMessages = CheatDetector.DetectRapidFire(main.Trick_inputs, gapSize);
             if (this.illegalInputCheck.Checked)
                 IllegalInputMessages = CheatDetector.DetectIllegalInputs(main.Analog_inputs, main.GetControllerType());
-            if (this.tasCodeCheck.Checked)
-                TasCodeMessages = CheatDetector.CompareGhost(main, this.ComparisonGhost);
+            if (this.liveReplayCheck.Checked)
+                LiveReplayMessages = CheatDetector.CompareGhost(main, this.ComparisonGhost);
 
-            List<String> messages = this.formFormalReport(RapidFireMessages, IllegalInputMessages, TasCodeMessages);
+            List<String> messages = this.formFormalReport(RapidFireMessages, IllegalInputMessages, LiveReplayMessages);
 
             CheatsReportForm crf = new CheatsReportForm(messages);
             crf.Show();
         }
 
-        private List<String> formFormalReport(List<String> RapidFireMessages, List<String> IllegalInputMessages, List<String> TasCodeMessages)
+        private List<String> formFormalReport(List<String> RapidFireMessages, List<String> IllegalInputMessages, List<String> LiveReplayMessages)
         {
 
             List<String> messages = new List<String>();
 
-            if (RapidFireMessages == null && IllegalInputMessages == null && TasCodeMessages == null)
+            if (RapidFireMessages == null && IllegalInputMessages == null && LiveReplayMessages == null)
             {
                 messages.Add("No cheats settings were selected.\r\n");
                 return messages;
             }
 
-            if (TasCodeMessages != null)
+            if (LiveReplayMessages != null)
             {
-                messages.Add("TAS CODE: \r\n");
-                foreach (String message in TasCodeMessages)
+                messages.Add("LIVE REPLAY: \r\n");
+                foreach (String message in LiveReplayMessages)
                     messages.Add(message + "\r\n");
                 messages.Add("\r\n");
             }
@@ -1202,9 +1202,9 @@ namespace InputDisplay.Forms
 
         }
 
-        private void tasCodeCheck_CheckedChanged(object sender, EventArgs e)
+        private void LiveReplayCheck_CheckedChanged(object sender, EventArgs e)
         {
-            this.compareGhostBtn.Enabled = this.tasCodeCheck.Checked;
+            this.compareGhostBtn.Enabled = this.liveReplayCheck.Checked;
         }
 
         private void compareGhostBtn_Click(object sender, EventArgs e)
