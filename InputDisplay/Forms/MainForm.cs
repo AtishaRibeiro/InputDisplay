@@ -861,7 +861,7 @@ namespace InputDisplay.Forms
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(3, 95);
+            this.linkLabel1.Location = new System.Drawing.Point(3, 128);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(47, 13);
             this.linkLabel1.TabIndex = 1;
@@ -873,10 +873,10 @@ namespace InputDisplay.Forms
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(3, 12);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(135, 78);
+            this.label12.Size = new System.Drawing.Size(135, 104);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Ghost Input Display\r\nVersion 1.1\r\n\r\nMade by WhatisLoaf\r\n\r\nDiscord: WhatIsLoaf#937" +
-    "0\r\n";
+            this.label12.Text = "Ghost Input Display\r\nVersion 1.2\r\n\r\nMade by WhatisLoaf, Olifré\r\n\r\nDiscord: \r\nWhat" +
+    "IsLoaf#9370\r\nOlifré#0215";
             // 
             // MainForm
             // 

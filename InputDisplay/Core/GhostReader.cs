@@ -74,7 +74,7 @@ namespace InputDisplay.Core
             Array.Copy(data, 62, name_bytes, 0, 20);
             this.MiiName = Encoding.BigEndianUnicode.GetString(name_bytes);
             // removing extra null terminator byte from string
-            this.MiiName = this.MiiName.Replace("\0", "");
+            this.MiiName = this.MiiName.Substring(0, Math.Max(0, this.MiiName.IndexOf('\0')));
             //extract the input data and put it in its own array
             byte[] input_data = new byte[data.Length - 136];
             Array.Copy(data, 136, input_data, 0, data.Length - 136);
