@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CheatDetector.cs" />
     <Compile Include="Forms\AccurateTimer.cs" />
     <Compile Include="Config\ClassicConfig.cs" />
     <Compile Include="Config\NunchuckConfig.cs" />
@@ -85,6 +86,12 @@
     <Compile Include="Entities\Timer.cs" />
     <Compile Include="Entities\WiiMote.cs" />
     <Compile Include="Core\GhostReader.cs" />
+    <Compile Include="Forms\CheatsReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CheatsReportForm.Designer.cs">
+      <DependentUpon>CheatsReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +118,9 @@
     <Compile Include="Config\Config.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Core\Yaz1dec.cs" />
+    <EmbeddedResource Include="Forms\CheatsReportForm.resx">
+      <DependentUpon>CheatsReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,11 +169,11 @@
     <Content Include="controller_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\FFmpeg.Win32.Static.4.1.1.1\build\FFmpeg.Win32.Static.targets" Condition="Exists('..\packages\FFmpeg.Win32.Static.4.1.1.1\build\FFmpeg.Win32.Static.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\FFmpeg.Win32.Static.4.1.1.1\build\FFmpeg.Win32.Static.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FFmpeg.Win32.Static.4.1.1.1\build\FFmpeg.Win32.Static.targets'))" />
   </Target>
-  <Import Project="..\packages\FFmpeg.Win32.Static.4.1.1.1\build\FFmpeg.Win32.Static.targets" Condition="Exists('..\packages\FFmpeg.Win32.Static.4.1.1.1\build\FFmpeg.Win32.Static.targets')" />
 </Project>

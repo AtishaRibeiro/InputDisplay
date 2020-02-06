@@ -7,8 +7,19 @@ using System.IO;
 
 namespace InputDisplay.Core
 {
-    class GhostReader
+    public class GhostReader
     {
+        public string CompletionTime { get; set; }
+        public string Controller_type { get; set; }
+        public String MiiName { get; set; }
+        public int TotalFrames { get; set; }
+        public List<(int endFrame, (bool, bool, bool) values)> Face_inputs { get; }
+        public List<(int endFrame, (double, double) values)> Analog_inputs { get; }
+        public List<(int endFrame, int values)> Trick_inputs { get; }
+        public CheatDetector CheatDetetor { get; set; }
+        public bool HasGhost { get; private set; }
+
+
         public GhostReader()
         {
             // (Accelerator, Drift, Item)
@@ -17,7 +28,10 @@ namespace InputDisplay.Core
             this.Analog_inputs = new List<(int, (double, double))>();
             // 0 -> none, 1 -> up, 2 -> down, 3 -> left, 4 -> right 
             this.Trick_inputs = new List<(int, int)>();
-    }
+
+            this.CheatDetetor = new CheatDetector();
+            this.HasGhost = false;
+        }
 
         public void ReadFile(string filename)
         {
@@ -59,11 +73,12 @@ namespace InputDisplay.Core
             byte[] name_bytes = new byte[20];
             Array.Copy(data, 62, name_bytes, 0, 20);
             this.MiiName = Encoding.BigEndianUnicode.GetString(name_bytes);
-
+            // removing extra null terminator byte from string
+            this.MiiName = this.MiiName.Replace("\0", "");
             //extract the input data and put it in its own array
             byte[] input_data = new byte[data.Length - 136];
             Array.Copy(data, 136, input_data, 0, data.Length - 136);
-            
+
             // if input data is compressed
             if ((data[12] & 0x08) != 0)
             {
@@ -134,14 +149,31 @@ namespace InputDisplay.Core
                 current_byte += 2;
             }
 
+            this.HasGhost = true;
+
         }
 
-        public string CompletionTime { get; set; }
-        public string Controller_type { get; set; }
-        public String MiiName { get; set; }
-        public int TotalFrames { get; set; }
-        public List<(int endFrame, (bool, bool, bool) values)> Face_inputs { get; }
-        public List<(int endFrame, (double, double) values)> Analog_inputs { get; }
-        public List<(int endFrame, int values)> Trick_inputs { get; }
+        public int GetControllerType()
+        {
+
+            switch (this.Controller_type)
+            {
+                case "Wii Wheel":
+                    return 0;
+                case "Nunchuck":
+                    return 1;
+                case "Classic":
+                    return 2;
+                default:
+                    return 3;
+            }
+
+        }
+
+        public String GetFormalGhostTimeInfo()
+        {
+            return String.Format("{0}: {1}", this.MiiName, this.CompletionTime);
+        }
+
     }
 }

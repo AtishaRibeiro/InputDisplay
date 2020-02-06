@@ -75,6 +75,20 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox FileFormatBox;
+        private System.Windows.Forms.TabPage CheatTab;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.CheckBox rapidFireCheck;
+        private System.Windows.Forms.CheckBox illegalInputCheck;
+        private System.Windows.Forms.Button cheatCheckBtn;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox frameGapCombo;
+        private System.Windows.Forms.Button compareGhostBtn;
+        private System.Windows.Forms.Label compareGhostLbl;
+        private System.Windows.Forms.CheckBox liveReplayCheck;
+        private System.Windows.Forms.Label cheatsSeperatorLbl;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

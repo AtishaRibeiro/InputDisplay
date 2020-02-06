@@ -13,6 +13,7 @@ namespace InputDisplay.Core
     {
 
         public Animator(double fps, int width, int height) {
+            this.GhostReader = new GhostReader();
             this.Fps = fps;
             this.Controller = new Classic(this);
             this.Timer = new Timer(new Point(322, 245));
@@ -150,7 +151,7 @@ namespace InputDisplay.Core
 
         public Bitmap bmp { get; set; }
 
-        private GhostReader GhostReader = new GhostReader();
+        private GhostReader GhostReader;
         private BaseController Controller;
         private Timer Timer;
 
@@ -162,6 +163,12 @@ namespace InputDisplay.Core
 
         private Point MousePos;
         private bool TimerMove = false;
+
+
+        public GhostReader GetGhost()
+        {
+            return this.GhostReader;
+        }
 
         //
         // The functions below are for the AnalogStick class

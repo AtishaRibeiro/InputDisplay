@@ -16,6 +16,8 @@ namespace InputDisplay.Forms
     public partial class MainForm : Form
     {
         private Animator Animator;
+        private GhostReader ComparisonGhost;
+        private CheatDetector CheatDetector;
         private bool GhostLoaded = false;
         private bool Animate = false;
 
@@ -30,10 +32,14 @@ namespace InputDisplay.Forms
             this.AllowDrop = true;
             this.DragEnter += new DragEventHandler(Form1_DragEnter);
             this.DragDrop += new DragEventHandler(Form1_DragDrop);
+            this.frameGapCombo.SelectedIndex = 0;
+            this.ComparisonGhost = new GhostReader();
+            this.CheatDetector = new CheatDetector();
         }
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button3 = new System.Windows.Forms.Button();
@@ -87,10 +93,24 @@ namespace InputDisplay.Forms
             this.recordButton = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.CheatTab = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.cheatsSeperatorLbl = new System.Windows.Forms.Label();
+            this.compareGhostBtn = new System.Windows.Forms.Button();
+            this.compareGhostLbl = new System.Windows.Forms.Label();
+            this.liveReplayCheck = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.frameGapCombo = new System.Windows.Forms.ComboBox();
+            this.rapidFireCheck = new System.Windows.Forms.CheckBox();
+            this.illegalInputCheck = new System.Windows.Forms.CheckBox();
+            this.cheatCheckBtn = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.AboutTab = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -109,7 +129,11 @@ namespace InputDisplay.Forms
             this.RecordTab.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.CheatTab.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.AboutTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // colorDialog1
@@ -584,6 +608,7 @@ namespace InputDisplay.Forms
             this.tabControl1.Controls.Add(this.GeneralTab);
             this.tabControl1.Controls.Add(this.CustomiseTab);
             this.tabControl1.Controls.Add(this.RecordTab);
+            this.tabControl1.Controls.Add(this.CheatTab);
             this.tabControl1.Controls.Add(this.AboutTab);
             this.tabControl1.Location = new System.Drawing.Point(12, 55);
             this.tabControl1.Name = "tabControl1";
@@ -676,6 +701,151 @@ namespace InputDisplay.Forms
             this.label13.TabIndex = 2;
             this.label13.Text = "Create a video of the input";
             // 
+            // CheatTab
+            // 
+            this.CheatTab.Controls.Add(this.groupBox8);
+            this.CheatTab.Controls.Add(this.groupBox9);
+            this.CheatTab.Location = new System.Drawing.Point(4, 22);
+            this.CheatTab.Name = "CheatTab";
+            this.CheatTab.Padding = new System.Windows.Forms.Padding(3);
+            this.CheatTab.Size = new System.Drawing.Size(240, 234);
+            this.CheatTab.TabIndex = 5;
+            this.CheatTab.Text = "Cheats";
+            this.CheatTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.cheatsSeperatorLbl);
+            this.groupBox8.Controls.Add(this.compareGhostBtn);
+            this.groupBox8.Controls.Add(this.compareGhostLbl);
+            this.groupBox8.Controls.Add(this.liveReplayCheck);
+            this.groupBox8.Controls.Add(this.label17);
+            this.groupBox8.Controls.Add(this.frameGapCombo);
+            this.groupBox8.Controls.Add(this.rapidFireCheck);
+            this.groupBox8.Controls.Add(this.illegalInputCheck);
+            this.groupBox8.Controls.Add(this.cheatCheckBtn);
+            this.groupBox8.Location = new System.Drawing.Point(5, 49);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(228, 179);
+            this.groupBox8.TabIndex = 6;
+            this.groupBox8.TabStop = false;
+            // 
+            // cheatsSeperatorLbl
+            // 
+            this.cheatsSeperatorLbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.cheatsSeperatorLbl.Location = new System.Drawing.Point(6, 74);
+            this.cheatsSeperatorLbl.Name = "cheatsSeperatorLbl";
+            this.cheatsSeperatorLbl.Size = new System.Drawing.Size(216, 2);
+            this.cheatsSeperatorLbl.TabIndex = 31;
+            // 
+            // compareGhostBtn
+            // 
+            this.compareGhostBtn.Enabled = false;
+            this.compareGhostBtn.Location = new System.Drawing.Point(147, 87);
+            this.compareGhostBtn.Name = "compareGhostBtn";
+            this.compareGhostBtn.Size = new System.Drawing.Size(75, 23);
+            this.compareGhostBtn.TabIndex = 30;
+            this.compareGhostBtn.Text = "Select .rkg";
+            this.compareGhostBtn.UseVisualStyleBackColor = true;
+            this.compareGhostBtn.Click += new System.EventHandler(this.compareGhostBtn_Click);
+            // 
+            // compareGhostLbl
+            // 
+            this.compareGhostLbl.AutoSize = true;
+            this.compareGhostLbl.Location = new System.Drawing.Point(6, 113);
+            this.compareGhostLbl.Name = "compareGhostLbl";
+            this.compareGhostLbl.Size = new System.Drawing.Size(99, 13);
+            this.compareGhostLbl.TabIndex = 29;
+            this.compareGhostLbl.Text = "(No ghost selected)";
+            // 
+            // liveReplayCheck
+            // 
+            this.liveReplayCheck.AutoSize = true;
+            this.liveReplayCheck.Location = new System.Drawing.Point(5, 93);
+            this.liveReplayCheck.Name = "liveReplayCheck";
+            this.liveReplayCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.liveReplayCheck.Size = new System.Drawing.Size(82, 17);
+            this.liveReplayCheck.TabIndex = 28;
+            this.liveReplayCheck.Text = "Live Replay";
+            this.liveReplayCheck.UseVisualStyleBackColor = true;
+            this.liveReplayCheck.CheckedChanged += new System.EventHandler(this.LiveReplayCheck_CheckedChanged);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(98, 43);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(78, 13);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "Frame gap size";
+            // 
+            // frameGapCombo
+            // 
+            this.frameGapCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.frameGapCombo.FormattingEnabled = true;
+            this.frameGapCombo.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.frameGapCombo.Location = new System.Drawing.Point(182, 40);
+            this.frameGapCombo.Name = "frameGapCombo";
+            this.frameGapCombo.Size = new System.Drawing.Size(40, 21);
+            this.frameGapCombo.TabIndex = 26;
+            // 
+            // rapidFireCheck
+            // 
+            this.rapidFireCheck.AutoSize = true;
+            this.rapidFireCheck.Checked = true;
+            this.rapidFireCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rapidFireCheck.Location = new System.Drawing.Point(6, 42);
+            this.rapidFireCheck.Name = "rapidFireCheck";
+            this.rapidFireCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.rapidFireCheck.Size = new System.Drawing.Size(74, 17);
+            this.rapidFireCheck.TabIndex = 2;
+            this.rapidFireCheck.Text = "Rapid Fire";
+            this.rapidFireCheck.UseVisualStyleBackColor = true;
+            // 
+            // illegalInputCheck
+            // 
+            this.illegalInputCheck.AutoSize = true;
+            this.illegalInputCheck.Checked = true;
+            this.illegalInputCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.illegalInputCheck.Location = new System.Drawing.Point(6, 19);
+            this.illegalInputCheck.Name = "illegalInputCheck";
+            this.illegalInputCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.illegalInputCheck.Size = new System.Drawing.Size(80, 17);
+            this.illegalInputCheck.TabIndex = 1;
+            this.illegalInputCheck.Text = "Illegal Input";
+            this.illegalInputCheck.UseVisualStyleBackColor = true;
+            // 
+            // cheatCheckBtn
+            // 
+            this.cheatCheckBtn.Enabled = false;
+            this.cheatCheckBtn.Location = new System.Drawing.Point(6, 133);
+            this.cheatCheckBtn.Name = "cheatCheckBtn";
+            this.cheatCheckBtn.Size = new System.Drawing.Size(216, 40);
+            this.cheatCheckBtn.TabIndex = 0;
+            this.cheatCheckBtn.Text = "Check";
+            this.cheatCheckBtn.UseVisualStyleBackColor = true;
+            this.cheatCheckBtn.Click += new System.EventHandler(this.cheatCheckBtn_Click);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label18);
+            this.groupBox9.Location = new System.Drawing.Point(6, 0);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(228, 43);
+            this.groupBox9.TabIndex = 5;
+            this.groupBox9.TabStop = false;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(50, 16);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(122, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Check ghosts for cheats";
+            // 
             // AboutTab
             // 
             this.AboutTab.Controls.Add(this.linkLabel1);
@@ -751,8 +921,14 @@ namespace InputDisplay.Forms
             this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.CheatTab.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.AboutTab.ResumeLayout(false);
             this.AboutTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -790,7 +966,8 @@ namespace InputDisplay.Forms
             return;
         }
 
-        private bool AdvanceAnimator() {
+        private bool AdvanceAnimator()
+        {
             if (this.Animate)
             {
                 if (this.Animator.Update())
@@ -804,12 +981,13 @@ namespace InputDisplay.Forms
                     this.Button3_Click(null, null);
                     return false;
                 }
-            } else
+            }
+            else
             {
                 this.Animator.DrawFrame();
                 return false;
             }
-            
+
         }
 
         private void ReadFile(string fileName)
@@ -825,6 +1003,7 @@ namespace InputDisplay.Forms
             }
             this.label6.Visible = false;
             this.recordButton.Enabled = true;
+            this.cheatCheckBtn.Enabled = true;
 
             (string time, string name, string controller, int frames) = this.Animator.GetGhostInfo();
             this.label5.Text = Path.GetFileName(fileName);
@@ -902,7 +1081,8 @@ namespace InputDisplay.Forms
                     this.button3.Text = "Play";
                     this.button3.BackColor = Color.LightGreen;
 
-                } else
+                }
+                else
                 {
                     this.Animate = true;
                     this.button3.Text = "Pause";
@@ -953,6 +1133,103 @@ namespace InputDisplay.Forms
                 Console.WriteLine(this.pictureBox1.ClientSize.Height);
                 this.Animator.bmp = new Bitmap(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             }
+        }
+
+        private void cheatCheckBtn_Click(object sender, EventArgs e)
+        {
+            if (this.Animator == null)
+                return;
+
+            if (this.liveReplayCheck.Checked && !this.ComparisonGhost.HasGhost)
+                return;
+
+            GhostReader main = this.Animator.GetGhost();
+            List<String> RapidFireMessages = null;
+            List<String> IllegalInputMessages = null;
+            List<String> LiveReplayMessages = null;
+
+            int gapSize = int.Parse(this.frameGapCombo.SelectedItem.ToString());
+
+            if (this.rapidFireCheck.Checked)
+                RapidFireMessages = CheatDetector.DetectRapidFire(main.Trick_inputs, gapSize);
+            if (this.illegalInputCheck.Checked)
+                IllegalInputMessages = CheatDetector.DetectIllegalInputs(main.Analog_inputs, main.GetControllerType());
+            if (this.liveReplayCheck.Checked)
+                LiveReplayMessages = CheatDetector.CompareGhost(main, this.ComparisonGhost);
+
+            List<String> messages = this.formFormalReport(RapidFireMessages, IllegalInputMessages, LiveReplayMessages);
+
+            CheatsReportForm crf = new CheatsReportForm(messages);
+            crf.Show();
+        }
+
+        private List<String> formFormalReport(List<String> RapidFireMessages, List<String> IllegalInputMessages, List<String> LiveReplayMessages)
+        {
+
+            List<String> messages = new List<String>();
+
+            if (RapidFireMessages == null && IllegalInputMessages == null && LiveReplayMessages == null)
+            {
+                messages.Add("No cheats settings were selected.\r\n");
+                return messages;
+            }
+
+            if (LiveReplayMessages != null)
+            {
+                messages.Add("LIVE REPLAY: \r\n");
+                foreach (String message in LiveReplayMessages)
+                    messages.Add(message + "\r\n");
+                messages.Add("\r\n");
+            }
+
+            if (RapidFireMessages != null)
+            {
+                messages.Add("RAPID FIRE: \r\n");
+                foreach (String message in RapidFireMessages)
+                    messages.Add(message + "\r\n");
+                messages.Add("\r\n");
+            }
+
+            if (IllegalInputMessages != null)
+            {
+                messages.Add("ILLEGAL INPUTS: \r\n");
+                foreach (String message in IllegalInputMessages)
+                    messages.Add(message + "\r\n");
+                messages.Add("\r\n");
+            }
+
+            return messages;
+
+        }
+
+        private void LiveReplayCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            this.compareGhostBtn.Enabled = this.liveReplayCheck.Checked;
+        }
+
+        private void compareGhostBtn_Click(object sender, EventArgs e)
+        {
+
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                InitialDirectory = Config.GhostFolder,
+                Filter = "rkg files (*.rkg)|*.rkg",
+                RestoreDirectory = true,
+                Title = ("Open File")
+            };
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                this.ComparisonGhost.ReadFile(ofd.FileName);
+            }
+            else
+            {
+                return;
+            }
+
+            // set lables
+            this.compareGhostLbl.Text = this.ComparisonGhost.GetFormalGhostTimeInfo();
+
         }
     }
 }
