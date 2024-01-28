@@ -61,7 +61,9 @@ namespace InputDisplay.Forms
 
         private void NumericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-            Config.PlaybackSpeed = (int)this.numericUpDown2.Value;
+            // The original playback speed is 59.94(60/1.001) fps
+            // do this weird calculation to properly allow up to 3x speed
+            Config.PlaybackSpeed = 60 * ((double)this.numericUpDown2.Value / 1.001 / 100);
         }
 
         private void NumericUpDown4_ValueChanged(object sender, EventArgs e)

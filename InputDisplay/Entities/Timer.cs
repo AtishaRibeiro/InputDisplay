@@ -25,9 +25,11 @@ namespace InputDisplay.Entities
 
             SolidBrush blackBrush = new SolidBrush(Color.Black);
             g.FillRectangle(blackBrush, new Rectangle(new Point(this.Coords.X, this.Coords.Y), this.Size));
-
-            int actualFrame = (int)Math.Floor(currentFrame) - 240;
-            double seconds = actualFrame * (1.0 / 60.0);
+            // TODO: with a timescale of 16.667ms the final time is quite far off the end time
+            // however having the correct timescale (1/(60.1.001)) also results in weird stuff
+            // Leaving it like this because when having the "correct" scale, time starts at -4.004 which seems weird
+            // Perhaps it'd be better to render the frame number instead
+            double seconds = ((currentFrame) - 240) * (1.0 / 60);
             SolidBrush whiteBrush = new SolidBrush(Color.White);
             g.DrawString(seconds.ToString("0.000", CultureInfo.CreateSpecificCulture("en-CA")), drawFont, whiteBrush, this.Coords.X, this.Coords.Y + 5, new StringFormat());
         }
