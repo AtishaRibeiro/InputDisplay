@@ -20,15 +20,14 @@ namespace InputDisplay.Forms
         private CheatDetector CheatDetector;
         private bool GhostLoaded = false;
         private bool Animate = false;
-
-        private Stopwatch stopWatch = new Stopwatch();
         private AccurateTimer timer;
 
         public MainForm()
         {
             InitializeComponent();
             VariableSetup();
-            this.Animator = new Animator(60/1.001, this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height);
+            // Set the framerate of the animator to 62.5fps, this may seem weird but a frame lasts exactly 16ms this way
+            this.Animator = new Animator(62.5, this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height);
             this.AllowDrop = true;
             this.DragEnter += new DragEventHandler(Form1_DragEnter);
             this.DragDrop += new DragEventHandler(Form1_DragDrop);
@@ -959,10 +958,8 @@ namespace InputDisplay.Forms
 
         private void TimerCallback()
         {
-            this.stopWatch.Stop();
             this.AdvanceAnimator();
             this.pictureBox1.Invalidate();
-            this.stopWatch.Restart();
             return;
         }
 

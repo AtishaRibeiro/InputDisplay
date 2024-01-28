@@ -49,6 +49,8 @@ namespace InputDisplay.Forms
             this.label2.Visible = false;
             this.progressBar1.Visible = false;
 
+            Animator.Fps = (60 / 1.001); // Set the framerate of the animator to 59.94fps, this matches the framerate of the game
+
             if (Config.PlaybackSpeed == (60/1.001))
             {
                 this.PrepareRecording();
