@@ -55,7 +55,7 @@ namespace InputDisplay.Core
 
         public bool Update()
         {
-            int roundedFrame = (int) Math.Floor(this.CurrentFrame);
+            int roundedFrame = (int)Math.Floor(this.CurrentFrame);
 
             //end of inputs reached
             if (roundedFrame >= this.GhostReader.TotalFrames)
@@ -76,7 +76,6 @@ namespace InputDisplay.Core
             if (roundedFrame >= this.GhostReader.Trick_inputs[this.TrickIndex].endFrame)
             {
                 this.TrickIndex += 1;
-
             }
 
             (bool accelerator, bool drift, bool item) actions = this.GhostReader.Face_inputs[this.FaceIndex].values;
@@ -85,7 +84,7 @@ namespace InputDisplay.Core
 
             this.Controller.Update(actions.accelerator, actions.drift, actions.item, coords, trick);
 
-            this.CurrentFrame += (double) Config.PlaybackSpeed / this.Fps;
+            this.CurrentFrame += Config.PlaybackSpeed / this.Fps;
             return true;
         }
 

@@ -28,7 +28,7 @@ namespace InputDisplay.Forms
         {
             InitializeComponent();
             VariableSetup();
-            this.Animator = new Animator(62.5, this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height);
+            this.Animator = new Animator(60/1.001, this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height);
             this.AllowDrop = true;
             this.DragEnter += new DragEventHandler(Form1_DragEnter);
             this.DragDrop += new DragEventHandler(Form1_DragDrop);

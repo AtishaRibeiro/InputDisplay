@@ -123,6 +123,6 @@ namespace InputDisplay
             }
         }
 
-        static public int PlaybackSpeed { get; set; } = 60;
+        static public double PlaybackSpeed { get; set; } = 60/1.001;
     }
 }

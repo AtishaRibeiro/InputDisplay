@@ -49,12 +49,13 @@ namespace InputDisplay.Forms
             this.label2.Visible = false;
             this.progressBar1.Visible = false;
 
-            if (Config.PlaybackSpeed == 60)
+            if (Config.PlaybackSpeed == (60/1.001))
             {
                 this.PrepareRecording();
-            } else
+            } 
+            else
             {
-                this.label1.Text = String.Format("The current playback speed is set to {0} (regular speed is 60)\nAre you sure you want to continue?", Config.PlaybackSpeed);
+                this.label1.Text = String.Format("The current playback speed is set to {0} (regular speed is 100)\nAre you sure you want to continue?", Config.PlaybackSpeed);
             }
         }
 
@@ -151,7 +152,7 @@ namespace InputDisplay.Forms
             // Prepare the animator and write all the frames to the temp directory
             this.Animator.Clear();
             int frameNr = 0;
-            int totalFrames = (int)((double)Math.Ceiling((double)((60.0 / Config.PlaybackSpeed) * this.Animator.Fps)) * this.Animator.GetGhostInfo().Item4);
+            int totalFrames = (int)(Math.Ceiling((((60/1.001) / Config.PlaybackSpeed) * this.Animator.Fps)) * this.Animator.GetGhostInfo().Item4);
             while (this.Animator.Update())
             {
                 // Check for cancel request
@@ -171,7 +172,7 @@ namespace InputDisplay.Forms
             Process proc = new Process();
             proc.StartInfo.FileName = "ffmpeg\\ffmpeg";
             this.FileName = String.Format("{0}.{1}", DateTime.Now.ToString("yy-MM-dd-hh-mm-ss"), this.FileFormat);
-            proc.StartInfo.Arguments = String.Format("-framerate 62.5 -i temp\\%d.png -vcodec {0} {1}", codec, this.FileName);
+            proc.StartInfo.Arguments = String.Format("-r \"60000/1001\" -i temp\\%d.png -vcodec {0} {1}", codec, this.FileName);
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.CreateNoWindow = true;
