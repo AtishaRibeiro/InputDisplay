@@ -561,7 +561,7 @@ namespace InputDisplay.Forms
             this.numericUpDown2.Size = new System.Drawing.Size(44, 20);
             this.numericUpDown2.TabIndex = 11;
             this.numericUpDown2.Value = new decimal(new int[] {
-            60,
+            100,
             0,
             0,
             0});
